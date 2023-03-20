@@ -14,7 +14,7 @@ function AddAppointment() {
     function handleSubmit(e){
         e.preventDefault()
         const bodyToPost = {doctor, patient, date, department}
-        axios.post('http://localhost:5005/appointments',bodyToPost)
+        axios.post('http://localhost:5005/api/appointments',bodyToPost)
         .then(()=>{
            setPatient ('')
            setDoctor('')

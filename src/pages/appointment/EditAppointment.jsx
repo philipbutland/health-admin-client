@@ -15,7 +15,7 @@ function EditAppointment(props) {
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointments/${appointmentsId}`)
+      .get(`${API_URL}/appointment/api/${appointmentsId}`)
       .then((response) => {
         const oneAppointment = response.data;
         setPatient(oneAppointment.patient);
@@ -45,11 +45,11 @@ function EditAppointment(props) {
  const deleteAppointment = () => {                    
     // Make a DELETE request to delete the appointment
     axios
-      .delete(`${API_URL}/appointments/${appointmentsId}`)
+      .delete(`${API_URL}/appointments/api/${appointmentsId}`)
       .then(() => {
         // Once the delete request is resolved successfully
         // navigate back to the list of appointments.
-        navigate("/appointments");
+        navigate("/appointments/");
       })
       .catch((err) => console.log(err));
   };  
