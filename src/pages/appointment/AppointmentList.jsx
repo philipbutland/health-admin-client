@@ -15,6 +15,7 @@ function AppointmentList() {
           }, 2000);
       })
   },[])
+  console.log("Appointment", appointment)
   return (
     <div>
      <h3>Appointment List</h3>

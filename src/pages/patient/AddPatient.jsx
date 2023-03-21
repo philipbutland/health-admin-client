@@ -16,7 +16,8 @@ function AddPatient() {
     function handleSubmit(e){
         e.preventDefault()
         const bodyToPost = {username, email, photo, dob, gender, bloodType}
-        axios.post('http://localhost:5005/patients',bodyToPost)
+        console.log ("bodyToPost", bodyToPost)
+        axios.post('http://localhost:5005/patients/add-patient',bodyToPost)
         .then(()=>{
            setUserName ('')
            setEmail('')
