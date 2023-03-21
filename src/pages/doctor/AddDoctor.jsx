@@ -27,6 +27,7 @@ function AddDoctor() {
 
     return (
     <div>
+    <h3>Add the Doctor</h3>
     <form action="" onSubmit={handleSubmit}>
         <label htmlFor="">
             Doctors Name

@@ -1,3 +1,4 @@
+//AppointmentList
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
@@ -6,7 +7,7 @@ function AppointmentList() {
   const [appointment,setAppointment] = useState(false)
 
   useEffect(()=>{
-      axios.get('http://localhost:5005/api/appointments')
+      axios.get('http://localhost:5005/appointments')
       .then(response=>{
           console.log(response.data)
           setTimeout(() => {
@@ -16,6 +17,7 @@ function AppointmentList() {
   },[])
   return (
     <div>
+     <h3>Appointment List</h3>
         {!appointment && <h2>Loading...</h2>}
               
         {appointment && appointment.map(individualAppointment=>{
@@ -25,7 +27,7 @@ function AppointmentList() {
                     <p>{individualAppointment.doctor}</p>
                     <p>{individualAppointment.department}</p>
                     <p>{individualAppointment.date}</p>
-                    <Link to={`/appointment/api/${individualAppointment._id}`}>Link to Appointment</Link>
+                    <Link to={`/appointment/${individualAppointment._id}`}>Link to Appointment</Link>
                 </div>
             )
         })}

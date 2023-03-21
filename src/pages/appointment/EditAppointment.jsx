@@ -1,3 +1,4 @@
+//EditAppointment
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import { useParams, useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ function EditAppointment(props) {
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointment/api/${appointmentId}`)
+      .get(`${API_URL}/appointment/${appointmentId}`)
       .then((response) => {
         const oneAppointment = response.data;
         setPatient(oneAppointment.patient);
@@ -45,7 +46,7 @@ function EditAppointment(props) {
  const deleteAppointment = () => {                    
     // Make a DELETE request to delete the appointment
     axios
-      .delete(`${API_URL}/appointments/api/${appointmentId}`)
+      .delete(`${API_URL}/appointments/${appointmentId}`)
       .then(() => {
         // Once the delete request is resolved successfully
         // navigate back to the list of appointments.
@@ -58,7 +59,7 @@ function EditAppointment(props) {
     <div>
       <h3>Edit the Appointment</h3>
  
-      <form onSubmit={handleFormSubmit}>      {/*  <== UPDATE  */}
+      <form onSubmit={handleFormSubmit}>    
         <label>Patient:</label>
         <input
           type="text"

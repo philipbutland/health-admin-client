@@ -1,3 +1,4 @@
+//EditDoctor
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import { useParams, useNavigate } from "react-router-dom";
@@ -10,12 +11,12 @@ function EditDoctor() {
   const [price,setPrice] = useState('')
   const [department,setDepartment] = useState('')   
  
-  const { doctorsId } = useParams();
+  const { doctorId } = useParams();
   const navigate = useNavigate();  
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/doctors/api/${doctorsId}`)
+      .get(`${API_URL}/doctors/${doctorId}`)
       .then((response) => {
         const oneDoctor = response.data;
         setName(oneDoctor.name);
@@ -25,7 +26,7 @@ function EditDoctor() {
       })
       .catch((error) => console.log(error));
     
-  }, [doctorsId]);
+  }, [doctorId]);
 
   const handleFormSubmit = (e) => {                     
     e.preventDefault();
@@ -34,18 +35,18 @@ function EditDoctor() {
  
     // Make a PUT request to update the doctor´s profile
     axios
-      .put(`${API_URL}/doctors/api/${doctorsId}`, requestBody)
+      .put(`${API_URL}/doctors/${doctorId}`, requestBody)
       .then((response) => {
         // Once the request is resolved successfully and the doctor´s profile
         // is updated we navigate back to the details page
-        navigate(`/doctors/${doctorsId}`)
+        navigate(`/doctors/${doctorId}`)
       });
   };
 
   const deleteDoctor = () => {                    
     // Make a DELETE request to delete the appointment
     axios
-      .delete(`${API_URL}/doctors/api/${doctorsId}`)
+      .delete(`${API_URL}/doctors/${doctorId}`)
       .then(() => {
         // Once the delete request is resolved successfully
         // navigate back to the list of the doctor´s profile.
