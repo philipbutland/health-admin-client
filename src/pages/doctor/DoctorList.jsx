@@ -23,10 +23,13 @@ function DoctorList() {
     {doctor && doctor.map(individualDoctor=>{
         return(
             <div key={individualDoctor._id}>
-                <h2>{individualDoctor.name}</h2>
+                <h2>{individualDoctor.username}</h2>
+                <h2>{individualDoctor.photo}</h2>
                 <p>{individualDoctor.email}</p>
                 <p>{individualDoctor.price}</p>
                 <p>{individualDoctor.department}</p>
+                <p>{individualDoctor.dob}</p>
+                <p>{individualDoctor.gender}</p>
                 <Link to={`/doctors/${individualDoctor._id}`}>Link to Doctors List</Link>
             </div>
         )

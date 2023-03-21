@@ -28,7 +28,7 @@ function AppointmentList() {
                     <p>{individualAppointment.doctor}</p>
                     <p>{individualAppointment.department}</p>
                     <p>{individualAppointment.date}</p>
-                    <Link to={`/appointment/${individualAppointment._id}`}>Link to Appointment</Link>
+                    <Link to={`/appointments/${individualAppointment._id}`}>Link to Appointment</Link>
                 </div>
             )
         })}
