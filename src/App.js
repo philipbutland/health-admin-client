@@ -26,7 +26,7 @@ function App() {
         <Route path="/patients/:patientsId" element={<EditPatient />} />
         <Route path="/appointments" element={<AppointmentList />} />
         <Route path="/appointments/add-appointments" element={<AddAppointment />} />
-        <Route path="/appointments/:appointmentsId" element={<EditAppointment />} />
+        <Route path="/appointments/:appointmentId" element={<EditAppointment />} />
         </Routes>
     </div>
   );

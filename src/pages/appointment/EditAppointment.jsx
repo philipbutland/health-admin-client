@@ -10,12 +10,12 @@ function EditAppointment(props) {
   const [department,setDepartment] = useState('')
   const [date,setDate] = useState('')   
  
-  const { appointmentsId } = useParams();
+  const { appointmentId } = useParams();
   const navigate = useNavigate();  
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointment/api/${appointmentsId}`)
+      .get(`${API_URL}/appointment/api/${appointmentId}`)
       .then((response) => {
         const oneAppointment = response.data;
         setPatient(oneAppointment.patient);
@@ -25,7 +25,7 @@ function EditAppointment(props) {
       })
       .catch((error) => console.log(error));
     
-  }, [appointmentsId]);
+  }, [appointmentId]);
   
   const handleFormSubmit = (e) => {                     
     e.preventDefault();
@@ -34,18 +34,18 @@ function EditAppointment(props) {
  
     // Make a PUT request to update the appointment
     axios
-      .put(`${API_URL}/appointments/${appointmentsId}`, requestBody)
+      .put(`${API_URL}/appointments/${appointmentId}`, requestBody)
       .then((response) => {
         // Once the request is resolved successfully and the appointment
         // is updated we navigate back to the details page
-        navigate(`/appointments/${appointmentsId}`)
+        navigate(`/appointments/${appointmentId}`)
       });
   };
 
  const deleteAppointment = () => {                    
     // Make a DELETE request to delete the appointment
     axios
-      .delete(`${API_URL}/appointments/api/${appointmentsId}`)
+      .delete(`${API_URL}/appointments/api/${appointmentId}`)
       .then(() => {
         // Once the delete request is resolved successfully
         // navigate back to the list of appointments.
