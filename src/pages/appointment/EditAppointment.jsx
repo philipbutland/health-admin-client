@@ -16,7 +16,7 @@ function EditAppointment(props) {
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointment/${appointmentId}`)
+      .get(`${API_URL}/appointments/${appointmentId}`)
       .then((response) => {
         const oneAppointment = response.data;
         setPatient(oneAppointment.patient);
@@ -74,7 +74,20 @@ function EditAppointment(props) {
           value={doctor}
           onChange={(e) => setDoctor(e.target.value)}
         />
-       
+        <label>Department:</label>
+        <input
+          type="text"
+          name="department"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
+        />
+       <label>Date:</label>
+        <input
+          type="text"
+          name="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
         <button type="submit">Update Appointment</button>
       </form>
       <button onClick={deleteAppointment}>Delete Appointment</button>

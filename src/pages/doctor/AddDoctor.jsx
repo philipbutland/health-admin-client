@@ -4,22 +4,28 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 function AddDoctor() {
-  const [name,setName] = useState('')
+  const [username,setUserName] = useState('')
   const [email, setEmail] = useState('')
+  const [photo,setPhoto] = useState('')
   const [price,setPrice] = useState('')
-  const [department,setDepartment] = useState('')  
+  const [department,setDepartment] = useState('')
+  const [gender,setGender] = useState('')
+  const [dob,setDob] = useState('')  
    
     const navigate = useNavigate()
 
     function handleSubmit(e){
         e.preventDefault()
-        const bodyToPost = {name, email, price, department}
+        const bodyToPost = {username, email, photo, department, gender}
         axios.post('http://localhost:5005/doctors',bodyToPost)
         .then(()=>{
-           setName ('')
+           setUserName ('')
            setEmail('')
+           setPhoto('')
            setPrice('')
            setDepartment('')
+           setGender('')
+           setDob('')
            alert("Doctors Profile Created")
            navigate('/doctors')
         })
@@ -31,19 +37,31 @@ function AddDoctor() {
     <form action="" onSubmit={handleSubmit}>
         <label htmlFor="">
             Doctors Name
-            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
+            <input type="text" value={username} onChange={(e)=>setUserName(e.target.value)}/>
         </label>
         <label htmlFor="">
             Email
             <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
         </label>
         <label htmlFor="">
-            Price
+           Photo
+          <input type="text" value={photo} onChange={(e)=>setPhoto(e.target.value)}/>
+        </label>
+        <label htmlFor="">
+        Price
           <input type="text" value={price} onChange={(e)=>setPrice(e.target.value)}/>
         </label>
         <label htmlFor="">
         Department
           <input type="text" value={department} onChange={(e)=>setDepartment(e.target.value)}/>
+        </label>
+        <label htmlFor="">
+        Gender
+          <input type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/>
+        </label>
+        <label htmlFor="">
+        DOB
+          <input type="text" value={dob} onChange={(e)=>setDob(e.target.value)}/>
         </label>
         <button>Submit Doctor´s Profile</button>
     </form>
