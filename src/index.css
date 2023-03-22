@@ -28,3 +28,11 @@ select {
   margin: 5px;
   font-size: 18px;
 }
+
+.navbar{
+  background-color: #009688;
+}
+
+.navutton{
+  background-color: #a6dad5;
+}
