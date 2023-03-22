@@ -23,11 +23,12 @@ function AppointmentList() {
         {appointment && appointment.map(individualAppointment=>{
             return(
                 <div key={individualAppointment._id}>
-                    <h2>{individualAppointment.patient}</h2>
-                    <p>{individualAppointment.doctor}</p>
-                    <p>{individualAppointment.department}</p>
-                    <p>{individualAppointment.date}</p>
-                    <Link to={`/appointment/${individualAppointment._id}`}>Link to Appointment</Link>
+                    <h2>Patient: {individualAppointment.patient}</h2>
+                    <p>Doctor: {individualAppointment.doctor}</p>
+                    <p>Department: {individualAppointment.department}</p>
+                    <p>Date: {individualAppointment.date}</p>
+                    <Link to={`/appointments/add-appointment`}>Add Appointment</Link> <span> | </span>
+                    <Link to={`/appointments/${individualAppointment._id}`}>Edit Appointment</Link>                    
                 </div>
             )
         })}

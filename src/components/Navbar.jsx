@@ -6,6 +6,15 @@ function Navbar() {
       <Link to="/">
         <button>Home</button>
       </Link>
+      <Link to="/doctors">
+        <button>Doctors</button>
+      </Link>
+      <Link to="/patients">
+        <button>Patients</button>
+      </Link>
+      <Link to="/appointments">
+        <button>Appointments</button>
+      </Link>
     </nav>
   );
 }

@@ -56,7 +56,7 @@ function AddPatient() {
          Blood type
             <input type="text" value={bloodType} onChange={(e)=>setBloodType(e.target.value)}/>
           </label>
-          <button>Submit Patient´s Profile</button>
+          <button type="submit">Submit Patient´s Profile</button>
       </form>
   </div>
     )

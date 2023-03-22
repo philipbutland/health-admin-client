@@ -44,7 +44,7 @@ function AddAppointment() {
             Date
             <input type="text" value={date} onChange={(e)=>setDate(e.target.value)}/>
         </label>
-        <button>Submit Appointment</button>
+        <button type="submit">Submit Appointment</button>
     </form>
 </div>
   )

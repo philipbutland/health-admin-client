@@ -6,10 +6,12 @@ import { useParams, useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:5005";
 
 function EditDoctor() {
-  const [name,setName] = useState('')
+  const [username,setUserName] = useState('')
   const [email, setEmail] = useState('')
+  const [photo,setPhoto] = useState('')
   const [price,setPrice] = useState('')
-  const [department,setDepartment] = useState('')   
+  const [department,setDepartment] = useState('')
+  const [gender,setGender] = useState('') 
  
   const { doctorId } = useParams();
   const navigate = useNavigate();  
@@ -19,10 +21,12 @@ function EditDoctor() {
       .get(`${API_URL}/doctors/${doctorId}`)
       .then((response) => {
         const oneDoctor = response.data;
-        setName(oneDoctor.name);
-        setEmail(oneDoctor.doctor);
+        setUserName(oneDoctor.username);
+        setEmail(oneDoctor.email);
+        setPhoto(oneDoctor.photo);
         setPrice(oneDoctor.price);
         setDepartment(oneDoctor.department);
+        setGender(oneDoctor.gender);
       })
       .catch((error) => console.log(error));
     
@@ -31,7 +35,7 @@ function EditDoctor() {
   const handleFormSubmit = (e) => {                     
     e.preventDefault();
     // Create an object representing the body of the PUT request
-    const requestBody = { name, email, price, department };
+    const requestBody = { username, email, photo, price, department, gender };
  
     // Make a PUT request to update the doctor´s profile
     axios
@@ -61,12 +65,12 @@ function EditDoctor() {
       <h3>Edit the Doctor´s Profile</h3>
  
       <form onSubmit={handleFormSubmit}>      
-        <label>Name:</label>
+        <label>Username:</label>
         <input
           type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="username"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
         />
         <label>Email:</label>
         <input
@@ -75,6 +79,13 @@ function EditDoctor() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+         <label>Photo:</label>
+        <input
+          type="text"
+          name="photo"
+          value={photo}
+          onChange={(e) => setPhoto(e.target.value)}
+        />
          <label>Price:</label>
         <input
           type="text"
@@ -82,11 +93,19 @@ function EditDoctor() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+         <label>Department:</label>
         <input
           type="text"
           name="department"
           value={department}
           onChange={(e) => setDepartment(e.target.value)}
+        />
+         <label>Gender:</label>
+         <input
+          type="text"
+          name="gender"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
         />
        
         <button type="submit">Update Doctor´s Profile</button>

@@ -29,8 +29,9 @@ function PatientList() {
                 <p>{individualPatient.photo}</p>
                 <p>{individualPatient.dob}</p>
                 <p>{individualPatient.gender}</p>
-                <p>{individualPatient.bloodType}</p>
-                <Link to={`/patients/${individualPatient._id}`}>Link to Patient List</Link>
+                <p>{individualPatient.bloodtype}</p>
+                <Link to={`/patients/add-patient`}>Add Patient</Link> <span> | </span>
+                <Link to={`/patients/${individualPatient._id}`}>Edit Patient</Link>
             </div>
         )
     })}

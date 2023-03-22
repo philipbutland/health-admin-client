@@ -16,7 +16,7 @@ function EditAppointment(props) {
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointment/${appointmentId}`)
+      .get(`${API_URL}/appointments/${appointmentId}`)
       .then((response) => {
         const oneAppointment = response.data;
         setPatient(oneAppointment.patient);

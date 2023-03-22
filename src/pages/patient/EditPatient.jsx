@@ -86,18 +86,21 @@ function EditPatient(props) {
         value={photo}
         onChange={(e) => setPhoto(e.target.value)}
       />
+       <label>DOB:</label>
       <input
         type="text"
         name="dob"
         value={dob}
         onChange={(e) => setDob(e.target.value)}
       />
+       <label>Gender:</label>
        <input
         type="text"
         name="gender"
         value={gender}
         onChange={(e) => setGender(e.target.value)}
       />
+       <label>Blood type:</label>
           <input
         type="text"
         name="bloodType"
