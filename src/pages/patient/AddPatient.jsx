@@ -29,7 +29,7 @@ function AddPatient() {
         })
     }
     return (
-      <div>
+      <div className="normalPage">
       <h3>Add the Patient</h3>
       <form action="" onSubmit={handleSubmit}>
           <label htmlFor="">

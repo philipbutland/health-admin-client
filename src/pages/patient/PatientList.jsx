@@ -17,7 +17,7 @@ function PatientList() {
 },[])
 
   return (
-    <div>
+    <div className="normalPage">
     <h3>Patient List</h3>
     {!patient && <h2>Loading...</h2>}
       

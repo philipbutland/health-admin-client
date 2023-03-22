@@ -30,34 +30,39 @@ function AddDoctor() {
     }
 
     return (
-    <div>
+    <div className="editPage">
     <h3>Add the Doctor</h3>
     <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="">
-            Doctors Name
-            <input type="text" value={username} onChange={(e)=>setUserName(e.target.value)}/>
+        <label htmlFor="" className="editFieldLabel">
+            Doctors Name:
+            <input className="editField" type="text" value={username} onChange={(e)=>setUserName(e.target.value)}/>
         </label>
-        <label htmlFor="">
+        <label htmlFor="" className="editFieldLabel">
             Email
-            <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+            <input className="editField" type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
         </label>
-        <label htmlFor="">
+        <label htmlFor="" className="editFieldLabel">
            Photo
-          <input type="text" value={photo} onChange={(e)=>setPhoto(e.target.value)}/>
+          <input className="editField" type="text" value={photo} onChange={(e)=>setPhoto(e.target.value)}/>
         </label>
-        <label htmlFor="">
+        <label htmlFor="" className="editFieldLabel">
         Price
-          <input type="text" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+          <input className="editField" type="text" value={price} onChange={(e)=>setPrice(e.target.value)}/>
         </label>
-        <label htmlFor="">
+        <label htmlFor="" className="editFieldLabel">
         Department
-          <input type="text" value={department} onChange={(e)=>setDepartment(e.target.value)}/>
+          <input className="editField" type="text" value={department} onChange={(e)=>setDepartment(e.target.value)}/>
         </label>
-        <label htmlFor="">
+        <label htmlFor="" className="editFieldLabel">
         Gender
-          <input type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/>
+          <select className="editField" name="gender" onChange={(e)=>setGender(e.target.value)}>
+            <option>M</option>
+            <option>F</option>
+            <option>I would rather not say</option>
+          </select>
+          {/* <input type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/> */}
         </label>
-        <button type="submit">Submit Doctor Profile</button>
+        <button className="addButton" type="submit">Submit Doctor Profile</button>
     </form>
 </div>
   )

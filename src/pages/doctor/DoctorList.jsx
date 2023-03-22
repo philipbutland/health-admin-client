@@ -17,26 +17,38 @@ function DoctorList() {
   },[])
   return (
     <div>
-    <h3>Doctor List</h3>
-    {!doctor && <h2>Loading...</h2>}
+        <h3>Doctor List</h3>
+        {!doctor && <h2>Loading...</h2>}
+        <table className="Container">
+
+        {/* <tr>
+            <th className="thinColumn">Name</th>
+            <th className="thinColumn">Photo</th>
+            <th className="wideColumn">E-mail</th>
+            <th className="thinColumn">Price</th>
+            <th className="thinColumn">Department</th>
+            <th className="thinColumn">Gender</th>
+        </tr> */}
+
       
-    {doctor && doctor.map(individualDoctor=>{
-        return(
-            <div key={individualDoctor._id}>
-                <h2>Username: {individualDoctor.username}</h2>
-                <h5>Email: {individualDoctor.email}</h5>
-                <p>Photo: {individualDoctor.photo}</p>
-                <p>Price: {individualDoctor.price}</p>
-                <p>Department: {individualDoctor.department}</p>
-                <p>Gender: {individualDoctor.gender}</p>
-                <Link to={`/doctors/add-doctor`}>Add Doctor</Link> <span> | </span>
-                <Link to={`/doctors/${individualDoctor._id}`}>Edit Doctor</Link>
-            </div>
-        )
-    })}
-</div>
-)
-}
+        {doctor && doctor.map(individualDoctor=>{
+            return(
+                    <tr key={individualDoctor._id} className="infoText">
+                        <td className="userColumn">{individualDoctor.username}</td>
+                        <td className="mediumColumn">{individualDoctor.photo}</td>
+                        <td className="mediumColumn">{individualDoctor.department}</td>
+                        <td className="buttonColumn"><button className="editButton"><Link to={`/doctors/edit/${individualDoctor._id}`}>Edit Doctor</Link></button></td>
+                        <td className="buttonColumn"><button className="editButton"><Link to={`/doctors/${individualDoctor._id}`}>Details</Link></button></td>
+                    </tr>
+            )
+        })}
+
+        </table>
+
+        <button className="addButton"><Link to={`/doctors/add-doctor`}>Add Doctor</Link></button>
+
+    </div>
+)}
 
 
 export default DoctorList

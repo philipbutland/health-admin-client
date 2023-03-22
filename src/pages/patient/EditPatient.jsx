@@ -61,7 +61,7 @@ function EditPatient(props) {
    
 
   return (
-    <div>
+    <div className="normalPage">
     <h3>Edit the Patient´s Profile</h3>
 
     <form onSubmit={handleFormSubmit}>      

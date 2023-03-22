@@ -56,7 +56,7 @@ function EditAppointment(props) {
   };  
   
   return (
-    <div>
+    <div className="normalPage">
       <h3>Edit the Appointment</h3>
  
       <form onSubmit={handleFormSubmit}>    

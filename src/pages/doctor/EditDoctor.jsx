@@ -61,56 +61,37 @@ function EditDoctor() {
 
 
   return (
-    <div>
+    <div className="editPage">
       <h3>Edit the Doctor´s Profile</h3>
  
       <form onSubmit={handleFormSubmit}>      
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <label>Email:</label>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-         <label>Photo:</label>
-        <input
-          type="text"
-          name="photo"
-          value={photo}
-          onChange={(e) => setPhoto(e.target.value)}
-        />
-         <label>Price:</label>
-        <input
-          type="text"
-          name="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-         <label>Department:</label>
-        <input
-          type="text"
-          name="department"
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-        />
-         <label>Gender:</label>
-         <input
-          type="text"
-          name="gender"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-        />
-       
-        <button type="submit">Update Doctor´s Profile</button>
+        <label className="editFieldLabel">
+          Username:
+          <input className="editField" type="text" name="username" value={username} onChange={(e) => setUserName(e.target.value)}/>
+        </label>
+        <label className="editFieldLabel">
+          Email:
+          <input className="editField" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <label className="editFieldLabel">
+          Photo:
+          <input className="editField" type="text" name="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} />
+        </label>
+        <label className="editFieldLabel">
+          Price:
+          <input className="editField" type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} />
+         </label>
+         <label className="editFieldLabel">
+          Department:
+          <input className="editField" type="text" name="department" value={department} onChange={(e) => setDepartment(e.target.value)} />
+        </label>        
+        <label className="editFieldLabel">
+          Gender:
+          <input className="editField" type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+        </label>
+        <button className="editButton" type="submit">Update Doctor´s Profile</button>
       </form>
-      <button onClick={deleteDoctor}>Delete Doctor´s Profile</button>
+      <button className="deleteButton" onClick={deleteDoctor}>Delete Doctor´s Profile</button>
     </div>
   );
 }
