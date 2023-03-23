@@ -10,12 +10,26 @@ function AddDoctor() {
   const [price,setPrice] = useState('')
   const [department,setDepartment] = useState('')
   const [gender,setGender] = useState('')
+  const [error, setError] = useState("");
+
+  const genderOptions = [
+    {value: '', text: '--Choose a gender--'},
+    {value: 'M', text: 'Male'},
+    {value: 'F', text: 'Female'},
+    {value: 'NA', text: 'Id rather not say'},
+  ];
+
+  const [selected, setSelected] = useState(genderOptions[0].value);
+
      
   const navigate = useNavigate()
 
     function handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault();
+        setError("");    
         const bodyToPost = {username, email, photo, price, department, gender}
+        // if (isNaN(price) || price === '') { return setError('Please select a price for your service')}
+
         axios.post('http://localhost:5005/doctors/add-doctor',bodyToPost)
         .then(()=>{
            setUserName ('')
@@ -27,12 +41,18 @@ function AddDoctor() {
            alert("Doctors Profile Created")
            navigate('/doctors')
         })
+        .catch((er) => {
+          console.log("error", er);
+          const email = er.response.data.error.message.includes('Email')
+          if (email) setError('Fill your email')
+        });
     }
 
     return (
     <div>
     <h3>Add the Doctor</h3>
     <form action="" onSubmit={handleSubmit}>
+        {error && <p> {error} </p>}
         <label htmlFor=""  className="editFieldLabel">
             Doctors Name
             <input className="editField" type="text" value={username} onChange={(e)=>setUserName(e.target.value)}/>
@@ -55,11 +75,14 @@ function AddDoctor() {
         </label>
         <label htmlFor="" className="editFieldLabel">
         Gender
+        <div>
           <select className="editField" name="gender" onChange={(e)=>setGender(e.target.value)}>
-            <option>M</option>
-            <option>F</option>
-            <option>I would rather not say</option>
-          </select>
+    		    <option value="M">Male</option>
+    		    <option value="F">Female</option>
+    		    <option value="NA">I'd rather not say</option>
+   		    </select>
+        </div>       
+
           {/* <input className="editField" type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/> */}
         </label>
         <button type="submit">Submit Doctor Profile</button>

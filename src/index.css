@@ -43,16 +43,14 @@ select {
   background-color: #a6dad5;
 }
 
-.infoText{
-    /* display: flex; */
-    /* flex-wrap: wrap;
-    flex-direction: row; */
-    /* justify-content: space-evenly; */
+.tableHeader{
     text-align: left;
-    /* width: 100%; */
-    /* width: 1200px; */
-    margin: 0px;
-    padding: 0px;
+    padding-left: 20px;
+    color: red;
+}
+
+.tableBody{
+  text-align: left;
 }
 
 .thinColumn{
@@ -73,7 +71,7 @@ select {
 .userColumn{
   font-weight: bold;
   width: 20%;
-  padding: 3px;
+  padding-left: 20px;
 }
 
 .buttonColumn{
