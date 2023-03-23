@@ -21,14 +21,14 @@ function DoctorList() {
         {!doctor && <h2>Loading...</h2>}
         <table className="Container">
 
-        {/* <tr>
+         {/* <tr>
             <th className="thinColumn">Name</th>
             <th className="thinColumn">Photo</th>
             <th className="wideColumn">E-mail</th>
             <th className="thinColumn">Price</th>
             <th className="thinColumn">Department</th>
             <th className="thinColumn">Gender</th>
-        </tr> */}
+        </tr>  */}
 
       
         {doctor && doctor.map(individualDoctor=>{
