@@ -21,16 +21,17 @@ function DoctorList() {
         {!doctor && <h2>Loading...</h2>}
         <table className="Container">
 
-         {/* <tr>
-            <th className="thinColumn">Name</th>
-            <th className="thinColumn">Photo</th>
-            <th className="wideColumn">E-mail</th>
-            <th className="thinColumn">Price</th>
-            <th className="thinColumn">Department</th>
-            <th className="thinColumn">Gender</th>
-        </tr>  */}
+        <thead>
 
-      
+        <tr>
+            <th className="infoText">Name</th>
+            <th className="infoText">Photo</th>
+            <th className="infoText">Gender</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
         {doctor && doctor.map(individualDoctor=>{
             return(
                     <tr key={individualDoctor._id} className="infoText">
@@ -42,6 +43,9 @@ function DoctorList() {
                     </tr>
             )
         })}
+        </tbody>
+      
+
 
         </table>
 

@@ -16,7 +16,7 @@ function AddDoctor() {
     function handleSubmit(e){
         e.preventDefault()
         const bodyToPost = {username, email, photo, price, department, gender}
-        axios.post('http://localhost:5005/doctors/add-doctors',bodyToPost)
+        axios.post('http://localhost:5005/doctors/add-doctor',bodyToPost)
         .then(()=>{
            setUserName ('')
            setEmail('')
@@ -30,11 +30,11 @@ function AddDoctor() {
     }
 
     return (
-    <div className="editPage">
+    <div>
     <h3>Add the Doctor</h3>
     <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="" className="editFieldLabel">
-            Doctors Name:
+        <label htmlFor=""  className="editFieldLabel">
+            Doctors Name
             <input className="editField" type="text" value={username} onChange={(e)=>setUserName(e.target.value)}/>
         </label>
         <label htmlFor="" className="editFieldLabel">
@@ -60,9 +60,9 @@ function AddDoctor() {
             <option>F</option>
             <option>I would rather not say</option>
           </select>
-          {/* <input type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/> */}
+          {/* <input className="editField" type="text" value={gender} onChange={(e)=>setGender(e.target.value)}/> */}
         </label>
-        <button className="addButton" type="submit">Submit Doctor Profile</button>
+        <button type="submit">Submit Doctor Profile</button>
     </form>
 </div>
   )

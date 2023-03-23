@@ -44,13 +44,13 @@ select {
 }
 
 .infoText{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
+    /* display: flex; */
+    /* flex-wrap: wrap;
+    flex-direction: row; */
+    /* justify-content: space-evenly; */
     text-align: left;
     /* width: 100%; */
-    width: 1200px;
+    /* width: 1200px; */
     margin: 0px;
     padding: 0px;
 }
@@ -138,4 +138,8 @@ a {
 
 .profileInfo{
   font-size: 18px;
+}
+
+.Container{
+  width: 100%
 }
