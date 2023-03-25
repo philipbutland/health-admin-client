@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
+import ShowDoctor from "../../components/ShowDoctor";
 
 const API_URL = "http://localhost:5005";
 
@@ -32,12 +33,7 @@ function DoctorInfo() {
 
   return (
     <div className="singlePerson">
-        <h2>Profile: {username}</h2>
-        <img src={photo} alt="../images/doctor.png"></img>
-        <p className="profileInfo"><b>e-mail: </b>{email}</p>
-        <p className="profileInfo"><b>Price: </b>€{price}</p>
-        <p className="profileInfo"><b>Department: </b>{department}</p>
-        <p className="profileInfo"><b>Gender: </b>{gender}</p>
+        <ShowDoctor username={username} image={photo} email={email} price={price} department={department} gender={gender} />
     </div>
   );
 }

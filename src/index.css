@@ -45,27 +45,21 @@ select {
 
 .tableHeader{
     text-align: left;
+    font-size: 18px;
     padding-left: 20px;
     color: red;
+    margin-left: 20px;
 }
 
 .tableBody{
   text-align: left;
 }
 
-.thinColumn{
-  width: 5%;
-  padding: 5px;
-}
 
 .mediumColumn{
-  width: 15%;
-  padding: 5px;
-}
-
-.wideColumn{
   width: 20%;
   padding: 5px;
+  padding-left: 20px;
 }
 
 .userColumn{
@@ -75,7 +69,7 @@ select {
 }
 
 .buttonColumn{
-  width: 20%;
+  width: 15%;
 }
 
 .addButton{
@@ -83,32 +77,23 @@ select {
   font-weight: bold;
   margin-top: 20px;
   border-radius: 10px;
-}
-
-.deleteButton{
-  background-color: #6cc2ba;
-  font-weight: bold;
-  margin-top: 20px;
-  border-radius: 10px;
+  color: white;
+  text-decoration: none;
   width: 250px;
 }
 
 a {
   color: white;
   text-decoration: none;
-} 
+}
 
 .editButton{
   background-color: #82b440;
   font-weight: bold;
   border-radius: 10px;
   text-decoration: none;
-}
-
-.singlePerson{
-  text-align: left;
-  margin: 20px 1000px 0 100px;
-  padding-bottom: 30px;
+  color: white;
+  text-decoration: none;
 }
 
 .editPage{
@@ -131,7 +116,8 @@ a {
 
 .editField{
   border-radius: 10px;
-  width: 300px;
+  width: 400px;
+  font-size: 20px;
 }
 
 .profileInfo{
@@ -140,4 +126,50 @@ a {
 
 .Container{
   width: 100%
+}
+
+.error{
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  padding: 20px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+::placeholder{
+  font-weight: bold;
+  color: red;
+}
+
+.singlePerson{
+  margin-bottom: 500px;
+}
+
+.Photo{
+  float: left;
+  padding: 5px;
+  margin-left: 10%;
+  width: 20%
+}
+
+.Info{
+  float:right;
+  text-align: left;
+  width: 60%;
+  font-size: 24px;
+  background-color: white;
+  margin-right: 50px;
+  padding: 10px;
+}
+
+
+.smallImage{
+  width: 25%;
+}
+
+.mediumImage{
+  width: 75%;
 }

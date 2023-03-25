@@ -34,27 +34,21 @@ function EditDoctor() {
 
   const handleFormSubmit = (e) => {                     
     e.preventDefault();
-    // Create an object representing the body of the PUT request
     const requestBody = { username, email, photo, price, department, gender };
  
-    // Make a PUT request to update the doctor´s profile
     axios
       .put(`${API_URL}/doctors/${doctorId}`, requestBody)
       .then((response) => {
-        // Once the request is resolved successfully and the doctor´s profile
-        // is updated we navigate back to the details page
         navigate(`/doctors/${doctorId}`)
       });
   };
 
   const deleteDoctor = () => {                    
-    // Make a DELETE request to delete the appointment
     axios
       .delete(`${API_URL}/doctors/${doctorId}`)
       .then(() => {
-        // Once the delete request is resolved successfully
-        // navigate back to the list of the doctor´s profile.
         navigate("/doctors");
+        alert("Doctor's Profile deleted");
       })
       .catch((err) => console.log(err));
   }; 
@@ -81,17 +75,38 @@ function EditDoctor() {
           Price:
           <input className="editField" type="text" name="price" value={price} onChange={(e) => setPrice(e.target.value)} />
          </label>
-         <label className="editFieldLabel">
-          Department:
-          <input className="editField" type="text" name="department" value={department} onChange={(e) => setDepartment(e.target.value)} />
-        </label>        
-        <label className="editFieldLabel">
-          Gender:
-          <input className="editField" type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+         <label htmlFor=""  className="editFieldLabel">
+           Department
+           <div>
+             <select className="editField" name="department" value={department} onChange={(e)=>setDepartment(e.target.value)}>
+              <option value="">--- Choose a department ---</option>
+       		    <option value="Radiology">Radiology</option>
+       		    <option value="Pediatrics">Pediatrics</option>
+       		    <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
+              <option value="Dermatology">Dermatology</option>
+              <option value="Opthamology">Opthamology</option>
+              <option value="Orthopedics">Orthopedics</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Psychiatry">Psychiatry</option>
+              <option value="Oncology">Oncology</option>
+    		    </select>
+          </div> 
         </label>
-        <button className="editButton" type="submit">Update Doctor´s Profile</button>
+        <label htmlFor=""  className="editFieldLabel">
+           Gender
+           <div>
+             <select className="editField" name="gender" value={gender} onChange={(e)=>setGender(e.target.value)}>
+              <option value="">--- Choose a gender ---</option>
+       		    <option value="M">Male</option>
+       		    <option value="F">Female</option>
+       		    <option value="N/A">I'd rather not say</option>
+    		    </select>
+          </div> 
+        </label>
+        <button className="editButton" type="submit">Update Doctor´s Profile</button> */}
       </form>
-      <button className="deleteButton" onClick={deleteDoctor}>Delete Doctor´s Profile</button>
+      <button className="addButton" onClick={deleteDoctor}>Delete Doctor´s Profile</button>
     </div>
   );
 }
