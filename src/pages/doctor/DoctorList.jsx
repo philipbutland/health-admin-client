@@ -1,13 +1,14 @@
 //DoctorList
-import axios from 'axios'
+//import axios from 'axios'
 import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import service from '../../api/service'
 
 function DoctorList() {
   const [doctor,setDoctor] = useState(false)
 
   useEffect(()=>{
-      axios.get('http://localhost:5005/doctors')
+      service.getDoctors()
       .then(response=>{
           console.log(response.data)
           setTimeout(() => {
@@ -25,7 +26,7 @@ function DoctorList() {
             <div key={individualDoctor._id}>
                 <h2>Username: {individualDoctor.username}</h2>
                 <h5>Email: {individualDoctor.email}</h5>
-                <p>Photo: {individualDoctor.photo}</p>
+                <img src={individualDoctor.photo} alt="movie" width="200" />
                 <p>Price: {individualDoctor.price}</p>
                 <p>Department: {individualDoctor.department}</p>
                 <p>Gender: {individualDoctor.gender}</p>
