@@ -2,18 +2,18 @@ import { Link } from "react-router-dom";
  
 function Navbar() {
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">
-        <button>Home</button>
+        <button className="navButton">Home</button>
       </Link>
       <Link to="/doctors">
-        <button>Doctors</button>
+        <button className="navButton">Doctors</button>
       </Link>
       <Link to="/patients">
-        <button>Patients</button>
+        <button className="navButton">Patients</button>
       </Link>
       <Link to="/appointments">
-        <button>Appointments</button>
+        <button className="navButton">Appointments</button>
       </Link>
     </nav>
   );

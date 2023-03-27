@@ -25,7 +25,7 @@ function AddAppointment() {
         })
     }
   return (
-    <div>
+    <div className="normalPage">
      <h3>Add the Appointment</h3>
     <form action="" onSubmit={handleSubmit}>
         <label htmlFor="">

@@ -16,7 +16,7 @@ function AppointmentList() {
       })
   },[])
   return (
-    <div>
+    <div className="normalPage">
      <h3>Appointment List</h3>
         {!appointment && <h2>Loading...</h2>}
               
