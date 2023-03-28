@@ -11,15 +11,21 @@ function AddPatient() {
   const [bloodType, setBloodType] = useState('') 
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setError("");
-    const bodyToPost = {username, email, photo, dob, gender, bloodType}
-    console.log("bodytopost patient", bodyToPost)
-    if (!username) {
-      setError("Please select a username")
+    function handleSubmit(e){
+        e.preventDefault()
+        const bodyToPost = {username, email, photo, dob, gender, bloodType}
+        axios.post('http://localhost:5005/patients/add-patient',bodyToPost)
+        .then(()=>{
+           setUserName ('')
+           setEmail('')
+           setPhoto('')
+           setDob('')
+           setGender('')
+           setBloodType('')
+           alert("Patients Profile Created")
+           navigate('/patients')
+        })
     }
     else if (!email)
       setError("Please select an a-mail address")
