@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 //DoctorList
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import doctorPic from '../../images/doctor.png';
+//import doctorPic from '../../images/doctor.png';
+import service from '../../api/service'
 
 const API_URL = "http://localhost:5005";
 
@@ -10,16 +12,21 @@ function DoctorList() {
   const [doctor,setDoctor] = useState(false)
 
   const getDoctors = () => {
-    axios.get('http://localhost:5005/doctors')
+    service.getDoctors()
     .then(response=>{
-          console.log(response.data)
+          console.log(response.data, "result")
           setDoctor(response.data)
     })
     .catch(err => console.log(err))
   }
 
   useEffect(()=>{
-    getDoctors()
+axios.get('http://localhost:5005/doctors')
+.then(response=>{
+  console.log(response.data, "result")
+  setDoctor(response.data)
+})
+.catch(err => console.log(err))
   },[])
 
   const deleteDoctor = (doctorId) => {
@@ -51,8 +58,7 @@ function DoctorList() {
                 {doctor && doctor.map(individualDoctor=>{
                     return(
                         <tr key={individualDoctor._id} className="tableBody">
-                            <td className="userColumn">{individualDoctor.username}</td>
-                            {/* <td className="mediumColumn>"><img className="smallImage" src={doctorPic} /></td> */}
+                            <td className="userColumn">{individualDoctor.username}</td>                           
                             <td className="mediumColumn"><img className="smallImage" src={individualDoctor.photo} alt="doctor" /></td>
                             <td className="mediumColumn">{individualDoctor.department}</td>
                             <td className="buttonColumn"><button className="editButton"><Link to={`/doctors/${individualDoctor._id}`}>Details</Link></button></td>

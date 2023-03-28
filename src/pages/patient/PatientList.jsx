@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import patientPic from '../../images/patient.png';
+//import patientPic from '../../images/patient.png';
+import service from '../../api/service'
 
 const API_URL = "http://localhost:5005";
 
@@ -9,7 +10,7 @@ function PatientList() {
   const [patient,setPatient] = useState(false)
 
   const getPatients = () => {
-    axios.get('http://localhost:5005/patients')
+    service.getPatients()
     .then(response=>{
           console.log(response.data)
           setPatient(response.data)
@@ -18,8 +19,13 @@ function PatientList() {
   }
 
   useEffect(()=>{
-    getPatients()
-  },[])
+    axios.get('http://localhost:5005/patients')
+    .then(response=>{
+      console.log(response.data, "result")
+      setPatient(response.data)
+    })
+    .catch(err => console.log(err))
+      },[])
 
   const deletePatient = (patientId) => {
     axios.delete(`${API_URL}/patients/${patientId}`)
@@ -53,7 +59,6 @@ function PatientList() {
                     return(
                         <tr key={individualPatient._id} className="tableBody">
                             <td className="userColumn">{individualPatient.username}</td>
-                            {/* <td className="mediumColumn>"><img className="smallImage" src={patientPic} /></td> */}
                             <td className="mediumColumn"><img className="smallImage" src={individualPatient.photo} alt="patient" /></td>
                             <td className="mediumColumn">{individualPatient.bloodType}</td>
                             <td className="mediumColumn">{individualPatient.gender}</td>

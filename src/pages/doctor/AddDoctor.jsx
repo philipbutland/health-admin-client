@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import service from "../../api/service";
 
 function AddDoctor() {
   const [username, setUserName] = useState("");
@@ -11,6 +12,23 @@ function AddDoctor() {
   const [gender, setGender] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+// ******** this method handles the file upload ********
+const handleFileUpload = (e) => {
+ 
+  const uploadData = new FormData();
+
+  uploadData.append("photo", e.target.files[0]);
+
+  service
+    .uploadImage(uploadData)
+    .then(response => {
+      setPhoto(response.fileUrl);
+      console.log(response.fileUrl)
+    })
+    .catch(err => console.log("Error while uploading the file: ", err));
+};
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,8 +46,8 @@ function AddDoctor() {
     else if (!department)
      setError("Please select a department from the dropdown menu")
     else{
-      axios
-        .post("http://localhost:5005/doctors/add-doctor", bodyToPost)
+      service
+        .createDoctors(bodyToPost)
         .then(() => {
           setUserName("");
           setEmail("");
@@ -73,12 +91,7 @@ function AddDoctor() {
         </label>
         <label htmlFor="" className="editFieldLabel">
           Photo
-          <input
-            className="editField" 
-            type="text"
-            value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-          />
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Price
