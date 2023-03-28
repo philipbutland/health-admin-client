@@ -43,7 +43,7 @@ function AddPatient() {
         })
         .catch((error) => {
           console.log("error", error);
-          setError(<p className="error">{error.response.data.message}</p>)
+          setError(<p className="errorMessage">{error.response.data.message}</p>)
         });
      }
   }
@@ -52,7 +52,7 @@ function AddPatient() {
     <div>
       <h3>Add a Patient</h3>
       <form action="" onSubmit={handleSubmit}>
-        {error && <p className="error"> {error} </p>}
+        {error && <p className="errorMessage"> {error} </p>}
         <label htmlFor="" className="editFieldLabel">
           Patient's Name
           <input
