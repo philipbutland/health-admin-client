@@ -13,6 +13,7 @@ import EditPatient from './pages/patient/EditPatient';
 import PatientList from './pages/patient/PatientList';
 import DoctorInfo from './pages/doctor/DoctorInfo';
 import PatientInfo from './pages/patient/PatientInfo';
+import AppointmentInfo from "./pages/appointment/AppointmentInfo"
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
         <Route path="/patients/:patientId" element={<PatientInfo />} />
         <Route path="/appointments" element={<AppointmentList />} />
         <Route path="/appointments/add-appointment" element={<AddAppointment />} />
-        <Route path="/appointments/:appointmentId" element={<EditAppointment />} />
+        <Route path="/appointments/edit/:appointmentId" element={<EditAppointment />} />
+        <Route path="/appointments/:appointmentId" element={<AppointmentInfo />} />
         </Routes>
     </div>
   );
