@@ -28,3 +28,148 @@ select {
   margin: 5px;
   font-size: 18px;
 }
+
+.navbar{
+  background-color: #009688;
+}
+
+.navButton{
+  background-color: #6cc2ba;
+  border-radius: 10px;
+  margin: 10px 20px;
+}
+
+.normalPage{
+  background-color: #a6dad5;
+}
+
+.tableHeader{
+    text-align: left;
+    font-size: 18px;
+    padding-left: 20px;
+    color: red;
+    margin-left: 20px;
+}
+
+.tableBody{
+  text-align: left;
+}
+
+
+.mediumColumn{
+  width: 20%;
+  padding: 5px;
+  padding-left: 20px;
+}
+
+.userColumn{
+  font-weight: bold;
+  width: 20%;
+  padding-left: 20px;
+}
+
+.buttonColumn{
+  width: 15%;
+}
+
+.addButton{
+  background-color: #009688;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  width: 250px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.editButton{
+  background-color: #82b440;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  text-decoration: none;
+}
+
+.editPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start ;
+  margin: 0 0 20px 10%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.editFieldLabel{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start ;
+  margin: 0 0 20px 10%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.editField{
+  border-radius: 10px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.profileInfo{
+  font-size: 18px;
+}
+
+.Container{
+  width: 100%
+}
+
+.errorMessage{
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  padding: 20px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+::placeholder{
+  font-weight: bold;
+  color: red;
+}
+
+.singlePerson{
+  margin-bottom: 500px;
+}
+
+.Photo{
+  float: left;
+  padding: 5px;
+  margin-left: 10%;
+  width: 20%
+}
+
+.Info{
+  float:right;
+  text-align: left;
+  width: 60%;
+  font-size: 24px;
+  background-color: white;
+  margin-right: 50px;
+  padding: 10px;
+}
+
+
+.smallImage{
+  width: 25%;
+}
+
+.mediumImage{
+  width: 75%;
+}
