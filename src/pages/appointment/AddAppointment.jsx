@@ -72,22 +72,6 @@ function AddAppointment() {
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
 
-
-        <label htmlFor="" className="editFieldLabel">
-          Doctor
-          <div>
-            <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
-              <option value="">--- Choose a Doctor ---</option>
-              {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
-                return(
-                    <option key={individualDoctor._id}>{individualDoctor.username}</option>
-                )
-              })}
-    		    </select>
-          </div>
-        </label>
-
-
         <label htmlFor="" className="editFieldLabel">
           Patient
           <div>
@@ -102,6 +86,20 @@ function AddAppointment() {
           </div>
         </label>
 
+
+        <label htmlFor="" className="editFieldLabel">
+          Doctor
+          <div>
+            <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
+              <option value="">--- Choose a Doctor ---</option>
+              {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
+                return(
+                    <option key={individualDoctor._id}>{individualDoctor.username}</option>
+                )
+              })}
+    		    </select>
+          </div>
+        </label>
 
         <label htmlFor="" className="editFieldLabel">
           Date and Time

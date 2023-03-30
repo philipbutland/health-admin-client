@@ -36,10 +36,10 @@ const handleFileUpload = (e) => {
     const bodyToPost = {username, email, photo, dob, gender, bloodType}
     console.log("bodytopost patient", bodyToPost)
     if (!username) {
-      setError("Please select a username")
+      setError("Please select a patient's name")
     }
     else if (!email)
-      setError("Please select an a-mail address")
+      setError("Please select an a-mail address for your patient")
     else if (!gender)
       setError("Please select a gender from the dropdown menu")
     else if (!bloodType)
@@ -60,7 +60,7 @@ const handleFileUpload = (e) => {
         })
         .catch((error) => {
           console.log("error", error);
-          setError(<p className="error">{error.response.data.message}</p>)
+          setError(<p>{error.response.data.message}</p>)
         });
      }
   }
@@ -69,7 +69,7 @@ const handleFileUpload = (e) => {
     <div>
       <h3>Add a Patient</h3>
       <form action="" onSubmit={handleSubmit}>
-        {error && <p className="error"> {error} </p>}
+        {error && <p className="errorMessage"> {error} </p>}
         <label htmlFor="" className="editFieldLabel">
           Patient's Name
           <input

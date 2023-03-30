@@ -6,6 +6,10 @@ import { useParams, useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:5005";
 
 function EditAppointment() {
+
+  const [doctorArray,setDoctorArray] = useState([]);
+  const [patientArray,setPatientArray] = useState([]);
+
   const [patientId,setPatientId] = useState('')
   const [doctorId, setDoctorId] = useState('')
   const [department,setDepartment] = useState('')
@@ -47,21 +51,68 @@ function EditAppointment() {
       })
       .catch((err) => console.log(err));
   };  
+
+  useEffect(()=>{
+    axios.get('http://localhost:5005/doctors')
+    .then(response=>{
+      setDoctorArray(response.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+
+  useEffect(()=>{
+    axios.get('http://localhost:5005/patients')
+    .then(response=>{
+      setPatientArray(response.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+
   
   return (
     <div className="normalPage">
       <h3>Edit the Appointment</h3>
  
       <form onSubmit={handleFormSubmit}>  
-
+{/* 
         <label className="editFieldLabel">
           Patient:
           <input className="editField" type="text" name="patientId" value={patientId} onChange={(e) => setPatientId(e.target.value)} />
-        </label>
-        <label className="editFieldLabel">
+        </label> */}
+
+        {/* <label className="editFieldLabel">
           Doctor:
           <input className="editField" type="text" name="doctorId" value={doctorId} onChange={(e) => setDoctorId(e.target.value)} />
+        </label> */}
+
+        <label htmlFor="" className="editFieldLabel">
+          Patient
+          <div>
+            <select className="editField" name="patientId" onChange={(e)=>setPatientId(e.target.value)}>
+              <option value="">--- Choose a Patient ---</option>
+              {(patientArray.length>0) && patientArray.map(individualPatient=>{
+                return(
+                  <option key={individualPatient._id}>{individualPatient.username}</option>
+                )
+              })}
+    		    </select>
+          </div>
         </label>
+
+        <label htmlFor="" className="editFieldLabel">
+          Doctor
+          <div>
+            <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
+              <option value="">--- Choose a Doctor ---</option>
+              {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
+                return(
+                    <option key={individualDoctor._id}>{individualDoctor.username}</option>
+                )
+              })}
+    		    </select>
+          </div>
+        </label>
+
         <label className="editFieldLabel">
           Date / Time:
           <input className="editField" type="datetime-local" name="dateTime" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />

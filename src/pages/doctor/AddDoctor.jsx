@@ -37,10 +37,10 @@ const handleFileUpload = (e) => {
     console.log("bodytopost doctor", bodyToPost)
 
     if (!username) {
-      setError("Please select a username")
+      setError("Please add a doctor's name")
     }
     else if (!email)
-      setError("Please select an a-mail address")
+      setError("Please add an e-mail address for your doctor")
     else if (!gender)
       setError("Please select a gender from the dropdown menu")
     else if (!department)
@@ -60,7 +60,7 @@ const handleFileUpload = (e) => {
         })
         .catch((error) => {
           console.log("error", error);
-          setError(<p className="errorMessage">{error.response.data.message}</p>)
+          setError(<p>{error.response.data.message}</p>)
         });
     }
   }

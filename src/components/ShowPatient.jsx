@@ -14,6 +14,8 @@ function ShowPatient(props) {
                    <div><p><b>Date of Birth: </b> {props.dob}</p></div>
                    <div><p><b>Gender: </b>{props.gender}</p></div>
                    <div><p><b>Blood Type: </b>{props.bloodType}</p></div>
+
+                   <h4>Appointments for this Patient</h4>
                </div>
            </div>
        </div>
