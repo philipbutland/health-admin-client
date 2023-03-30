@@ -8,7 +8,7 @@ const API_URL = "http://localhost:5005";
 
 function PatientInfo() {
 
-    const { patientId } = useParams();
+    const {patientId} = useParams();
     const [username,setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [photo,setPhoto] = useState('')
@@ -33,7 +33,7 @@ function PatientInfo() {
 
   return (
     <div className="singlePerson">
-        <ShowPatient username={username} image={photo} email={email} dob={dob} gender={gender} bloodType={bloodType} />
+        <ShowPatient id={patientId} username={username} image={photo} email={email} dob={dob} gender={gender} bloodType={bloodType} />
     </div>
   );
 }

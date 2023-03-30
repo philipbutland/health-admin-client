@@ -6,7 +6,6 @@ function AddAppointment() {
 
   const [doctorArray,setDoctorArray] = useState([]);
   const [patientArray,setPatientArray] = useState([]);
- 
 
   const [doctorId,setDoctorId] = useState(false)
   const [patientId, setPatientId] = useState("");
@@ -19,19 +18,25 @@ function AddAppointment() {
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    setDoctorArray([]);
-    setPatientArray([]);
     const bodyToPost = { doctorId, patientId, dateTime, department };
 
     if (!doctorId) {
       setError("Please select a doctor")
+      return
     }
-    else if (!patientId)
+    else if (!patientId) {
       setError("Please select a patient")
-    else if (!dateTime)
+      return
+    }
+    else if (!dateTime) {
       setError("Please select a date and time")
-    else if (!department)
+      return
+    }
+    else if (!department) {
       setError("Please select a department from the dropdown menu")
+      return
+    }
+
     else{
       axios
         .post("http://localhost:5005/appointments/add-appointment", bodyToPost)
@@ -50,6 +55,7 @@ function AddAppointment() {
     }
   }
   
+
   useEffect(()=>{
     axios.get('http://localhost:5005/doctors')
     .then(response=>{
@@ -57,7 +63,7 @@ function AddAppointment() {
     })
     .catch(err => console.log(err))
   },[])
-
+  
   useEffect(()=>{
     axios.get('http://localhost:5005/patients')
     .then(response=>{
@@ -65,6 +71,8 @@ function AddAppointment() {
     })
     .catch(err => console.log(err))
   },[])
+
+
 
   return (
     <div>

@@ -13,8 +13,9 @@ function DoctorList() {
 
   const getDoctors = () => {
     service.getDoctors()
+    axios.get('http://localhost:5005/doctors')
     .then(response=>{
-          console.log(response.data, "result")
+          console.log("getDoctors result", response.data)
           setDoctor(response.data)
     })
     .catch(err => console.log(err))
@@ -23,7 +24,7 @@ function DoctorList() {
   useEffect(()=>{
     axios.get('http://localhost:5005/doctors')
     .then(response=>{
-      console.log(response.data, "result")
+      console.log("result", response.data)
       setDoctor(response.data)
     })
     .catch(err => console.log(err))

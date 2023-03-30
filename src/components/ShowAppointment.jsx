@@ -1,4 +1,16 @@
+import { useEffect } from "react"
+import axios from "axios"
+
+
 function ShowAppointment(props) {
+
+    useEffect(()=>{
+        axios.get('http://localhost:5005/appointments')
+        .then(response=>{
+          console.log(response.data)
+        })
+        .catch(err => console.log(err))
+      },[])
 
     return (
       <div className="singlePerson">

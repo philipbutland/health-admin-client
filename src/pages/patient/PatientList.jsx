@@ -11,6 +11,7 @@ function PatientList() {
 
   const getPatients = () => {
     service.getPatients()
+    axios.get('http://localhost:5005/patients')
     .then(response=>{
           console.log(response.data)
           setPatient(response.data)

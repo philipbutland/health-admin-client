@@ -74,16 +74,6 @@ function EditAppointment() {
       <h3>Edit the Appointment</h3>
  
       <form onSubmit={handleFormSubmit}>  
-{/* 
-        <label className="editFieldLabel">
-          Patient:
-          <input className="editField" type="text" name="patientId" value={patientId} onChange={(e) => setPatientId(e.target.value)} />
-        </label> */}
-
-        {/* <label className="editFieldLabel">
-          Doctor:
-          <input className="editField" type="text" name="doctorId" value={doctorId} onChange={(e) => setDoctorId(e.target.value)} />
-        </label> */}
 
         <label htmlFor="" className="editFieldLabel">
           Patient

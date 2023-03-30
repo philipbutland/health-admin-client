@@ -165,6 +165,16 @@ a {
   padding: 10px;
 }
 
+.patientInfo{
+  float:right;
+  text-align: left;
+  width: 90%;
+  font-size: 24px;
+  background-color: white;
+  margin-right: 50px;
+  padding: 10px;
+}
+
 
 .smallImage{
   width: 25%;
