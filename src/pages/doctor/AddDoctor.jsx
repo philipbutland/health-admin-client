@@ -112,7 +112,7 @@ const handleFileUpload = (e) => {
        		    <option value="Pediatrics">Pediatrics</option>
        		    <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
               <option value="Dermatology">Dermatology</option>
-              <option value="Opthamology">Opthamology</option>
+              <option value="Ophthalmology">Ophthalmology</option>
               <option value="Orthopedics">Orthopedics</option>
               <option value="Cardiology">Cardiology</option>
               <option value="Neurology">Neurology</option>
