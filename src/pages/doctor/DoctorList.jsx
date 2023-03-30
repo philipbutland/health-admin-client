@@ -21,12 +21,12 @@ function DoctorList() {
   }
 
   useEffect(()=>{
-axios.get('http://localhost:5005/doctors')
-.then(response=>{
-  console.log(response.data, "result")
-  setDoctor(response.data)
-})
-.catch(err => console.log(err))
+    axios.get('http://localhost:5005/doctors')
+    .then(response=>{
+      console.log(response.data, "result")
+      setDoctor(response.data)
+    })
+    .catch(err => console.log(err))
   },[])
 
   const deleteDoctor = (doctorId) => {

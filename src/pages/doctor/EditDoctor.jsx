@@ -35,6 +35,7 @@ function EditDoctor() {
   const handleFormSubmit = (e) => {                     
     e.preventDefault();
     const requestBody = { username, email, photo, price, department, gender };
+    console.log("request body", requestBody)
  
     axios
       .put(`${API_URL}/doctors/${doctorId}`, requestBody)
@@ -104,7 +105,7 @@ function EditDoctor() {
     		    </select>
           </div> 
         </label>
-        <button className="editButton" type="submit">Update Doctor´s Profile</button> */}
+        <button className="editButton" type="submit">Update Doctor´s Profile</button>
       </form>
       <button className="addButton" onClick={deleteDoctor}>Delete Doctor´s Profile</button>
     </div>

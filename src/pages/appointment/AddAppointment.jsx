@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function AddAppointment() {
 
-  const [doctorId, setDoctorId] = useState("");
+  const [doctorArray,setDoctorArray] = useState([]);
+  const [patientArray,setPatientArray] = useState([]);
+ 
+
+  const [doctorId,setDoctorId] = useState(false)
   const [patientId, setPatientId] = useState("");
   const [dateTime, setDateTime] = useState("");
   const [department, setDepartment] = useState("");
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
 
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
+    setDoctorArray([]);
+    setPatientArray([]);
     const bodyToPost = { doctorId, patientId, dateTime, department };
 
     if (!doctorId) {
@@ -25,7 +31,7 @@ function AddAppointment() {
     else if (!dateTime)
       setError("Please select a date and time")
     else if (!department)
-     setError("Please select a department from the dropdown menu")
+      setError("Please select a department from the dropdown menu")
     else{
       axios
         .post("http://localhost:5005/appointments/add-appointment", bodyToPost)
@@ -43,33 +49,62 @@ function AddAppointment() {
         });
     }
   }
+  
+  useEffect(()=>{
+    axios.get('http://localhost:5005/doctors')
+    .then(response=>{
+      setDoctorArray(response.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+
+  useEffect(()=>{
+    axios.get('http://localhost:5005/patients')
+    .then(response=>{
+      setPatientArray(response.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+
   return (
     <div>
       <h3>Add an Appointment</h3>
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
+
+
         <label htmlFor="" className="editFieldLabel">
           Doctor
-          <input
-            className="editField" 
-            type="text"
-            value={doctorId}
-            onChange={(e) => setDoctorId(e.target.value)}
-            placeholder="Doctor (required)"
-          />
+          <div>
+            <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
+              <option value="">--- Choose a Doctor ---</option>
+              {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
+                return(
+                    <option key={individualDoctor._id}>{individualDoctor.username}</option>
+                )
+              })}
+    		    </select>
+          </div>
         </label>
+
+
         <label htmlFor="" className="editFieldLabel">
           Patient
-          <input
-            className="editField" 
-            type="text"
-            value={patientId}
-            onChange={(e) => setPatientId(e.target.value)}
-            placeholder="Patient (required)"
-          />
+          <div>
+            <select className="editField" name="patientId" onChange={(e)=>setPatientId(e.target.value)}>
+              <option value="">--- Choose a Patient ---</option>
+              {(patientArray.length>0) && patientArray.map(individualPatient=>{
+                return(
+                  <option key={individualPatient._id}>{individualPatient.username}</option>
+                )
+              })}
+    		    </select>
+          </div>
         </label>
+
+
         <label htmlFor="" className="editFieldLabel">
-          dateTime
+          Date and Time
           <input
             className="editField" 
             type="datetime-local"
@@ -77,8 +112,9 @@ function AddAppointment() {
             onChange={(e) => setDateTime(e.target.value)}
           />
         </label>
+
         <label htmlFor=""  className="editFieldLabel">
-           Department
+           Department {doctorArray.department}
            <div>
              <select className="editField" name="department" onChange={(e)=>setDepartment(e.target.value)}>
                 <option value="">--- Choose a department ---</option>
@@ -92,7 +128,7 @@ function AddAppointment() {
                 <option value="Neurology">Neurology</option>
                 <option value="Psychiatry">Psychiatry</option>
                 <option value="Oncology">Oncology</option>
-    		</select>
+    		    </select>
           </div> 
         </label>
 
