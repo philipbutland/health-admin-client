@@ -56,12 +56,7 @@ function EditDoctor() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = { username, email, photo, price, department, gender };
-<<<<<<< HEAD
-    console.log("request body", requestBody)
  
-=======
-
->>>>>>> b78a196b8d41fd5a4405c81c85e479630fdb88da
     axios
       .put(`${API_URL}/doctors/${doctorId}`, requestBody)
       .then((response) => {
@@ -160,13 +155,9 @@ function EditDoctor() {
             </select>
           </div>
         </label>
-<<<<<<< HEAD
-        <button className="editButton" type="submit">Update Doctor´s Profile</button>
-=======
         <button className="editButton" type="submit" disabled={buttonisable}>
           Update Doctor´s Profile
         </button>
->>>>>>> b78a196b8d41fd5a4405c81c85e479630fdb88da
       </form>
       <button className="addButton" onClick={deleteDoctor}>
         Delete Doctor´s Profile
