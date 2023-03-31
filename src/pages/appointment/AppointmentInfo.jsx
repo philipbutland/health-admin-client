@@ -13,10 +13,12 @@ function AppointmentInfo() {
     const [patientId, setPatientId] = useState('')
     const [dateTime, setDateTime] = useState('')
     const [department, setDepartment] = useState('')
+
+    const storedToken = localStorage.getItem("authToken");
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointments/${appointmentId}`)
+      .get(`${API_URL}/appointments/${appointmentId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
         setDoctorId(response.data.doctorId);
         setPatientId(response.data.patientId)
