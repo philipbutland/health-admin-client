@@ -8,6 +8,7 @@ function AppointmentList() {
   const [appointment,setAppointment] = useState(false)
 
   const getAppointments = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios.get('http://localhost:5005/appointments')
     .then(response=>{
           console.log("Appointments", response.data)

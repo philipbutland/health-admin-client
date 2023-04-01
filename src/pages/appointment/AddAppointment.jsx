@@ -42,8 +42,9 @@ function AddAppointment() {
     }
 
     else{
+      const storedToken = localStorage.getItem('authToken');
       axios
-        .post("http://localhost:5005/appointments/add-appointment", bodyToPost)
+        .post("http://localhost:5005/appointments/add-appointment", bodyToPost, { headers: { Authorization: `Bearer ${storedToken}` }})
         .then(() => {
           setDoctorId("");
           setPatientId("");
