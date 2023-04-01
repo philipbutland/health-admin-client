@@ -15,7 +15,6 @@ function DoctorList() {
     service.getDoctors()
     axios.get('http://localhost:5005/doctors')
     .then(response=>{
-          console.log("getDoctors result", response.data)
           setDoctor(response.data)
     })
     .catch(err => console.log(err))
@@ -24,7 +23,6 @@ function DoctorList() {
   useEffect(()=>{
     axios.get('http://localhost:5005/doctors')
     .then(response=>{
-      console.log("result", response.data)
       setDoctor(response.data)
     })
     .catch(err => console.log(err))
@@ -43,7 +41,7 @@ function DoctorList() {
 
   return (
     <div>
-        <h1>Doctor List</h1>
+        <p className="pageHeader">Doctor List</p>
         {!doctor && <h2>Loading...</h2>}
         <table className="Container">
 

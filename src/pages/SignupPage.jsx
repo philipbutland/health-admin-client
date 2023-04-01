@@ -29,6 +29,8 @@ const handleSignupSubmit = (e) => {
     // Create an object representing the request body
     const requestBody = { email, password, name };
 
+    console.log("requestBody", requestBody)
+
     // Make an axios request to the API
     // If POST request is successful redirect to login page
     // If the request resolves with an error, set the error message in the state
@@ -77,8 +79,9 @@ const handleSignupSubmit = (e) => {
 
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <p className="warningMessage">Already have account?</p>
+      <p className="linkMessage"><Link to={"/login"}> <p className="link">Login</p></Link></p>
+
     </div>
   )
 }

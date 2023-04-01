@@ -27,8 +27,9 @@ function Navbar() {
             <button className="navButton">Appointments</button>
           </Link>
           
-             <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>
+          <button className="loginButton" onClick={logOutUser}>Logout</button>
+
+          <span className="userName">{user && user.name}</span>
         </>
       )}
 
@@ -36,11 +37,11 @@ function Navbar() {
         <>
           <Link to="/signup">
             {" "}
-            <button>Sign Up</button>{" "}
+            <button className="loginButton">Sign Up</button>{" "}
           </Link>
           <Link to="/login">
             {" "}
-            <button>Login</button>{" "}
+            <button className="loginButton">Login</button>{" "}
           </Link>
         </>
       )}

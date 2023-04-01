@@ -45,7 +45,7 @@ select {
 
 .tableHeader{
     text-align: left;
-    font-size: 18px;
+    font-size: 24px;
     padding-left: 20px;
     color: red;
     margin-left: 20px;
@@ -96,6 +96,13 @@ a {
   text-decoration: none;
 }
 
+.loginButton{
+  background-color:blue;
+  border-radius: 10px;
+  color:white;
+  font-weight:bold;
+}
+
 .editPage{
   display: flex;
   flex-direction: column;
@@ -134,9 +141,37 @@ a {
   font-weight: bold;
   padding: 20px;
   width: 50%;
+  font-size: 18px;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
+}
+
+.warningMessage{
+  color: white;
+  background-color: red;
+  font-weight: bold;
+  width: 50%;
+  font-size: 18px;
+  margin: 50px auto 0 auto;
+  padding: 2px;
+  justify-content: center;
+}
+
+.linkMessage{
+  color: blue;
+  text-decoration: underline;
+  background-color: red;
+  font-weight: bold;
+  width: 50%;
+  font-size: 18px; 
+  margin: 0 auto;
+  padding: 1px;
+  justify-content: center;
+}
+
+.link{
+  color: blue;
 }
 
 ::placeholder{
@@ -182,4 +217,21 @@ a {
 
 .mediumImage{
   width: 75%;
+}
+
+.userName{
+  color:white;
+  background-color: black;
+  font-weight: bold;
+  float: right;
+  text-align: right;
+  font-size: 18px;
+  margin: 10px 20px 0 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.pageHeader{
+  font-weight: bold;
+  font-size: 32px;
 }

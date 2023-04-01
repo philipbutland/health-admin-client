@@ -15,7 +15,7 @@ function ShowAppointment(props) {
 
     return (
       <div className="singlePerson">
-          <h2>Appointment</h2>
+          <p className="pageHeader">Appointment</p>
           <div>
               {/* <div className="Photo">
                   <img src={props.image} className="mediumImage" alt="doctor" />

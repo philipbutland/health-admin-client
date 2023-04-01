@@ -67,7 +67,7 @@ const handleFileUpload = (e) => {
   
   return (
     <div>
-      <h3>Add a Patient</h3>
+      <p className="pageHeader">Add a Patient</p>
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
         <label htmlFor="" className="editFieldLabel">

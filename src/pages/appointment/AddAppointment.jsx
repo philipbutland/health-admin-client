@@ -7,12 +7,8 @@ function AddAppointment() {
   const [doctorArray,setDoctorArray] = useState([]);
   const [patientArray,setPatientArray] = useState([]);
 
-
-  // IDEA FOR IMPROVEMENT - store doctors and patients in Appointments model as an object not a string
-  // you'll then have to console.log to find the exact thing to map, but it will be easier to transfer eg ID for links
-
   const [doctorId,setDoctorId] = useState(false)
-  const [patientId, setPatientId] = useState("");
+  const [patientId, setPatientId] = useState(false);
   const [dateTime, setDateTime] = useState("");
   const [department, setDepartment] = useState("");
 
@@ -64,7 +60,6 @@ function AddAppointment() {
   useEffect(()=>{
     axios.get('http://localhost:5005/doctors')
     .then(response=>{
-      console.log("DOCTOR RESPONSE", response)
       setDoctorArray(response.data)
     })
     .catch(err => console.log(err))
@@ -73,7 +68,6 @@ function AddAppointment() {
   useEffect(()=>{
     axios.get('http://localhost:5005/patients')
     .then(response=>{
-      console.log("PATIENT RESPONSE", response)
       setPatientArray(response.data)
     })
     .catch(err => console.log(err))
@@ -83,24 +77,9 @@ function AddAppointment() {
 
   return (
     <div>
-      <h3>Add an Appointment</h3>
+      <p className="pageHeader">Add an Appointment</p>
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
-
-        <label htmlFor="" className="editFieldLabel">
-          Patient
-          <div>
-            <select className="editField" name="patientId" onChange={(e)=>setPatientId(e.target.value)}>
-              <option value="">--- Choose a Patient ---</option>
-              {(patientArray.length>0) && patientArray.map(individualPatient=>{
-                return(
-                  <option key={individualPatient._id}>{individualPatient.username}</option>
-                )
-              })}
-    		    </select>
-          </div>
-        </label>
-
 
         <label htmlFor="" className="editFieldLabel">
           Doctor
@@ -109,7 +88,21 @@ function AddAppointment() {
               <option value="">--- Choose a Doctor ---</option>
               {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
                 return(
-                    <option key={individualDoctor._id}>{individualDoctor.username}</option>
+                  <option key={individualDoctor._id} value={individualDoctor._id}>{individualDoctor.username} ({individualDoctor.department})</option>
+                )
+              })}
+    		    </select>
+          </div>
+        </label>
+
+        <label htmlFor="" className="editFieldLabel">
+          Patient
+          <div>
+            <select className="editField" name="patientId" onChange={(e)=>setPatientId(e.target.value)}>
+              <option value="">--- Choose a Patient ---</option>
+              {(patientArray.length>0) && patientArray.map(individualPatient=>{
+                return(
+                  <option key={individualPatient._id} value={individualPatient._id}>{individualPatient.username}</option>
                 )
               })}
     		    </select>

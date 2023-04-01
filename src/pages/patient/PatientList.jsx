@@ -41,7 +41,7 @@ function PatientList() {
 
   return (
     <div>
-        <h1>Patient List</h1>
+        <p className="pageHeader">Patient List</p>
         {!patient && <h2>Loading...</h2>}
         <table className="Container">
 
@@ -56,7 +56,6 @@ function PatientList() {
 
             <tbody>
                 {patient && patient.map(individualPatient=>{
-                    console.log("individual patient", individualPatient)
                     return(
                         <tr key={individualPatient._id} className="tableBody">
                             <td className="userColumn">{individualPatient.username}</td>

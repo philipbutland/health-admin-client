@@ -9,8 +9,8 @@ const API_URL = "http://localhost:5005";
 function AppointmentInfo() {
 
     const { appointmentId } = useParams();
-    const [doctorArray, setDoctorArray] = useState('')
-    const [patientArray, setPatientArray] = useState('')
+    const [doctorName, setDoctorName] = useState('')
+    const [patientName, setPatientName] = useState('')
     const [dateTime, setDateTime] = useState('')
     const [department, setDepartment] = useState('')
 
@@ -20,9 +20,8 @@ function AppointmentInfo() {
     axios
       .get(`${API_URL}/appointments/${appointmentId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
-        console.log("APPOINTMENT RESPONSE", response.data)
-        setDoctorArray(response.data.doctorId);
-        setPatientArray(response.data.patientId)
+        setDoctorName(response.data.doctorId.username);
+        setPatientName(response.data.patientId.username)
         setDateTime(response.data.dateTime)
         setDepartment(response.data.department)
       })
@@ -32,7 +31,7 @@ function AppointmentInfo() {
 
   return (
     <div className="singlePerson">
-        <ShowAppointment doctorArray={doctorArray} patientArray={patientArray} dateTime={dateTime} department={department} />
+        <ShowAppointment doctorName={doctorName} patientName={patientName} dateTime={dateTime} department={department} />
     </div>
   );
 }

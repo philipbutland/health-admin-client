@@ -18,7 +18,7 @@ function EditDoctor() {
   const { doctorId } = useParams();
   const navigate = useNavigate();
 
-  // ******** this method handles the file upload ********
+
   const handleFileUpload = (e) => {
     const uploadData = new FormData();
     setButtondisable(true);
@@ -76,7 +76,7 @@ function EditDoctor() {
 
   return (
     <div className="editPage">
-      <h3>Edit the Doctor´s Profile</h3>
+      <p className="pageHeader">Edit the Doctor´s Profile</p>
 
       <form onSubmit={handleFormSubmit}>
         <label className="editFieldLabel">

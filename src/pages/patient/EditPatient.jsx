@@ -72,7 +72,7 @@ function EditPatient() {
 
   return (
     <div className="editPage">
-      <h3>Edit the Patient´s Profile</h3>
+      <p className="pageHeader">Edit the Patient´s Profile</p>
 
       <form onSubmit={handleFormSubmit}>
         <label className="editFieldLabel">

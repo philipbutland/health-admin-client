@@ -4,11 +4,20 @@ import axios from 'axios'
 function ShowPatient(props) {
 
     const [appointment,setAppointment]=useState([])
+
+       
+    useEffect(() => {
+        axios.get(`http://localhost:5005/patients`)
+        .then(response=>{
+            console.log("all patients data",response.data)
+        })
+
+    }, [])
+    
    
     useEffect(() => {
         axios.get(`http://localhost:5005/patients/${props.id}`)
         .then(response=>{
-            console.log("data",response.data)
             setAppointment(response.data.appointment)
         })
 
@@ -17,7 +26,7 @@ function ShowPatient(props) {
    
      return (
        <div>
-           <h2>{props.username}</h2>
+           <p className="pageHeader">{props.username}</p>
            <div>           
                {/* <div className="Photo">
                    <img src={props.image} className="mediumImage" alt="patient" />
