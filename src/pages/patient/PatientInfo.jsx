@@ -20,6 +20,8 @@ function PatientInfo() {
     axios
       .get(`${API_URL}/patients/${patientId}`)
       .then((response) => {
+        console.log("PATIENT RESPONSE", response.data)
+
         setUserName(response.data.username);
         setEmail(response.data.email)
         setPhoto(response.data.photo)

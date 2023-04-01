@@ -9,8 +9,8 @@ const API_URL = "http://localhost:5005";
 function AppointmentInfo() {
 
     const { appointmentId } = useParams();
-    const [doctorId, setDoctorId] = useState('')
-    const [patientId, setPatientId] = useState('')
+    const [doctorArray, setDoctorArray] = useState('')
+    const [patientArray, setPatientArray] = useState('')
     const [dateTime, setDateTime] = useState('')
     const [department, setDepartment] = useState('')
  
@@ -18,8 +18,9 @@ function AppointmentInfo() {
     axios
       .get(`${API_URL}/appointments/${appointmentId}`)
       .then((response) => {
-        setDoctorId(response.data.doctorId);
-        setPatientId(response.data.patientId)
+        console.log("APPOINTMENT RESPONSE", response.data)
+        setDoctorArray(response.data.doctorId);
+        setPatientArray(response.data.patientId)
         setDateTime(response.data.dateTime)
         setDepartment(response.data.department)
       })
@@ -29,7 +30,7 @@ function AppointmentInfo() {
 
   return (
     <div className="singlePerson">
-        <ShowAppointment doctorId={doctorId} patientId={patientId} dateTime={dateTime} department={department} />
+        <ShowAppointment doctorArray={doctorArray} patientArray={patientArray} dateTime={dateTime} department={department} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 
 function ShowAppointment(props) {
@@ -20,8 +21,11 @@ function ShowAppointment(props) {
                   <img src={props.image} className="mediumImage" alt="doctor" />
               </div> */}
               <div className="Info">
-                  <div><p><b>Doctor: </b>{props.doctorId}</p></div>
-                  <div><p><b>Patient: </b> {props.patientId}</p></div>
+
+              {/* <Link to="/doctors/${props.doctorId}"> */}
+                <div><p><b>Doctor: </b>{props.doctorName}</p></div>
+              {/* </Link> */}
+                  <div><p><b>Patient: </b> {props.patientName}</p></div>
                   <div><p><b>Date/Time: </b>{props.dateTime}</p></div>
                   <div><p><b>Department: </b>{props.department}</p></div>
               </div>

@@ -7,6 +7,10 @@ function AddAppointment() {
   const [doctorArray,setDoctorArray] = useState([]);
   const [patientArray,setPatientArray] = useState([]);
 
+
+  // IDEA FOR IMPROVEMENT - store doctors and patients in Appointments model as an object not a string
+  // you'll then have to console.log to find the exact thing to map, but it will be easier to transfer eg ID for links
+
   const [doctorId,setDoctorId] = useState(false)
   const [patientId, setPatientId] = useState("");
   const [dateTime, setDateTime] = useState("");
@@ -59,6 +63,7 @@ function AddAppointment() {
   useEffect(()=>{
     axios.get('http://localhost:5005/doctors')
     .then(response=>{
+      console.log("DOCTOR RESPONSE", response)
       setDoctorArray(response.data)
     })
     .catch(err => console.log(err))
@@ -67,6 +72,7 @@ function AddAppointment() {
   useEffect(()=>{
     axios.get('http://localhost:5005/patients')
     .then(response=>{
+      console.log("PATIENT RESPONSE", response)
       setPatientArray(response.data)
     })
     .catch(err => console.log(err))
