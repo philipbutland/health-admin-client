@@ -19,17 +19,32 @@ const getDoctors = () => {
     .catch(errorHandler);
 };
 
-const uploadImage = (file) => {
+const createDoctors = (newDoctor) => {
+  console.log("new doctor in service: ", newDoctor)
   return service
-    .post("/upload", file)
+    .post("/doctors/add-doctor", newDoctor)
     .then((res) => res.data)
     .catch(errorHandler);
 };
 
-const createDoctors = (newDoctor) => {
-  console.log("new doctor in service: ", newDoctor)
+const getPatients = () => {
   return service
-    .post("/doctors/add/doctor", newDoctor)
+    .get("/patients")
+    .then((res) => res.data)
+    .catch(errorHandler);
+};
+
+const createPatients = (newPatient) => {
+  console.log("new patient in the database: ", newPatient)
+  return service
+    .post("/patients/add-patient", newPatient)
+    .then((res) => res.data)
+    .catch(errorHandler);
+};
+
+const uploadImage = (file) => {
+  return service
+    .post("/upload", file)
     .then((res) => res.data)
     .catch(errorHandler);
 };
@@ -38,6 +53,8 @@ const createDoctors = (newDoctor) => {
 export default {
   service,
   getDoctors,
-  uploadImage,
   createDoctors,
+  getPatients,
+  createPatients,
+  uploadImage,
 };
