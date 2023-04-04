@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import { useParams, useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 function EditAppointment() {
 
@@ -63,7 +64,7 @@ function EditAppointment() {
   };  
 
   useEffect(()=>{
-    axios.get('http://localhost:5005/doctors')
+    axios.get(`${API_URL}/doctors`)
     .then(response=>{
       setDoctorArray(response.data)
     })
@@ -71,7 +72,7 @@ function EditAppointment() {
   },[])
 
   useEffect(()=>{
-    axios.get('http://localhost:5005/patients')
+    axios.get(`${API_URL}/patients`)
     .then(response=>{
       setPatientArray(response.data)
     })

@@ -1,11 +1,14 @@
 import { useEffect,useState } from "react";
 import axios from 'axios'
 
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
+
 function ShowPatient(props) {
 
     const [appointment,setAppointment]=useState([])      
     useEffect(() => {
-        axios.get(`http://localhost:5005/patients`)
+        axios.get(`${API_URL}5/patients`)
         .then(response=>{
             console.log("all patients data",response.data)
         })
@@ -14,7 +17,7 @@ function ShowPatient(props) {
     
    
     useEffect(() => {
-        axios.get(`http://localhost:5005/patients/${props.id}`)
+        axios.get(`${API_URL}/patients/${props.id}`)
         .then(response=>{
             setAppointment(response.data.appointment)
         })

@@ -4,14 +4,15 @@ import {Link} from 'react-router-dom';
 //import patientPic from '../../images/patient.png';
 import service from '../../api/service'
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 function PatientList() {
   const [patient,setPatient] = useState(false)
 
   const getPatients = () => {
     service.getPatients()
-    axios.get('http://localhost:5005/patients')
+    axios.get(`${API_URL}/patients`)
     .then(response=>{
           console.log(response.data)
           setPatient(response.data)
@@ -20,7 +21,7 @@ function PatientList() {
   }
 
   useEffect(()=>{
-    axios.get('http://localhost:5005/patients')
+    axios.get(`${API_URL}/patients`)
     .then(response=>{
       console.log(response.data, "result")
       setPatient(response.data)

@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import service from "../../api/service";
 
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 function AddPatient() {
   const [username,setUserName] = useState('')
   const [email, setEmail] = useState('')
@@ -10,7 +12,7 @@ function AddPatient() {
   const [dob, setDob] = useState('')
   const [gender, setGender] = useState('')
   const [bloodType, setBloodType] = useState('') 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
 
@@ -47,7 +49,7 @@ const handleFileUpload = (e) => {
     else{
       console.log("OK HERE")
       axios
-        .post("http://localhost:5005/patients/add-patient", bodyToPost)
+        .post(`${API_URL}/patients/add-patient`, bodyToPost)
         .then(() => {
           setUserName("");
           setEmail("");

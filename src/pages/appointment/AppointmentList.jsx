@@ -2,14 +2,15 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 function AppointmentList() {
   const [appointment,setAppointment] = useState(false)
 
   const getAppointments = () => {
     const storedToken = localStorage.getItem("authToken");
-    axios.get('http://localhost:5005/appointments')
+    axios.get(`${API_URL}/appointments`)
     .then(response=>{
         setAppointment(response.data)
         console.log("appointments", response.data)

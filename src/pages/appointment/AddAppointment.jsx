@@ -14,6 +14,8 @@ function AddAppointment() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
   let department=""
   let doctorName=""
 
@@ -50,7 +52,7 @@ function AddAppointment() {
       const storedToken = localStorage.getItem('authToken');
       console.log ("BODY2POST", bodyToPost)
       axios
-        .post("http://localhost:5005/appointments/add-appointment", bodyToPost, { headers: { Authorization: `Bearer ${storedToken}` }})
+        .post(`${API_URL}/appointments/add-appointment`, bodyToPost, { headers: { Authorization: `Bearer ${storedToken}` }})
         .then(() => {
           setDoctorId("");
           setPatientId("");
@@ -68,7 +70,7 @@ function AddAppointment() {
   
 
   useEffect(()=>{
-    axios.get('http://localhost:5005/doctors')
+    axios.get(`${API_URL}/doctors`)
     .then(response=>{
       setDoctorArray(response.data)
     })
@@ -76,7 +78,7 @@ function AddAppointment() {
   },[])
   
   useEffect(()=>{
-    axios.get('http://localhost:5005/patients')
+    axios.get(`${API_URL}/patients`)
     .then(response=>{
       setPatientArray(response.data)
     })

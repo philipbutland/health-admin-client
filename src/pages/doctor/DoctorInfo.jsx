@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams } from "react-router-dom";
 import ShowDoctor from "../../components/ShowDoctor";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 
 function DoctorInfo() {

@@ -2,11 +2,12 @@ import { useEffect } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 function ShowAppointment(props) {
 
     useEffect(()=>{
-        axios.get('http://localhost:5005/appointments')
+        axios.get(`${API_URL}/appointments`)
         .then(response=>{
           console.log(response.data)
         })
