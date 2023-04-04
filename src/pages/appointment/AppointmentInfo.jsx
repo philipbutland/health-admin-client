@@ -9,17 +9,19 @@ const API_URL = "http://localhost:5005";
 function AppointmentInfo() {
 
     const { appointmentId } = useParams();
-    const [doctorId, setDoctorId] = useState('')
-    const [patientId, setPatientId] = useState('')
+    const [doctorName, setDoctorName] = useState('')
+    const [patientName, setPatientName] = useState('')
     const [dateTime, setDateTime] = useState('')
     const [department, setDepartment] = useState('')
+
+    const storedToken = localStorage.getItem("authToken");
  
   useEffect(() => {
     axios
-      .get(`${API_URL}/appointments/${appointmentId}`)
+      .get(`${API_URL}/appointments/${appointmentId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
-        setDoctorId(response.data.doctorId);
-        setPatientId(response.data.patientId)
+        setDoctorName(response.data.doctorId.username);
+        setPatientName(response.data.patientId.username)
         setDateTime(response.data.dateTime)
         setDepartment(response.data.department)
       })
@@ -29,7 +31,7 @@ function AppointmentInfo() {
 
   return (
     <div className="singlePerson">
-        <ShowAppointment doctorId={doctorId} patientId={patientId} dateTime={dateTime} department={department} />
+        <ShowAppointment doctorName={doctorName} patientName={patientName} dateTime={dateTime} department={department} />
     </div>
   );
 }

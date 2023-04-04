@@ -8,7 +8,7 @@ const API_URL = "http://localhost:5005";
 
 function PatientInfo() {
 
-    const { patientId } = useParams();
+    const {patientId} = useParams();
     const [username,setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [photo,setPhoto] = useState('')
@@ -20,6 +20,8 @@ function PatientInfo() {
     axios
       .get(`${API_URL}/patients/${patientId}`)
       .then((response) => {
+        console.log("PATIENT RESPONSE", response.data)
+
         setUserName(response.data.username);
         setEmail(response.data.email)
         setPhoto(response.data.photo)
@@ -33,7 +35,7 @@ function PatientInfo() {
 
   return (
     <div className="singlePerson">
-        <ShowPatient username={username} image={photo} email={email} dob={dob} gender={gender} bloodType={bloodType} />
+        <ShowPatient id={patientId} username={username} image={photo} email={email} dob={dob} gender={gender} bloodType={bloodType} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ function ShowDoctor(props) {
 
   return (
     <div className="singlePerson">
-        <h2>{props.username}</h2>
+        <p className="pageHeader">{props.username}</p>
         <div>
             <div className="Photo">
                 <img src={props.image} className="mediumImage" alt="doctor" />

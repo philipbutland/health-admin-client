@@ -14,6 +14,10 @@ import PatientList from './pages/patient/PatientList';
 import DoctorInfo from './pages/doctor/DoctorInfo';
 import PatientInfo from './pages/patient/PatientInfo';
 import AppointmentInfo from "./pages/appointment/AppointmentInfo"
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage"
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";  
 
 function App() {
   return (
@@ -29,10 +33,12 @@ function App() {
         <Route path="/patients/add-patient" element={<AddPatient />} />
         <Route path="/patients/edit/:patientId" element={<EditPatient />} />
         <Route path="/patients/:patientId" element={<PatientInfo />} />
-        <Route path="/appointments" element={<AppointmentList />} />
+        <Route path="/appointments" element={<IsPrivate><AppointmentList /></IsPrivate>} />
         <Route path="/appointments/add-appointment" element={<AddAppointment />} />
         <Route path="/appointments/edit/:appointmentId" element={<EditAppointment />} />
         <Route path="/appointments/:appointmentId" element={<AppointmentInfo />} />
+        <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
+        <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
         </Routes>
     </div>
   );

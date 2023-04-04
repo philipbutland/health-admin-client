@@ -8,10 +8,11 @@ function AppointmentList() {
   const [appointment,setAppointment] = useState(false)
 
   const getAppointments = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios.get('http://localhost:5005/appointments')
     .then(response=>{
-          console.log("Appointments", response.data)
-          setAppointment(response.data)
+        setAppointment(response.data)
+        console.log("appointments", response.data)
     })
     .catch(err => console.log(err))
   }
@@ -33,14 +34,14 @@ function AppointmentList() {
 
   return (
     <div>
-        <h1>Appointments</h1>
+        <p className="pageHeader">Appointments</p>
         {!appointment && <h2>Loading...</h2>}
         <table className="Container">
 
             <thead>
                 <tr>
-                    <th className="tableHeader">Patient</th>
                     <th className="tableHeader">Doctor</th>
+                    <th className="tableHeader">Patient</th>
                     <th className="tableHeader">Date and Time</th>
                     <th className="tableHeader">Department</th>
                 </tr>
@@ -50,13 +51,13 @@ function AppointmentList() {
                 {appointment && appointment.map(individualAppointment=>{
                     return(
                         <tr key={individualAppointment._id} className="tableBody">
-                            <td className="userColumn">{individualAppointment.patientId}</td>
-                            <td className="userColumn">{individualAppointment.doctorId}</td>
-                            <td className="mediumColumn">{individualAppointment.dateTime}</td>
-                            <td className="mediumColumn">{individualAppointment.department}</td>
-                            <td className="buttonColumn"><button className="editButton"><Link to={`/appointments/${individualAppointment._id}`}>Details</Link></button></td>
-                            <td className="buttonColumn"><button className="editButton"><Link to={`/appointments/edit/${individualAppointment._id}`}>Edit Appointment</Link></button></td>
-                            <td className="buttonColumn"><button className="editButton" onClick={()=>deleteAppointment(individualAppointment._id)}>Delete Appointment</button></td>
+                          <td className="userColumn">{individualAppointment.doctorId.username}</td>
+                          <td className="userColumn">{individualAppointment.patientId.username}</td>
+                          <td className="mediumColumn">{individualAppointment.dateTime}</td>
+                          <td className="mediumColumn">{individualAppointment.department}</td>
+                          <td className="buttonColumn"><button className="editButton"><Link to={`/appointments/${individualAppointment._id}`}>Details</Link></button></td>
+                          <td className="buttonColumn"><button className="editButton"><Link to={`/appointments/edit/${individualAppointment._id}`}>Edit Appointment</Link></button></td>
+                          <td className="buttonColumn"><button className="editButton" onClick={()=>deleteAppointment(individualAppointment._id)}>Delete Appointment</button></td>
                         </tr>
                     )
                 })}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import service from "../../api/service";
 
 function AddPatient() {
   const [username,setUserName] = useState('')
@@ -11,24 +12,34 @@ function AddPatient() {
   const [bloodType, setBloodType] = useState('') 
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
 
-    function handleSubmit(e){
-        e.preventDefault()
-        const bodyToPost = {username, email, photo, dob, gender, bloodType}
-        axios.post('http://localhost:5005/patients/add-patient',bodyToPost)
-        .then(()=>{
-           setUserName ('')
-           setEmail('')
-           setPhoto('')
-           setDob('')
-           setGender('')
-           setBloodType('')
-           alert("Patients Profile Created")
-           navigate('/patients')
-        })
+// ******** this method handles the file upload ********
+const handleFileUpload = (e) => {
+ 
+  const uploadData = new FormData();
+
+  uploadData.append("photo", e.target.files[0]);
+
+  service
+    .uploadImage(uploadData)
+    .then(response => {
+      setPhoto(response.fileUrl);
+      console.log(response.fileUrl)
+    })
+    .catch(err => console.log("Error while uploading the file: ", err));
+};
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setError("");
+    const bodyToPost = {username, email, photo, dob, gender, bloodType}
+    console.log("bodytopost patient", bodyToPost)
+    if (!username) {
+      setError("Please select a patient's name")
     }
     else if (!email)
-      setError("Please select an a-mail address")
+      setError("Please select an a-mail address for your patient")
     else if (!gender)
       setError("Please select a gender from the dropdown menu")
     else if (!bloodType)
@@ -49,14 +60,14 @@ function AddPatient() {
         })
         .catch((error) => {
           console.log("error", error);
-          setError(<p className="errorMessage">{error.response.data.message}</p>)
+          setError(<p>{error.response.data.message}</p>)
         });
      }
   }
   
   return (
     <div>
-      <h3>Add a Patient</h3>
+      <p className="pageHeader">Add a Patient</p>
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
         <label htmlFor="" className="editFieldLabel">
@@ -81,12 +92,7 @@ function AddPatient() {
         </label>
         <label htmlFor="" className="editFieldLabel">
           Photo
-          <input
-            className="editField" 
-            type="text"
-            value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-          />
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Date of Birth
