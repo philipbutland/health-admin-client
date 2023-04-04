@@ -22,9 +22,10 @@ function ShowAppointment(props) {
               </div> */}
               <div className="Info">
 
-              {/* <Link to="/doctors/${props.doctorId}"> */}
-                <div><p><b>Doctor: </b>{props.doctorName}</p></div>
-              {/* </Link> */}
+                {/* <div><p><b>Doctor: </b><Link to="/doctors/${props.doctorId}">{props.doctorName}</Link></p></div>
+                <div><p><b>Patient: </b><Link to="/doctors/${props.patienId}">{props.patientName}</Link></p></div> */}
+
+                  <div><p><b>Doctor: </b>{props.doctorName}</p></div>
                   <div><p><b>Patient: </b> {props.patientName}</p></div>
                   <div><p><b>Date/Time: </b>{props.dateTime}</p></div>
                   <div><p><b>Department: </b>{props.department}</p></div>

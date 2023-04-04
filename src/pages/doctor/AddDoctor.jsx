@@ -44,7 +44,7 @@ const handleFileUpload = (e) => {
     else if (!gender)
       setError("Please select a gender from the dropdown menu")
     else if (!department)
-     setError("Please select a department from the dropdown menu")
+      setError("Please select a department from the dropdown menu")
     else{
       service
         .createDoctors(bodyToPost)

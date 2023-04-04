@@ -12,22 +12,21 @@ function EditAppointment() {
 
   const [doctorId, setDoctorId] = useState(false)
   const [patientId, setPatientId] = useState(false)
-
-  const [department,setDepartment] = useState('')
   const [dateTime,setDateTime] = useState('')   
  
   const { appointmentId } = useParams();
   const navigate = useNavigate();  
+
+  let department = ""
+  let doctorName = ""
  
   useEffect(() => {
     axios
       .get(`${API_URL}/appointments/${appointmentId}`)
       .then((response) => {
         const oneAppointment = response.data;
-        console.log("***", response.data)
         setDoctorId(oneAppointment.doctorId);
         setPatientId(oneAppointment.patientId);
-        setDepartment(oneAppointment.department);
         setDateTime(oneAppointment.dateTime);
       })
       .catch((error) => console.log(error));
@@ -36,7 +35,17 @@ function EditAppointment() {
   
   const handleFormSubmit = (e) => {                     
     e.preventDefault();
-    const requestBody = { doctorId, patientId, department, dateTime };
+    
+    if (doctorArray.length>0) {
+      doctorArray.map(individualDoctor=>{
+          if (individualDoctor._id === doctorId) {
+            department = individualDoctor.department
+            doctorName = individualDoctor.username
+          }
+      })
+    }
+
+    const requestBody = { doctorId, doctorName, patientId, department, dateTime };
      axios
       .put(`${API_URL}/appointments/${appointmentId}`, requestBody)
       .then((response) => {
@@ -80,11 +89,11 @@ function EditAppointment() {
           Doctor
           <div>
             <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
-              <option value="">{doctorId.username}</option>
+              <option value="">{doctorId.username} ({doctorId.department})</option>
               {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
                 return(
                     individualDoctor.username !== doctorId.username && 
-                    <option key={individualDoctor._id} value={individualDoctor._id}>{individualDoctor.username}</option>
+                    <option key={individualDoctor._id} value={individualDoctor._id}>{individualDoctor.username} ({individualDoctor.department})</option>
                 )               
               })}
     		    </select>
@@ -110,24 +119,7 @@ function EditAppointment() {
           Date / Time:
           <input className="editField" type="datetime-local" name="dateTime" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
         </label>
-        <label htmlFor=""  className="editFieldLabel">
-           Department
-           <div>
-             <select className="editField" name="department" value={department} onChange={(e)=>setDepartment(e.target.value)}>
-              <option value="">--- Choose a department ---</option>
-       		    <option value="Radiology">Radiology</option>
-       		    <option value="Pediatrics">Pediatrics</option>
-       		    <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
-              <option value="Dermatology">Dermatology</option>
-              <option value="Opthamology">Opthamology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Psychiatry">Psychiatry</option>
-              <option value="Oncology">Oncology</option>
-    		    </select>
-          </div> 
-        </label>
+
         <button className="editButton"  type="submit">Update Appointment</button>
       </form>
       <button className="addButton"  onClick={deleteAppointment}>Delete Appointment</button>

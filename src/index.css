@@ -235,3 +235,20 @@ a {
   font-weight: bold;
   font-size: 32px;
 }
+
+.appoinmentsList{
+  margin-top: 300px;
+  background-color: white;
+}
+
+.appointmentsHeader{
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.appointmentColumn{
+  width: 20%;
+  text-align: left;
+  padding-left: 20px;
+  margin-left: 20px;
+}
