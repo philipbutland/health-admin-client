@@ -1,24 +1,43 @@
-//EditPatient
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import service from "../../api/service";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
-function EditPatient(props) {
-  const [username,setUserName] = useState('')
-  const [email, setEmail] = useState('')
-  const [photo,setPhoto] = useState('')
-  const [dob,setDob] = useState('')
-  const [gender,setGender] = useState('')
-  const [bloodType,setBloodType] = useState('') 
+
+function EditPatient() {
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [bloodType, setBloodType] = useState("");
+  const [buttonisable, setButtondisable] = useState("");
 
   const { patientId } = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
+  // ******** this method handles the file upload ********
+  const handleFileUpload = (e) => {
+    const uploadData = new FormData();
+    setButtondisable(true);
+    uploadData.append("photo", e.target.files[0]);
+
+    service
+      .uploadImage(uploadData)
+      .then((response) => {
+        setButtondisable(false);
+        setPhoto(response.fileUrl);
+        console.log(response.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/patient/${patientId}`)
+      .get(`${API_URL}/patients/${patientId}`)
       .then((response) => {
         const onePatient = response.data;
         setUserName(onePatient.username);
@@ -29,90 +48,115 @@ function EditPatient(props) {
         setBloodType(onePatient.bloodType);
       })
       .catch((error) => console.log(error));
-
   }, [patientId]);
 
-  const handleFormSubmit = (e) => {                     
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Create an object representing the body of the PUT request
     const requestBody = { username, email, photo, dob, gender, bloodType };
- 
-    // Make a PUT request to update the patient´s profile
+
     axios
       .put(`${API_URL}/patients/${patientId}`, requestBody)
       .then((response) => {
-        // Once the request is resolved successfully and the patient´s profile
-        // is updated we navigate back to the details page
-        navigate(`/patients/${patientId}`)
+        navigate(`/patients/${patientId}`);
       });
   };
 
-  const deletePatient = () => {                    
-    // Make a DELETE request to delete the patient
+  const deletePatient = () => {
     axios
       .delete(`${API_URL}/patients/${patientId}`)
       .then(() => {
-        // Once the delete request is resolved successfully
-        // navigate back to the list of the patient´s profile.
         navigate("/patients");
+        alert("Patient's Profile deleted");
       })
       .catch((err) => console.log(err));
-  }; 
-   
+  };
 
   return (
-    <div>
-    <h3>Edit the Patient´s Profile</h3>
+    <div className="editPage">
+      <p className="pageHeader">Edit the Patient´s Profile</p>
 
-    <form onSubmit={handleFormSubmit}>      
-      <label>Username:</label>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={(e) => setUserName(e.target.value)}
-      />
-      <label>Email:</label>
-      <input
-        type="text"
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-       <label>Photo:</label>
-      <input
-        type="text"
-        name="photo"
-        value={photo}
-        onChange={(e) => setPhoto(e.target.value)}
-      />
-       <label>DOB:</label>
-      <input
-        type="text"
-        name="dob"
-        value={dob}
-        onChange={(e) => setDob(e.target.value)}
-      />
-       <label>Gender:</label>
-       <input
-        type="text"
-        name="gender"
-        value={gender}
-        onChange={(e) => setGender(e.target.value)}
-      />
-       <label>Blood type:</label>
+      <form onSubmit={handleFormSubmit}>
+        <label className="editFieldLabel">
+          Username:
           <input
-        type="text"
-        name="bloodType"
-        value={bloodType}
-        onChange={(e) => setBloodType(e.target.value)}
-      />
-     
-      <button type="submit">Update Patient´s Profile</button>
-    </form>
-    <button onClick={deletePatient}>Delete Patient´s Profile</button>
-  </div>
-);
+            className="editField"
+            type="text"
+            name="username"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </label>
+        <label className="editFieldLabel">
+          Email:
+          <input
+            className="editField"
+            type="text"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label className="editFieldLabel">
+          Photo
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
+          <img className="smallImage" src={photo} alt="patient" />
+        </label>
+        <label className="editFieldLabel">
+          Date of Birth:
+          <input
+            className="editField"
+            type="date"
+            name="dob"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+          />
+        </label>
+        <label htmlFor="" className="editFieldLabel">
+          Gender
+          <div>
+            <select
+              className="editField"
+              name="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            >
+              <option value="">--- Choose a gender ---</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="N/A">I'd rather not say</option>
+            </select>
+          </div>
+        </label>
+        <label htmlFor="" className="editFieldLabel">
+          Blood Type
+          <div>
+            <select
+              className="editField"
+              name="bloodType"
+              value={bloodType}
+              onChange={(e) => setBloodType(e.target.value)}
+            >
+              <option value="">--- Choose a Blood Type ---</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+        </label>
+        <button className="editButton" type="submit" disabled={buttonisable}>
+          Update Patient´s Profile
+        </button>
+      </form>
+      <button className="addButton" onClick={deletePatient}>
+        Delete Patient´s Profile
+      </button>
+    </div>
+  );
 }
 
-export default EditPatient
+export default EditPatient;

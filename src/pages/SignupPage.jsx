@@ -1,10 +1,11 @@
 // src/pages/SignupPage.js
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
@@ -65,8 +66,8 @@ function SignupPage(props) {
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <p className="warningMessage">Already have account?</p>
+      <p className="linkMessage"><Link to={"/login"}> <p className="link">Login</p></Link></p>
     </div>
   );
 }

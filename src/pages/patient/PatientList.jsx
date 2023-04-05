@@ -1,10 +1,11 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 //import patientPic from '../../images/patient.png';
-import service from "../../api/service";
+import service from '../../api/service'
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 function PatientList() {
   const [patient, setPatient] = useState(false);
@@ -15,7 +16,7 @@ function PatientList() {
     if (role === "patient") {
       const user = localStorage.getItem("user");
       axios
-        .get(`http://localhost:5005/patients/${user}`)
+        .get(`${API_URL}/patients/${user}`)
         .then((response) => {
           console.log("patients", response.data);
           setPatient(response.data);
@@ -24,7 +25,7 @@ function PatientList() {
     }
     if (role === "admin") {
       axios
-        .get("http://localhost:5005/patients")
+        .get(`${API_URL}/patients`)
         .then((response) => {
           console.log(response.data);
           setPatient(response.data);
@@ -35,7 +36,7 @@ function PatientList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5005/patients")
+      .get(`${API_URL}/patients`)
       .then((response) => {
         console.log(response.data, "result");
         setPatient(response.data);
@@ -53,69 +54,40 @@ function PatientList() {
 
   return (
     <div>
-      <h1>Patient List</h1>
-      {!patient && <h2>Loading...</h2>}
-      <table className="Container">
-        <thead>
-          <tr>
-            <th className="tableHeader">Name</th>
-            <th className="tableHeader">Photo</th>
-            <th className="tableHeader">Blood Type</th>
-            <th className="tableHeader">Gender</th>
-          </tr>
-        </thead>
+        <p className="pageHeader">Patient List</p>
+        {!patient && <h2>Loading...</h2>}
+        <table className="Container">
 
-        <tbody>
-          {patient &&
-            patient.map((individualPatient) => {
-              console.log("individual patient", individualPatient);
-              return (
-                <tr key={individualPatient._id} className="tableBody">
-                  <td className="userColumn">{individualPatient.username}</td>
-                  <td className="mediumColumn">
-                    <img
-                      className="smallImage"
-                      src={individualPatient.photo}
-                      alt="patient"
-                    />
-                  </td>
-                  <td className="mediumColumn">
-                    {individualPatient.bloodType}
-                  </td>
-                  <td className="mediumColumn">{individualPatient.gender}</td>
-                  <td className="buttonColumn">
-                    <button className="editButton">
-                      <Link to={`/patients/${individualPatient._id}`}>
-                        Details
-                      </Link>
-                    </button>
-                  </td>
-                  <td className="buttonColumn">
-                    <button className="editButton">
-                      <Link to={`/patients/edit/${individualPatient._id}`}>
-                        Edit Patient
-                      </Link>
-                    </button>
-                  </td>
-                  <td className="buttonColumn">
-                    <button
-                      className="editButton"
-                      onClick={() => deletePatient(individualPatient._id)}
-                    >
-                      Delete Patient
-                    </button>
-                  </td>
+            <thead>
+                <tr>
+                    <th className="tableHeader">Name</th>
+                    <th className="tableHeader">Photo</th>
+                    <th className="tableHeader">Blood Type</th>
+                    <th className="tableHeader">Gender</th>
                 </tr>
-              );
-            })}
-        </tbody>
-      </table>
+            </thead>
 
-      <button className="addButton">
-        <Link to={`/patients/add-patient`}>Add Patient</Link>
-      </button>
+            <tbody>
+                {patient && patient.map(individualPatient=>{
+                    return(
+                        <tr key={individualPatient._id} className="tableBody">
+                            <td className="userColumn">{individualPatient.username}</td>
+                            <td className="mediumColumn"><img className="smallImage" src={individualPatient.photo} alt="patient" /></td>
+                            <td className="mediumColumn">{individualPatient.bloodType}</td>
+                            <td className="mediumColumn">{individualPatient.gender}</td>
+                            <td className="buttonColumn"><button className="editButton"><Link to={`/patients/${individualPatient._id}`}>Details</Link></button></td>
+                            <td className="buttonColumn"><button className="editButton"><Link to={`/patients/edit/${individualPatient._id}`}>Edit Patient</Link></button></td>
+                            <td className="buttonColumn"><button className="editButton" onClick={()=>deletePatient(individualPatient._id)}>Delete Patient</button></td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
+
+        <button className="addButton"><Link to={`/patients/add-patient`}>Add Patient</Link></button>
+
     </div>
-  );
-}
+)}
 
-export default PatientList;
+
+export default PatientList

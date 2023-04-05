@@ -2,9 +2,11 @@
 
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 const service = axios.create({
   // make sure you use PORT = 5005 (the port where our server is running)
-  baseURL: "http://localhost:5005",
+  baseURL: `${API_URL}`,
   // withCredentials: true // => you might need this when having the users in the app
 });
 

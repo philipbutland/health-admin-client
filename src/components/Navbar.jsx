@@ -10,7 +10,7 @@ function Navbar() {
   } = useContext(AuthContext);
  
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">
         <button>Home</button>
       </Link>
@@ -63,16 +63,16 @@ function Navbar() {
         <>
           <Link to="/signup">
             {" "}
-            <button>Sign Up</button>{" "}
+            <button className="loginButton">Sign Up</button>{" "}
           </Link>
           <Link to="/login">
             {" "}
-            <button>Login</button>{" "}
+            <button className="loginButton">Login</button>{" "}
           </Link>
         </>
       )}
     </nav>
   );
 }
- 
+
 export default Navbar;

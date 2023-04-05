@@ -10,31 +10,41 @@ function EditAppointment() {
   const [doctorArray,setDoctorArray] = useState([]);
   const [patientArray,setPatientArray] = useState([]);
 
-  const [patientId,setPatientId] = useState('')
-  const [doctorId, setDoctorId] = useState('')
-  const [department,setDepartment] = useState('')
+  const [doctorId, setDoctorId] = useState(false)
+  const [patientId, setPatientId] = useState(false)
   const [dateTime,setDateTime] = useState('')   
  
   const { appointmentId } = useParams();
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
+  let department = ""
+  let doctorName = ""
+ 
   useEffect(() => {
     axios
       .get(`${API_URL}/appointments/${appointmentId}`)
       .then((response) => {
         const oneAppointment = response.data;
-        setPatientId(oneAppointment.patient);
-        setDoctorId(oneAppointment.doctor);
-        setDepartment(oneAppointment.department);
-        setDateTime(oneAppointment.date);
+        setDoctorId(oneAppointment.doctorId);
+        setPatientId(oneAppointment.patientId);
+        setDateTime(oneAppointment.dateTime);
       })
       .catch((error) => console.log(error));
   }, [appointmentId]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { patientId, doctorId, department, dateTime };
-    console.log("body", requestBody)
+    
+    if (doctorArray.length>0) {
+      doctorArray.map(individualDoctor=>{
+          if (individualDoctor._id === doctorId) {
+            department = individualDoctor.department
+            doctorName = individualDoctor.username
+          }
+      })
+    }
+
+    const requestBody = { doctorId, doctorName, patientId, department, dateTime };
      axios
       .put(`${API_URL}/appointments/${appointmentId}`, requestBody)
       .then((response) => {
@@ -46,15 +56,13 @@ function EditAppointment() {
     axios
       .delete(`${API_URL}/appointments/${appointmentId}`)
       .then(() => {
-        // Once the delete request is resolved successfully
-        // navigate back to the list of appointments.
         navigate("/appointments/");
       })
       .catch((err) => console.log(err));
   };  
 
   useEffect(()=>{
-    axios.get('http://localhost:5005/doctors')
+    axios.get(`${API_URL}/doctors`)
     .then(response=>{
       setDoctorArray(response.data)
     })
@@ -62,7 +70,7 @@ function EditAppointment() {
   },[])
 
   useEffect(()=>{
-    axios.get('http://localhost:5005/patients')
+    axios.get(`${API_URL}/patients`)
     .then(response=>{
       setPatientArray(response.data)
     })
@@ -71,33 +79,35 @@ function EditAppointment() {
 
   
   return (
-    <div>
-      <h3>Edit the Appointment</h3>
+    <div className="normalPage">
+      <p className="pageHeader">Edit the Appointment</p>
  
       <form onSubmit={handleFormSubmit}>  
 
-        <label htmlFor="" className="editFieldLabel">
-          Patient
+      <label htmlFor="" className="editFieldLabel">
+          Doctor
           <div>
-            <select className="editField" name="patientId" onChange={(e)=>setPatientId(e.target.value)}>
-              <option value="">--- Choose a Patient ---</option>
-              {(patientArray.length>0) && patientArray.map(individualPatient=>{
+            <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
+              <option value="">{doctorId.username} ({doctorId.department})</option>
+              {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
                 return(
-                  <option key={individualPatient._id}>{individualPatient.username}</option>
-                )
+                    individualDoctor.username !== doctorId.username && 
+                    <option key={individualDoctor._id} value={individualDoctor._id}>{individualDoctor.username} ({individualDoctor.department})</option>
+                )               
               })}
     		    </select>
           </div>
         </label>
 
         <label htmlFor="" className="editFieldLabel">
-          Doctor
+          Patient
           <div>
-            <select className="editField" name="doctorId" onChange={(e)=>setDoctorId(e.target.value)}>
-              <option value="">--- Choose a Doctor ---</option>
-              {(doctorArray.length>0) && doctorArray.map(individualDoctor=>{
+            <select className="editField" name="patientId" onChange={(e)=>setPatientId(e.target.value)}>
+              <option value="">{patientId.username}</option>
+              {(patientArray.length>0) && patientArray.map(individualPatient=>{
                 return(
-                    <option key={individualDoctor._id}>{individualDoctor.username}</option>
+                  individualPatient.username !== patientId.username && 
+                  <option key={individualPatient._id} value={individualPatient._id}>{individualPatient.username}</option>
                 )
               })}
     		    </select>
@@ -107,24 +117,6 @@ function EditAppointment() {
         <label className="editFieldLabel">
           Date / Time:
           <input className="editField" type="datetime-local" name="dateTime" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
-        </label>
-        <label htmlFor=""  className="editFieldLabel">
-           Department
-           <div>
-             <select className="editField" name="department" value={department} onChange={(e)=>setDepartment(e.target.value)}>
-              <option value="">--- Choose a department ---</option>
-       		    <option value="Radiology">Radiology</option>
-       		    <option value="Pediatrics">Pediatrics</option>
-       		    <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
-              <option value="Dermatology">Dermatology</option>
-              <option value="Opthamology">Opthamology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Psychiatry">Psychiatry</option>
-              <option value="Oncology">Oncology</option>
-    		    </select>
-          </div> 
         </label>
         <button className="editButton"  type="submit">Update Appointment</button>
       </form>

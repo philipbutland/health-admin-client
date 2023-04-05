@@ -33,7 +33,7 @@ function PatientInfo() {
 
   return (
     <div className="singlePerson">
-               <ShowPatient id={patientId} username={username} image={photo} email={email} dob={dob} gender={gender} bloodType={bloodType} />
+        <ShowPatient id={patientId} username={username} image={photo} email={email} dob={dob} gender={gender} bloodType={bloodType} />
     </div>
   );
 }

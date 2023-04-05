@@ -11,6 +11,13 @@ import EditDoctor from './pages/doctor/EditDoctor';
 import AddPatient from './pages/patient/AddPatient';
 import EditPatient from './pages/patient/EditPatient';
 import PatientList from './pages/patient/PatientList';
+import DoctorInfo from './pages/doctor/DoctorInfo';
+import PatientInfo from './pages/patient/PatientInfo';
+import AppointmentInfo from "./pages/appointment/AppointmentInfo"
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage"
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";  
 
 function App() {
   return (
@@ -20,13 +27,18 @@ function App() {
       <Route path="/" element={<HomePage />} />
         <Route path="/doctors" element={<DoctorList />} />
         <Route path="/doctors/add-doctor" element={<AddDoctor />} />
-        <Route path="/doctors/:doctorId" element={<EditDoctor />} />
+        <Route path="/doctors/edit/:doctorId" element={<EditDoctor />} />
+        <Route path="/doctors/:doctorId" element={<DoctorInfo />} />
         <Route path="/patients" element={<PatientList />} />
         <Route path="/patients/add-patient" element={<AddPatient />} />
-        <Route path="/patients/:patientId" element={<EditPatient />} />
-        <Route path="/appointments" element={<AppointmentList />} />
+        <Route path="/patients/edit/:patientId" element={<EditPatient />} />
+        <Route path="/patients/:patientId" element={<PatientInfo />} />
+        <Route path="/appointments" element={<IsPrivate><AppointmentList /></IsPrivate>} />
         <Route path="/appointments/add-appointment" element={<AddAppointment />} />
-        <Route path="/appointments/:appointmentId" element={<EditAppointment />} />
+        <Route path="/appointments/edit/:appointmentId" element={<EditAppointment />} />
+        <Route path="/appointments/:appointmentId" element={<AppointmentInfo />} />
+        <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
+        <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
         </Routes>
     </div>
   );

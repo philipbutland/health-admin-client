@@ -1,9 +1,9 @@
 //AddAppointment
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function AddAppointment() {
   const [doctorArray, setDoctorArray] = useState([]);
@@ -13,14 +13,36 @@ function AddAppointment() {
   const [patientId, setPatientId] = useState("");
   const [dateTime, setDateTime] = useState("");
   const [department, setDepartment] = useState("");
+  const [doctorName, setDoctorName] = useState("");
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  /*  let department=""
+  let doctorName="" */
+
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    const bodyToPost = { doctorId, patientId, dateTime, department };
+
+    if (doctorArray.length > 0) {
+      doctorArray.map((individualDoctor) => {
+        console.log(doctorArray)
+        console.log("indiDoc", individualDoctor);
+        if (individualDoctor._id === doctorId) {
+          setDepartment(individualDoctor.department);
+          setDoctorName(individualDoctor.username);
+        }
+      });
+    }
+
+    const bodyToPost = {
+      doctorId,
+      doctorName,
+      patientId,
+      dateTime,
+      department,
+    };
 
     if (!doctorId) {
       setError("Please select a doctor");
@@ -31,22 +53,19 @@ function AddAppointment() {
     } else if (!dateTime) {
       setError("Please select a date and time");
       return;
-    } else if (!department) {
-      setError("Please select a department from the dropdown menu");
-      return;
     } else {
       const storedToken = localStorage.getItem("authToken");
+      console.log("BODY2POST", bodyToPost);
       axios
-        .post(
-          `${API_URL}/appointments/add-appointment`,
-          bodyToPost,
-          { headers: { Authorization: `Bearer ${storedToken}` } }
-        )
+        .post(`${API_URL}/appointments/add-appointment`, bodyToPost, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
         .then(() => {
           setDoctorId("");
           setPatientId("");
           setDateTime("");
           setDepartment("");
+          setDoctorName("");
           alert("Appointment Created");
           navigate("/appointments");
         })
@@ -67,7 +86,7 @@ function AddAppointment() {
       })
       .catch((err) => console.log(err));
   }, []);
-
+console.log(doctorArray)
   useEffect(() => {
     axios
       .get(`${API_URL}/patients`)
@@ -79,9 +98,36 @@ function AddAppointment() {
 
   return (
     <div>
-      <h3>Add an Appointment</h3>
+      <p className="pageHeader">Add an Appointment</p>
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
+
+        <label htmlFor="" className="editFieldLabel">
+          Doctor
+          <div>
+            <select
+              className="editField"
+              name="doctorId"
+              onChange={(e) => {
+                setDoctorId(e.target.value);
+              }}
+            >
+              <option value="">--- Choose a Doctor --- </option>
+              {/* {doctorArray.length > 0 && */}
+                {doctorArray.map((individualDoctor) => {
+                  return (
+                    <option
+                      key={individualDoctor._id}
+                      value={individualDoctor._id}
+                    >
+                      {individualDoctor.username} ({individualDoctor.department}
+                      )
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+        </label>
 
         <label htmlFor="" className="editFieldLabel">
           Patient
@@ -95,29 +141,11 @@ function AddAppointment() {
               {patientArray.length > 0 &&
                 patientArray.map((individualPatient) => {
                   return (
-                    <option key={individualPatient._id}>
+                    <option
+                      key={individualPatient._id}
+                      value={individualPatient._id}
+                    >
                       {individualPatient.username}
-                    </option>
-                  );
-                })}
-            </select>
-          </div>
-        </label>
-
-        <label htmlFor="" className="editFieldLabel">
-          Doctor
-          <div>
-            <select
-              className="editField"
-              name="doctorId"
-              onChange={(e) => setDoctorId(e.target.value)}
-            >
-              <option value="">--- Choose a Doctor ---</option>
-              {doctorArray.length > 0 &&
-                doctorArray.map((individualDoctor) => {
-                  return (
-                    <option key={individualDoctor._id}>
-                      {individualDoctor.username}
                     </option>
                   );
                 })}
@@ -135,31 +163,6 @@ function AddAppointment() {
           />
         </label>
 
-        <label htmlFor="" className="editFieldLabel">
-          Department {doctorArray.department}
-          <div>
-            <select
-              className="editField"
-              name="department"
-              onChange={(e) => setDepartment(e.target.value)}
-            >
-              <option value="">--- Choose a department ---</option>
-              <option value="Radiology">Radiology</option>
-              <option value="Pediatrics">Pediatrics</option>
-              <option value="Obstetrics and Gynecology">
-                Obstetrics and Gynecology
-              </option>
-              <option value="Dermatology">Dermatology</option>
-              <option value="Ophthalmology">Ophthalmology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Psychiatry">Psychiatry</option>
-              <option value="Oncology">Oncology</option>
-            </select>
-          </div>
-        </label>
-
         <button className="addButton" type="submit">
           Submit Appointment
         </button>
@@ -167,9 +170,5 @@ function AddAppointment() {
     </div>
   );
 }
-export default AddAppointment
 
-
-
-
-
+export default AddAppointment;
