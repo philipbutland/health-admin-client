@@ -10,56 +10,44 @@ const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
-  
+
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
+  const handleUsername = (e) => setUsername(e.target.value);
 
-  
-// src/pages/SignupPage.js
-
-// ...
-
-const handleSignupSubmit = (e) => {
+  const handleSignupSubmit = (e) => {
     e.preventDefault();
-    // Create an object representing the request body
-    const requestBody = { email, password, name };
+    let role = "patient";
+    const requestBody = { email, password, username, role };
+    if (!email || !password) {
+      setErrorMessage("Please enter both email and password.");
+    }
 
-    console.log("requestBody", requestBody)
-
-    // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
-    axios.post(`${API_URL}/auth/signup`, requestBody)
+    axios
+      .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        navigate('/login');
+        console.log("Signup successful");
+        navigate("/login");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
-      })
+      });
   };
 
-  
- return (
+  return (
     <div className="SignupPage">
       <h1>Sign Up</h1>
-
       <form onSubmit={handleSignupSubmit}>
         <label>Email:</label>
-        <input 
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmail}
-        />
+        <input type="email" name="email" value={email} onChange={handleEmail} />
 
         <label>Password:</label>
-        <input 
+        <input
           type="password"
           name="password"
           value={password}
@@ -67,23 +55,21 @@ const handleSignupSubmit = (e) => {
         />
 
         <label>Name:</label>
-        <input 
+        <input
           type="text"
-          name="name"
-          value={name}
-          onChange={handleName}
+          name="username"
+          value={username}
+          onChange={handleUsername}
         />
-
-        <button type="submit">Sign Up</button>
+        <button type="submit">Sign up</button>
       </form>
 
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <p className="warningMessage">Already have account?</p>
       <p className="linkMessage"><Link to={"/login"}> <p className="link">Login</p></Link></p>
-
     </div>
-  )
+  );
 }
 
 export default SignupPage;

@@ -1,74 +1,115 @@
-import axios from 'axios';
-import {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
-
 function AppointmentList() {
-  const [appointment,setAppointment] = useState(false)
+  const [appointment, setAppointment] = useState(false);
 
   const getAppointments = () => {
-    const storedToken = localStorage.getItem("authToken");
-    axios.get(`${API_URL}/appointments`)
-    .then(response=>{
-        setAppointment(response.data)
-        console.log("appointments", response.data)
-    })
-    .catch(err => console.log(err))
-  }
+    const role = localStorage.getItem("role");
+    if (role === "patient") {
+      const user = localStorage.getItem("user");
+      axios
+        .get(`${API_URL}/appointments/${user}`)
+        .then((response) => {
+          console.log("Appointments", response.data);
+          setAppointment(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
+    if (role === "admin") {
+      axios
+        .get(`${API_URL}/appointments`)
+        .then((response) => {
+          console.log("Appointments", response.data);
+          setAppointment(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
-  useEffect(()=>{
-    getAppointments()
-  },[])
+  useEffect(() => {
+    getAppointments();
+  }, []);
 
   const deleteAppointment = (AppointmentId) => {
-    axios.delete(`${API_URL}/appointments/${AppointmentId}`)
-    .then( () => 
-      getAppointments()
-    )
-    .then(alert("Appointment deleted")
-    )
-    .catch(err=>console.log(err))
-  }
-
+    axios
+      .delete(`${API_URL}/appointments/${AppointmentId}`)
+      .then(() => getAppointments())
+      .then(alert("Appointment deleted"))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
-        <p className="pageHeader">Appointments</p>
-        {!appointment && <h2>Loading...</h2>}
-        <table className="Container">
+      <h1>Appointments</h1>
+      {!appointment && <h2>Loading...</h2>}
+      <table className="Container">
+        <thead>
+          <tr>
+            <th className="tableHeader">Patient</th>
+            <th className="tableHeader">Doctor</th>
+            <th className="tableHeader">Date and Time</th>
+            <th className="tableHeader">Department</th>
+          </tr>
+        </thead>
 
-            <thead>
-                <tr>
-                    <th className="tableHeader">Doctor</th>
-                    <th className="tableHeader">Patient</th>
-                    <th className="tableHeader">Date and Time</th>
-                    <th className="tableHeader">Department</th>
+        <tbody>
+          {appointment &&
+            appointment.map((individualAppointment) => {
+              return (
+                <tr key={individualAppointment._id} className="tableBody">
+                  <td className="userColumn">
+                    {individualAppointment.patientId}
+                  </td>
+                  <td className="userColumn">
+                    {individualAppointment.doctorId}
+                  </td>
+                  <td className="mediumColumn">
+                    {individualAppointment.dateTime}
+                  </td>
+                  <td className="mediumColumn">
+                    {individualAppointment.department}
+                  </td>
+                  <td className="buttonColumn">
+                    <button className="editButton">
+                      <Link to={`/appointments/${individualAppointment._id}`}>
+                        Details
+                      </Link>
+                    </button>
+                  </td>
+                  <td className="buttonColumn">
+                    <button className="editButton">
+                      <Link
+                        to={`/appointments/edit/${individualAppointment._id}`}
+                      >
+                        Edit Appointment
+                      </Link>
+                    </button>
+                  </td>
+                  <td className="buttonColumn">
+                    <button
+                      className="editButton"
+                      onClick={() =>
+                        deleteAppointment(individualAppointment._id)
+                      }
+                    >
+                      Delete Appointment
+                    </button>
+                  </td>
                 </tr>
-            </thead>
+              );
+            })}
+        </tbody>
+      </table>
 
-            <tbody>
-                {appointment && appointment.map(individualAppointment=>{
-                    return(
-                        <tr key={individualAppointment._id} className="tableBody">
-                          <td className="userColumn">{individualAppointment.doctorId.username}</td>
-                          <td className="userColumn">{individualAppointment.patientId.username}</td>
-                          <td className="mediumColumn">{individualAppointment.dateTime}</td>
-                          <td className="mediumColumn">{individualAppointment.department}</td>
-                          <td className="buttonColumn"><button className="editButton"><Link to={`/appointments/${individualAppointment._id}`}>Details</Link></button></td>
-                          <td className="buttonColumn"><button className="editButton"><Link to={`/appointments/edit/${individualAppointment._id}`}>Edit Appointment</Link></button></td>
-                          <td className="buttonColumn"><button className="editButton" onClick={()=>deleteAppointment(individualAppointment._id)}>Delete Appointment</button></td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
-
-        <button className="addButton"><Link to={`/appointments/add-appointment`}>Add Appointment</Link></button>
-
+      <button className="addButton">
+        <Link to={`/appointments/add-appointment`}>Add Appointment</Link>
+      </button>
     </div>
-)}
+  );
+}
 
-
-export default AppointmentList
+export default AppointmentList;

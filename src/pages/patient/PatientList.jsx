@@ -8,37 +8,49 @@ const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 
 function PatientList() {
-  const [patient,setPatient] = useState(false)
+  const [patient, setPatient] = useState(false);
 
   const getPatients = () => {
-    service.getPatients()
-    axios.get(`${API_URL}/patients`)
-    .then(response=>{
-          console.log(response.data)
-          setPatient(response.data)
-    })
-    .catch(err => console.log(err))
-  }
+    service.getPatients();
+    const role = localStorage.getItem("role");
+    if (role === "patient") {
+      const user = localStorage.getItem("user");
+      axios
+        .get(`${API_URL}/patients/${user}`)
+        .then((response) => {
+          console.log("patients", response.data);
+          setPatient(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
+    if (role === "admin") {
+      axios
+        .get(`${API_URL}/patients`)
+        .then((response) => {
+          console.log(response.data);
+          setPatient(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
-  useEffect(()=>{
-    axios.get(`${API_URL}/patients`)
-    .then(response=>{
-      console.log(response.data, "result")
-      setPatient(response.data)
-    })
-    .catch(err => console.log(err))
-      },[])
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/patients`)
+      .then((response) => {
+        console.log(response.data, "result");
+        setPatient(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const deletePatient = (patientId) => {
-    axios.delete(`${API_URL}/patients/${patientId}`)
-    .then( () => 
-      getPatients()
-    )
-    .then(alert("Patient's Profile deleted")
-    )
-    .catch(err=>console.log(err))
-  }
-
+    axios
+      .delete(`${API_URL}/patients/${patientId}`)
+      .then(() => getPatients())
+      .then(alert("Patient's Profile deleted"))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>

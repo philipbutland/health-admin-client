@@ -22,6 +22,13 @@ function DoctorList() {
   }
 
   useEffect(()=>{
+  /*     service.getDoctors()
+      .then(response=>{
+          console.log(response.data)
+          setTimeout(() => {
+              setDoctor(response.data)
+          }, 2000);
+      }) */
     axios.get(`${API_URL}/doctors`)
     .then(response=>{
       setDoctor(response.data)

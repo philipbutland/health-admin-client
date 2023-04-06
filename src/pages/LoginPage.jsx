@@ -7,53 +7,64 @@ import { AuthContext } from "../context/auth.context";
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
-
-
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
-  
-  const navigate = useNavigate();
-
   const { storeToken, authenticateUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
-  
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { email, password };
- 
-    axios.post(`${API_URL}/auth/login`, requestBody)
-      .then((response) => {
-      // Request to the server's endpoint `/auth/login` returns a response
-      // with the JWT string ->  response.data.authToken
-        console.log('JWT token', response.data.authToken );
 
-        storeToken(response.data.authToken); 
+    axios
+      .post(`${API_URL}/auth/login`, requestBody)
+      .then((response) => {
+        storeToken(response.data.authToken);
         authenticateUser();
-        navigate('/');                             
+        console.log("roleFromServer:" + response.data.role);
+        localStorage.setItem("role", response.data.role);
+
+        if (response.data.role === "doctor") {
+          console.log("save role as:", response.data.role);
+          localStorage.setItem("role", response.data.role);
+          if (response.data.login) {
+            navigate(`/doctors/${response.data.login._id}`);
+          } 
+          
+        } else if (response.data.role === "patient") {
+          console.log("save role as:", response.data.role);
+          localStorage.setItem("role", response.data.role);
+          if (response.data.login) {
+            navigate(`/patients/${response.data.login._id}`);
+
+          } else if (response.data.role === "admin") {
+            console.log("save role as:", response.data.role);
+            localStorage.setItem("role", response.data.role);
+            if (response.data.login) {
+              navigate(`/`);
+            }
+          }
+        }
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
-      })
+      });
   };
-  
+
   return (
     <div className="LoginPage">
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit}>
         <label>Email:</label>
-        <input 
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmail}
-        />
+        <input type="email" name="email" value={email} onChange={handleEmail} />
 
         <label>Password:</label>
         <input

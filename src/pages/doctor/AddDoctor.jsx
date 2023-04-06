@@ -6,6 +6,7 @@ import service from "../../api/service";
 function AddDoctor() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("");
   const [price, setPrice] = useState(0);
   const [department, setDepartment] = useState("");
@@ -51,6 +52,7 @@ const handleFileUpload = (e) => {
         .then(() => {
           setUserName("");
           setEmail("");
+          setPassword("");
           setPhoto("");
           setPrice(0);
           setDepartment("");
@@ -87,6 +89,16 @@ const handleFileUpload = (e) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="e-mail address (required)"
+          />
+        </label>
+        <label htmlFor="" className="editFieldLabel">
+          Password
+          <input
+            className="editField" 
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password (required)"
           />
         </label>
         <label htmlFor="" className="editFieldLabel">

@@ -1,10 +1,9 @@
 //EditAppointment
 import { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
-
 
 function EditAppointment() {
 
@@ -31,10 +30,9 @@ function EditAppointment() {
         setDateTime(oneAppointment.dateTime);
       })
       .catch((error) => console.log(error));
-    
   }, [appointmentId]);
-  
-  const handleFormSubmit = (e) => {                     
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     
     if (doctorArray.length>0) {
@@ -120,7 +118,6 @@ function EditAppointment() {
           Date / Time:
           <input className="editField" type="datetime-local" name="dateTime" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
         </label>
-
         <button className="editButton"  type="submit">Update Appointment</button>
       </form>
       <button className="addButton"  onClick={deleteAppointment}>Delete Appointment</button>
@@ -128,4 +125,4 @@ function EditAppointment() {
   );
 }
 
-export default EditAppointment
+export default EditAppointment;

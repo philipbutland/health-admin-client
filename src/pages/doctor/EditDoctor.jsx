@@ -44,6 +44,7 @@ function EditDoctor() {
       .get(`${API_URL}/doctors/${doctorId}`)
       .then((response) => {
         const oneDoctor = response.data;
+        console.log(oneDoctor)
         setUserName(oneDoctor.username);
         setEmail(oneDoctor.email);
         setPhoto(oneDoctor.photo);

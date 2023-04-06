@@ -5,31 +5,57 @@ import { AuthContext } from "../context/auth.context";
 function Navbar() {
   const { 
     isLoggedIn,
-    user,                   
+    role = localStorage.getItem('role'),              
     logOutUser            
   } = useContext(AuthContext);
  
   return (
     <nav className="navbar">
       <Link to="/">
-        <button className="navButton">Home</button>
+        <button>Home</button>
       </Link>
-
+      
          {isLoggedIn && (
         <>
-          <Link to="/doctors">
-            <button className="navButton">Doctors</button>
-          </Link>
+       
+        {role === "doctor" && (
+          <>          
           <Link to="/patients">
             <button className="navButton">Patients</button>
+          </Link>
+          <Link to="/doctors">
+            <button className="navButton">My Profile</button>
           </Link>
           <Link to="/appointments">
             <button className="navButton">Appointments</button>
           </Link>
-          
-          <button className="loginButton" onClick={logOutUser}>Logout</button>
-
-          <span className="userName">{user && user.name}</span>
+          </>
+      )} 
+      {role === "patient" && (
+        <>          
+          <Link to="/patients">
+            <button className="navButton">My Profile</button>
+          </Link>
+          <Link to="/appointments">
+            <button className="navButton">Appointments</button>
+          </Link>
+          </>
+      )}  
+      {role === "admin" && (
+        <>          
+          <Link to="/patients">
+            <button className="navButton">Patients</button>
+          </Link>
+          <Link to="/doctors">
+            <button className="navButton">Doctors</button>
+          </Link>
+          <Link to="/appointments">
+            <button className="navButton">Appointments</button>
+          </Link>
+          </>
+      )}         
+             <button onClick={logOutUser}>Logout</button>
+          {/* <span>{user && user.name}</span> */}
         </>
       )}
 
