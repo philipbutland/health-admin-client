@@ -25,7 +25,6 @@ function AddAppointment() {
 
     if (doctorArray.length>0) {
       doctorArray.map(individualDoctor=>{
-        console.log("indiDoc", individualDoctor)
         if (individualDoctor._id === doctorId) {
           department = individualDoctor.department
           doctorName = individualDoctor.username
