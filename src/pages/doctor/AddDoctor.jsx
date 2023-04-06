@@ -34,7 +34,7 @@ const handleFileUpload = (e) => {
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    const bodyToPost = { username, email, photo, price, department, gender };
+    const bodyToPost = { username, email, photo, price, department, gender, password };
     console.log("bodytopost doctor", bodyToPost)
 
     if (!username) {

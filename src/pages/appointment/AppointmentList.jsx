@@ -12,7 +12,7 @@ function AppointmentList() {
     if (role === "patient") {
       const user = localStorage.getItem("user");
       axios
-        .get(`${API_URL}/appointments/${user}`)
+        .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
           console.log("Appointments", response.data);
           setAppointment(response.data);
@@ -45,7 +45,7 @@ function AppointmentList() {
   return (
     <div>
       <h1>Appointments</h1>
-      {!appointment && <h2>Loading...</h2>}
+    {!appointment && <h2>Loading...</h2>}
       <table className="Container">
         <thead>
           <tr>
@@ -58,14 +58,14 @@ function AppointmentList() {
 
         <tbody>
           {appointment &&
-            appointment.map((individualAppointment) => {
+            appointment.map(individualAppointment => {
               return (
                 <tr key={individualAppointment._id} className="tableBody">
                   <td className="userColumn">
-                    {individualAppointment.patientId}
+                    {individualAppointment.patientId.username}
                   </td>
                   <td className="userColumn">
-                    {individualAppointment.doctorId}
+                    {individualAppointment.doctorId.username}
                   </td>
                   <td className="mediumColumn">
                     {individualAppointment.dateTime}
@@ -107,7 +107,7 @@ function AppointmentList() {
 
       <button className="addButton">
         <Link to={`/appointments/add-appointment`}>Add Appointment</Link>
-      </button>
+      </button> 
     </div>
   );
 }

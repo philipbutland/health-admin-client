@@ -23,40 +23,39 @@ function LoginPage(props) {
     const requestBody = { email, password };
 
     axios
-      .post(`${API_URL}/auth/login`, requestBody)
-      .then((response) => {
-        storeToken(response.data.authToken);
-        authenticateUser();
-        console.log("roleFromServer:" + response.data.role);
+    .post(`${API_URL}/auth/login`, requestBody)
+    .then((response) => {
+      console.log(response.data)
+      storeToken(response.data.authToken);
+      authenticateUser();
+      console.log("roleFromServer:" + response.data.role);
+      localStorage.setItem("role", response.data.role);
+
+      if (response.data.role === "doctor") {
+        console.log("save role as:", response.data.role);
         localStorage.setItem("role", response.data.role);
-
-        if (response.data.role === "doctor") {
-          console.log("save role as:", response.data.role);
-          localStorage.setItem("role", response.data.role);
-          if (response.data.login) {
-            navigate(`/doctors/${response.data.login._id}`);
-          } 
-          
-        } else if (response.data.role === "patient") {
-          console.log("save role as:", response.data.role);
-          localStorage.setItem("role", response.data.role);
-          if (response.data.login) {
-            navigate(`/patients/${response.data.login._id}`);
-
-          } else if (response.data.role === "admin") {
-            console.log("save role as:", response.data.role);
-            localStorage.setItem("role", response.data.role);
-            if (response.data.login) {
-              navigate(`/`);
-            }
-          }
+        if (response.data.login) {
+          navigate(`/doctors/${response.data.login._id}`);
+        } 
+      } else if (response.data.role === "patient") {
+        console.log("save role as:", response.data.role);
+        localStorage.setItem("role", response.data.role);
+        if (response.data.login) {
+          navigate(`/patients/${response.data.login._id}`);
         }
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      });
-  };
+      } else if (response.data.role === "admin") {
+        console.log("save role as:", response.data.role);
+        localStorage.setItem("role", response.data.role);
+        if (response.data.login) {
+          navigate(`/`);
+        }
+      }
+    })
+    .catch((error) => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    });
+};
 
   return (
     <div className="LoginPage">
