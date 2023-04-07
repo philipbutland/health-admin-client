@@ -29,7 +29,7 @@ function App() {
         <Route path="/doctors/add-doctor" element={<AddDoctor />} />
         <Route path="/doctors/edit/:doctorId" element={<EditDoctor />} />
         <Route path="/doctors/:doctorId" element={<DoctorInfo />} />
-        <Route path="/patients" element={<PatientList />} />
+        <Route path="/patients" element={<IsPrivate><PatientList /></IsPrivate>} />
         <Route path="/patients/add-patient" element={<AddPatient />} />
         <Route path="/patients/edit/:patientId" element={<EditPatient />} />
         <Route path="/patients/:patientId" element={<PatientInfo />} />

@@ -62,10 +62,10 @@ function AppointmentList() {
               return (
                 <tr key={individualAppointment._id} className="tableBody">
                   <td className="userColumn">
-                    {individualAppointment.patientId}
+                    {individualAppointment.patientId.username}
                   </td>
                   <td className="userColumn">
-                    {individualAppointment.doctorId}
+                    {individualAppointment.doctorId.username}
                   </td>
                   <td className="mediumColumn">
                     {individualAppointment.dateTime}

@@ -21,14 +21,19 @@ function LoginPage(props) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { email, password };
+    console.log("REQUEST INFO", email, password)
 
     axios
       .post(`${API_URL}/auth/login`, requestBody)
+
       .then((response) => {
+        console.log("RESPONSE", response.data)
         storeToken(response.data.authToken);
         authenticateUser();
         console.log("roleFromServer:" + response.data.role);
         localStorage.setItem("role", response.data.role);
+
+        console.log("ROLE", response.data.role)
 
         if (response.data.role === "doctor") {
           console.log("save role as:", response.data.role);
@@ -76,7 +81,7 @@ function LoginPage(props) {
 
         <button type="submit">Login</button>
       </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+      { errorMessage && <p className="errorMessage">{errorMessage}</p> }
 
       <p className="warningMessage">Don't have an account yet?</p>
       <p className="linkMessage"><Link to={"/signup"}> <p className="link">Sign Up</p></Link></p>

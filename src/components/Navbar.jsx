@@ -4,10 +4,13 @@ import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
   const { 
+    user, 
     isLoggedIn,
     role = localStorage.getItem('role'),              
     logOutUser            
   } = useContext(AuthContext);
+
+  console.log("user", user)
  
   return (
     <nav className="navbar">
@@ -55,7 +58,7 @@ function Navbar() {
           </>
       )}         
              <button onClick={logOutUser}>Logout</button>
-          {/* <span>{user && user.name}</span> */}
+             <span className="userName">{user && user.username}</span>
         </>
       )}
 
