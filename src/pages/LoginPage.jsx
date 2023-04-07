@@ -24,6 +24,7 @@ function LoginPage(props) {
     console.log("REQUEST INFO", email, password)
     setErrorMessage("")
 
+<<<<<<< HEAD
     if(!email) {
       setErrorMessage("Please enter an e-mail address")
     }
@@ -35,6 +36,9 @@ function LoginPage(props) {
     else {
       console.log("!!!")
       axios
+=======
+    axios
+>>>>>>> 19b86518b3819e8b50d5570aed12569acf27a148
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
         console.log("§§", response.data)
@@ -64,6 +68,7 @@ function LoginPage(props) {
             navigate(`/`);
           }
         }
+<<<<<<< HEAD
       })
       .catch((error) => {
         console.log("error", error)
@@ -76,6 +81,13 @@ function LoginPage(props) {
         }
       });
     }
+=======
+    })
+    .catch((error) => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    });
+>>>>>>> 19b86518b3819e8b50d5570aed12569acf27a148
 };
 
   return (

@@ -4,14 +4,11 @@ import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
   const { 
-    user, 
+    user,
     isLoggedIn,
     role = localStorage.getItem('role'),              
     logOutUser            
   } = useContext(AuthContext);
-
-  console.log("user", user)
- 
   return (
     <nav className="navbar">
       <Link to="/">
@@ -42,7 +39,8 @@ function Navbar() {
           <Link to="/appointments">
             <button className="navButton">Appointments</button>
           </Link>
-          </>
+                  </>
+          
       )}  
       {role === "admin" && (
         <>          
