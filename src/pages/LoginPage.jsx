@@ -21,8 +21,42 @@ function LoginPage(props) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { email, password };
+    console.log("REQUEST INFO", email, password)
 
     axios
+<<<<<<< HEAD
+      .post(`${API_URL}/auth/login`, requestBody)
+
+      .then((response) => {
+        console.log("RESPONSE", response.data)
+        storeToken(response.data.authToken);
+        authenticateUser();
+        console.log("roleFromServer:" + response.data.role);
+        localStorage.setItem("role", response.data.role);
+
+        console.log("ROLE", response.data.role)
+
+        if (response.data.role === "doctor") {
+          console.log("save role as:", response.data.role);
+          localStorage.setItem("role", response.data.role);
+          if (response.data.login) {
+            navigate(`/doctors/${response.data.login._id}`);
+          } 
+          
+        } else if (response.data.role === "patient") {
+          console.log("save role as:", response.data.role);
+          localStorage.setItem("role", response.data.role);
+          if (response.data.login) {
+            navigate(`/patients/${response.data.login._id}`);
+
+          } else if (response.data.role === "admin") {
+            console.log("save role as:", response.data.role);
+            localStorage.setItem("role", response.data.role);
+            if (response.data.login) {
+              navigate(`/`);
+            }
+          }
+=======
     .post(`${API_URL}/auth/login`, requestBody)
     .then((response) => {
       console.log(response.data)
@@ -42,6 +76,7 @@ function LoginPage(props) {
         localStorage.setItem("role", response.data.role);
         if (response.data.login) {
           navigate(`/patients/${response.data.login._id}`);
+>>>>>>> 8f75df85dd2740691fbaab5bb452d9e43893d502
         }
       } else if (response.data.role === "admin") {
         console.log("save role as:", response.data.role);
@@ -75,7 +110,7 @@ function LoginPage(props) {
 
         <button type="submit">Login</button>
       </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+      { errorMessage && <p className="errorMessage">{errorMessage}</p> }
 
       <p className="warningMessage">Don't have an account yet?</p>
       <p className="linkMessage"><Link to={"/signup"}> <p className="link">Sign Up</p></Link></p>
