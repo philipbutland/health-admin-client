@@ -12,14 +12,14 @@ function AddAppointment() {
   const [doctorId, setDoctorId] = useState(false);
   const [patientId, setPatientId] = useState("");
   const [dateTime, setDateTime] = useState("");
-  const [department, setDepartment] = useState("");
-  const [doctorName, setDoctorName] = useState("");
+ /*  const [department, setDepartment] = useState("");
+  const [doctorName, setDoctorName] = useState(""); */
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  /*  let department=""
-  let doctorName="" */
+  let department=""
+  let doctorName=""
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,8 +29,8 @@ function AddAppointment() {
       doctorArray.map(individualDoctor=>{
 
         if (individualDoctor._id === doctorId) {
-          setDepartment(individualDoctor.department);
-          setDoctorName(individualDoctor.username);
+          department = individualDoctor.department;
+          doctorName = individualDoctor.username;
         }
       });
     }
@@ -63,8 +63,6 @@ function AddAppointment() {
           setDoctorId("");
           setPatientId("");
           setDateTime("");
-          setDepartment("");
-          setDoctorName("");
           alert("Appointment Created");
           navigate("/appointments");
         })
@@ -112,8 +110,8 @@ console.log(doctorArray)
               }}
             >
               <option value="">--- Choose a Doctor --- </option>
-              {/* {doctorArray.length > 0 && */}
-                {doctorArray.map((individualDoctor) => {
+              {doctorArray.length > 0 &&
+                doctorArray.map((individualDoctor) => {
                   return (
                     <option
                       key={individualDoctor._id}

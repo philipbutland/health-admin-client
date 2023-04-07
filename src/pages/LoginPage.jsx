@@ -24,6 +24,7 @@ function LoginPage(props) {
     console.log("REQUEST INFO", email, password)
 
     axios
+<<<<<<< HEAD
       .post(`${API_URL}/auth/login`, requestBody)
 
       .then((response) => {
@@ -55,13 +56,41 @@ function LoginPage(props) {
               navigate(`/`);
             }
           }
+=======
+    .post(`${API_URL}/auth/login`, requestBody)
+    .then((response) => {
+      console.log(response.data)
+      storeToken(response.data.authToken);
+      authenticateUser();
+      console.log("roleFromServer:" + response.data.role);
+      localStorage.setItem("role", response.data.role);
+
+      if (response.data.role === "doctor") {
+        console.log("save role as:", response.data.role);
+        localStorage.setItem("role", response.data.role);
+        if (response.data.login) {
+          navigate(`/doctors/${response.data.login._id}`);
+        } 
+      } else if (response.data.role === "patient") {
+        console.log("save role as:", response.data.role);
+        localStorage.setItem("role", response.data.role);
+        if (response.data.login) {
+          navigate(`/patients/${response.data.login._id}`);
+>>>>>>> 8f75df85dd2740691fbaab5bb452d9e43893d502
         }
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      });
-  };
+      } else if (response.data.role === "admin") {
+        console.log("save role as:", response.data.role);
+        localStorage.setItem("role", response.data.role);
+        if (response.data.login) {
+          navigate(`/`);
+        }
+      }
+    })
+    .catch((error) => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    });
+};
 
   return (
     <div className="LoginPage">
