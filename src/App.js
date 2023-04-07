@@ -25,18 +25,18 @@ function App() {
       <Navbar />
       <Routes>
       <Route path="/" element={<HomePage />} />
-        <Route path="/doctors" element={<DoctorList />} />
-        <Route path="/doctors/add-doctor" element={<AddDoctor />} />
-        <Route path="/doctors/edit/:doctorId" element={<EditDoctor />} />
-        <Route path="/doctors/:doctorId" element={<DoctorInfo />} />
-        <Route path="/patients" element={<PatientList />} />
-        <Route path="/patients/add-patient" element={<AddPatient />} />
-        <Route path="/patients/edit/:patientId" element={<EditPatient />} />
-        <Route path="/patients/:patientId" element={<PatientInfo />} />
+        <Route path="/doctors" element={<IsPrivate><DoctorList /></IsPrivate>} />
+        <Route path="/doctors/add-doctor" element={<IsPrivate><AddDoctor /></IsPrivate>} />
+        <Route path="/doctors/edit/:doctorId" element={<IsPrivate><EditDoctor /></IsPrivate>} />
+        <Route path="/doctors/:doctorId" element={<IsPrivate><DoctorInfo /></IsPrivate>} />
+        <Route path="/patients" element={<IsPrivate><PatientList /></IsPrivate>} />
+        <Route path="/patients/add-patient" element={<IsPrivate><AddPatient /></IsPrivate>} />
+        <Route path="/patients/edit/:patientId" element={<IsPrivate><EditPatient /></IsPrivate>} />
+        <Route path="/patients/:patientId" element={<IsPrivate><PatientInfo /></IsPrivate>} />
         <Route path="/appointments" element={<IsPrivate><AppointmentList /></IsPrivate>} />
-        <Route path="/appointments/add-appointment" element={<AddAppointment />} />
-        <Route path="/appointments/edit/:appointmentId" element={<EditAppointment />} />
-        <Route path="/appointments/:appointmentId" element={<AppointmentInfo />} />
+        <Route path="/appointments/add-appointment" element={<IsPrivate><AddAppointment /></IsPrivate>} />
+        <Route path="/appointments/edit/:appointmentId" element={<IsPrivate><EditAppointment /></IsPrivate>} />
+        <Route path="/appointments/:appointmentId" element={<IsPrivate><AppointmentInfo /></IsPrivate>} />
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
         </Routes>

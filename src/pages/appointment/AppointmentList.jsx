@@ -14,7 +14,7 @@ function AppointmentList() {
       axios
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
-          console.log("Appointments", response.data);
+         console.log("Appointments", response.data);
           setAppointment(response.data);
         })
         .catch((err) => console.log(err));
