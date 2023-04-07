@@ -83,7 +83,7 @@ function AddAppointment() {
       })
       .catch((err) => console.log(err));
   }, []);
-console.log(doctorArray)
+
   useEffect(() => {
     axios
       .get(`${API_URL}/patients`)

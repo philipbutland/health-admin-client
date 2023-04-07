@@ -22,74 +22,60 @@ function LoginPage(props) {
     e.preventDefault();
     const requestBody = { email, password };
     console.log("REQUEST INFO", email, password)
+    setErrorMessage("")
 
-    axios
-<<<<<<< HEAD
+    if(!email) {
+      setErrorMessage("Please enter an e-mail address")
+    }
+
+    else if (!password) {
+      setErrorMessage("Please enter a password")
+    }
+
+    else {
+      console.log("!!!")
+      axios
       .post(`${API_URL}/auth/login`, requestBody)
-
       .then((response) => {
-        console.log("RESPONSE", response.data)
+        console.log("§§", response.data)
         storeToken(response.data.authToken);
         authenticateUser();
         console.log("roleFromServer:" + response.data.role);
         localStorage.setItem("role", response.data.role);
-
-        console.log("ROLE", response.data.role)
-
+  
         if (response.data.role === "doctor") {
           console.log("save role as:", response.data.role);
           localStorage.setItem("role", response.data.role);
           if (response.data.login) {
-            navigate(`/doctors/${response.data.login._id}`);
+            // navigate(`/doctors/${response.data.login._id}`);
+            navigate("/")
           } 
-          
         } else if (response.data.role === "patient") {
           console.log("save role as:", response.data.role);
           localStorage.setItem("role", response.data.role);
           if (response.data.login) {
-            navigate(`/patients/${response.data.login._id}`);
-
-          } else if (response.data.role === "admin") {
-            console.log("save role as:", response.data.role);
-            localStorage.setItem("role", response.data.role);
-            if (response.data.login) {
-              navigate(`/`);
-            }
+            // navigate(`/patients/${response.data.login._id}`);
+            navigate("/")
           }
-=======
-    .post(`${API_URL}/auth/login`, requestBody)
-    .then((response) => {
-      console.log(response.data)
-      storeToken(response.data.authToken);
-      authenticateUser();
-      console.log("roleFromServer:" + response.data.role);
-      localStorage.setItem("role", response.data.role);
-
-      if (response.data.role === "doctor") {
-        console.log("save role as:", response.data.role);
-        localStorage.setItem("role", response.data.role);
-        if (response.data.login) {
-          navigate(`/doctors/${response.data.login._id}`);
-        } 
-      } else if (response.data.role === "patient") {
-        console.log("save role as:", response.data.role);
-        localStorage.setItem("role", response.data.role);
-        if (response.data.login) {
-          navigate(`/patients/${response.data.login._id}`);
->>>>>>> 8f75df85dd2740691fbaab5bb452d9e43893d502
+        } else if (response.data.role === "admin") {
+          console.log("save role as:", response.data.role);
+          localStorage.setItem("role", response.data.role);
+          if (response.data.login) {
+            navigate(`/`);
+          }
         }
-      } else if (response.data.role === "admin") {
-        console.log("save role as:", response.data.role);
-        localStorage.setItem("role", response.data.role);
-        if (response.data.login) {
-          navigate(`/`);
+      })
+      .catch((error) => {
+        console.log("error", error)
+        const errorDescription = error.response.data.message;
+        if (errorMessage){
+          console.log(errorDescription)
         }
-      }
-    })
-    .catch((error) => {
-      const errorDescription = error.response.data.message;
-      setErrorMessage(errorDescription);
-    });
+        else {
+          setErrorMessage(errorDescription);
+        }
+      });
+    }
 };
 
   return (
