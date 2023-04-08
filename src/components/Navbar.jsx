@@ -9,6 +9,8 @@ function Navbar() {
     role = localStorage.getItem('role'),              
     logOutUser            
   } = useContext(AuthContext);
+
+  console.log("user", user)
   return (
     <nav className="navbar">
       <Link to="/">
@@ -33,9 +35,13 @@ function Navbar() {
       )} 
       {role === "patient" && (
         <>          
-          <Link to="/patients">
+
+          {user._id && 
+          <Link to={`/patients/${user._id}`}>          
             <button className="navButton">My Profile</button>
           </Link>
+          }
+
           <Link to="/appointments">
             <button className="navButton">Appointments</button>
           </Link>

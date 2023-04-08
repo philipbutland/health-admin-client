@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 function AppointmentList() {
+
   const [appointment, setAppointment] = useState(false);
 
   const getAppointments = () => {
@@ -14,9 +15,9 @@ function AppointmentList() {
       axios
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
-         console.log("Appointments", response.data);
+         console.log("*** Appointments", response.data);
          console.log("PatientId", response.data.patientId)
-          setAppointment(response.data);
+        setAppointment(response.data);
         })
         .catch((err) => console.log(err));
     }
@@ -24,9 +25,10 @@ function AppointmentList() {
       axios
         .get(`${API_URL}/appointments`)
         .then((response) => {
-          console.log("Appointments", response.data);
+          console.log("### Appointments", response.data);
           console.log("PatientId", response.data.patientId)
           setAppointment(response.data);
+          console.log("APPOINTMENT", appointment)
         })
         .catch((err) => console.log(err));
     }
@@ -61,14 +63,14 @@ function AppointmentList() {
         <tbody>
           {appointment &&
             appointment.map(individualAppointment => {
-              {/* return (
+              return (
                 <tr key={individualAppointment._id} className="tableBody">
-                  <td className="userColumn">
+                  {/* <td className="userColumn">
                     {individualAppointment.patientId.username}
                   </td>
                   <td className="userColumn">
                     {individualAppointment.doctorId.username}
-                  </td>
+                  </td> */}
                   <td className="mediumColumn">
                     {individualAppointment.dateTime}
                   </td>
@@ -102,7 +104,7 @@ function AppointmentList() {
                     </button>
                   </td>
                 </tr>
-              ); */}
+              );
             })}
         </tbody>
       </table>
