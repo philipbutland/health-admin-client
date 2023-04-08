@@ -49,10 +49,17 @@ function AddAppointment() {
     };
 
     if (role === "patient" ){
-      bodyToPost.patientId = user._id
+      bodyToPost.patientId = user._id;
+      bodyToPost.doctorId = doctorId;
+    }
+    
+    else if (role === "doctor" ){
+      bodyToPost.doctorId = user._id;
+      console.log(user._id)
+      bodyToPost.patientId = patientId;
     }
 
-    if (!doctorId) {
+    if (!doctorId && role ==="admin") {
       setError("Please select a doctor");
       return;
     } else if (!patientId && role === "admin") {
@@ -108,12 +115,14 @@ function AddAppointment() {
       <form action="" onSubmit={handleSubmit}>
         {error && <p className="errorMessage"> {error} </p>}
 
-        <label htmlFor="" className="editFieldLabel">
+   { (role === "admin" || role === "patient") &&  
+      <label htmlFor="" className="editFieldLabel">
           Doctor
           <div>
             <select
               className="editField"
               name="doctorId"
+              value={doctorId}
               onChange={(e) => {
                 setDoctorId(e.target.value);
               }}
@@ -133,15 +142,16 @@ function AddAppointment() {
                 })}
             </select>
           </div>
-        </label>
+        </label>}
 
-        {role === "admin" && 
+        {(role === "admin" || role === "doctor") &&
         <label htmlFor="" className="editFieldLabel">
           Patient
           <div>
             <select
               className="editField"
               name="patientId"
+              value={patientId}
               onChange={(e) => setPatientId(e.target.value)}
             >
               <option value="">--- Choose a Patient ---</option>

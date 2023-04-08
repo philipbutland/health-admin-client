@@ -21,13 +21,13 @@ function Navbar() {
         <>
        
         {role === "doctor" && (
-          <>          
-          <Link to="/patients">
-            <button className="navButton">Patients</button>
-          </Link>
-          <Link to="/doctors">
+          <> 
+          {user._id && 
+          <Link to={`/doctors/${user._id}`}>          
             <button className="navButton">My Profile</button>
           </Link>
+          }
+               
           <Link to="/appointments">
             <button className="navButton">Appointments</button>
           </Link>

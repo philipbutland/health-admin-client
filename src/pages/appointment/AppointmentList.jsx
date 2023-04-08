@@ -1,24 +1,35 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function AppointmentList() {
-
   const [appointment, setAppointment] = useState(false);
 
   const getAppointments = () => {
     const role = localStorage.getItem("role");
+    const user = localStorage.getItem("user");
     if (role === "patient") {
-      const user = localStorage.getItem("user");
-      console.log(user)
+      console.log(user);
       axios
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
-         console.log("*** Appointments", response.data);
-         console.log("PatientId", response.data.patientId)
-        setAppointment(response.data);
+          console.log("*** Appointments", response.data);
+          console.log("PatientId", response.data.patientId);
+          setAppointment(response.data);
+        })
+        .catch((err) => console.log(err));
+    }
+    if (role === "doctor") {
+      console.log(user)
+      axios
+        .get(`${API_URL}/appointments/doctors/${user}`)
+        .then((response) => {
+          console.log("DoctorId", response.data);
+          setAppointment(response.data);
+          console.log("APPOINTMENT", appointment);
         })
         .catch((err) => console.log(err));
     }
@@ -27,9 +38,9 @@ function AppointmentList() {
         .get(`${API_URL}/appointments`)
         .then((response) => {
           console.log("### Appointments", response.data);
-          console.log("PatientId", response.data.patientId)
+          console.log("PatientId", response.data.patientId);
           setAppointment(response.data);
-          console.log("APPOINTMENT", appointment)
+          console.log("APPOINTMENT", appointment);
         })
         .catch((err) => console.log(err));
     }
@@ -50,7 +61,7 @@ function AppointmentList() {
   return (
     <div>
       <h1>Appointments</h1>
-    {!appointment && <h2>Loading...</h2>}
+      {!appointment && <h2>Loading...</h2>}
       <table className="Container">
         <thead>
           <tr>
@@ -63,7 +74,7 @@ function AppointmentList() {
 
         <tbody>
           {appointment &&
-            appointment.map(individualAppointment => {
+            appointment.map((individualAppointment) => {
               return (
                 <tr key={individualAppointment._id} className="tableBody">
                   <td className="userColumn">
@@ -112,7 +123,7 @@ function AppointmentList() {
 
       <button className="addButton">
         <Link to={`/appointments/add-appointment`}>Add Appointment</Link>
-      </button> 
+      </button>
     </div>
   );
 }

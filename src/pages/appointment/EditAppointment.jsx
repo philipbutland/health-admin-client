@@ -1,7 +1,8 @@
 //EditAppointment
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context";
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
@@ -13,8 +14,12 @@ function EditAppointment() {
   const [doctorId, setDoctorId] = useState(false)
   const [patientId, setPatientId] = useState(false)
   const [dateTime,setDateTime] = useState('')   
- 
   const { appointmentId } = useParams();
+  const { user } = useContext (AuthContext)
+  const role = localStorage.getItem('role')
+
+  
+
   const navigate = useNavigate();  
 
   let department = ""
@@ -45,7 +50,18 @@ function EditAppointment() {
     }
 
     const requestBody = { doctorId, doctorName, patientId, department, dateTime };
-     axios
+    if (role === "patient" ){
+      requestBody.patientId = user._id;
+      requestBody.doctorId = doctorId;
+    }
+    
+    else if (role === "doctor" ){
+      requestBody.doctorId = user._id;
+      console.log(user._id)
+      requestBody.patientId = patientId;
+    }
+
+      axios
       .put(`${API_URL}/appointments/${appointmentId}`, requestBody)
       .then((response) => {
         navigate(`/appointments/${appointmentId}`)
@@ -83,7 +99,7 @@ function EditAppointment() {
       <p className="pageHeader">Edit the Appointment</p>
  
       <form onSubmit={handleFormSubmit}>  
-
+      {(role === "admin" || role === "patient") &&  
       <label htmlFor="" className="editFieldLabel">
           Doctor
           <div>
@@ -97,8 +113,9 @@ function EditAppointment() {
               })}
     		    </select>
           </div>
-        </label>
+        </label>}
 
+        {(role === "admin" || role === "doctor") &&
         <label htmlFor="" className="editFieldLabel">
           Patient
           <div>
@@ -112,7 +129,7 @@ function EditAppointment() {
               })}
     		    </select>
           </div>
-        </label>
+        </label>}
 
         <label className="editFieldLabel">
           Date / Time:
