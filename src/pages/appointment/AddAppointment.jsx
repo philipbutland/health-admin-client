@@ -1,7 +1,9 @@
 //AddAppointment
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context";
+
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -12,6 +14,9 @@ function AddAppointment() {
   const [doctorId, setDoctorId] = useState(false);
   const [patientId, setPatientId] = useState("");
   const [dateTime, setDateTime] = useState("");
+  const { user } = useContext (AuthContext)
+  const role = localStorage.getItem('role')
+ 
  /*  const [department, setDepartment] = useState("");
   const [doctorName, setDoctorName] = useState(""); */
 
@@ -43,10 +48,14 @@ function AddAppointment() {
       department,
     };
 
+    if (role === "patient" ){
+      bodyToPost.patientId = user._id
+    }
+
     if (!doctorId) {
       setError("Please select a doctor");
       return;
-    } else if (!patientId) {
+    } else if (!patientId && role === "admin") {
       setError("Please select a patient");
       return;
     } else if (!dateTime) {
@@ -83,7 +92,7 @@ function AddAppointment() {
       })
       .catch((err) => console.log(err));
   }, []);
-console.log(doctorArray)
+
   useEffect(() => {
     axios
       .get(`${API_URL}/patients`)
@@ -126,6 +135,7 @@ console.log(doctorArray)
           </div>
         </label>
 
+        {role === "admin" && 
         <label htmlFor="" className="editFieldLabel">
           Patient
           <div>
@@ -148,7 +158,7 @@ console.log(doctorArray)
                 })}
             </select>
           </div>
-        </label>
+        </label>}
 
         <label htmlFor="" className="editFieldLabel">
           Date and Time

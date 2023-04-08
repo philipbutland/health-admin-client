@@ -22,22 +22,62 @@ function SignupPage(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     let role = "patient";
+    setErrorMessage("")
+    console.log("** error **", errorMessage)
     const requestBody = { email, password, username, role };
-    if (!email || !password) {
-      setErrorMessage("Please enter both email and password.");
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+
+    if (!email || !password || !username) {
+      console.log("§§§§§§§§§§§§§§", email, password, username)
+      if (!email && !password && !username) {
+        setErrorMessage("please provide an e-mail address, user name and password")
+      }
+      else if (email){
+        if (password){
+          setErrorMessage("Please provide a user name")
+        }
+        else if (username) {
+          setErrorMessage("Please provide a password")
+        }
+        else {
+          setErrorMessage("Please provide a user name and password")         
+        }
+      }
+      else if (password) {
+        if (username) {
+          setErrorMessage("Please provide an e-mail address")
+        }
+        else {
+          setErrorMessage("Please provide an e-mail address and user name")
+        }
+      }
+      else {
+        setErrorMessage("Please provide an e-mail address and password")       
+      }
+    }
+    else if (!passwordRegex.test(password)) {
+      setErrorMessage("Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.")
     }
 
-    axios
+    else {
+      axios
       .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        console.log("Signup successful");
+        alert("Signup successful");
         navigate("/login");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
+        console.log("Message", errorMessage)
+        if (errorMessage){
+          console.log(errorDescription)
+        }
+        else {
+          setErrorMessage(errorDescription);
+        }
       });
-  };
+    }
+};
 
   return (
     <div className="SignupPage">
@@ -64,7 +104,7 @@ function SignupPage(props) {
         <button type="submit">Sign up</button>
       </form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
 
       <p className="warningMessage">Already have account?</p>
       <p className="linkMessage"><Link to={"/login"}> <p className="link">Login</p></Link></p>

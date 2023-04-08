@@ -5,17 +5,20 @@ import { Link } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 function AppointmentList() {
+
   const [appointment, setAppointment] = useState(false);
 
   const getAppointments = () => {
     const role = localStorage.getItem("role");
     if (role === "patient") {
       const user = localStorage.getItem("user");
+      console.log(user)
       axios
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
-         console.log("Appointments", response.data);
-          setAppointment(response.data);
+         console.log("*** Appointments", response.data);
+         console.log("PatientId", response.data.patientId)
+        setAppointment(response.data);
         })
         .catch((err) => console.log(err));
     }
@@ -23,8 +26,10 @@ function AppointmentList() {
       axios
         .get(`${API_URL}/appointments`)
         .then((response) => {
-          console.log("Appointments", response.data);
+          console.log("### Appointments", response.data);
+          console.log("PatientId", response.data.patientId)
           setAppointment(response.data);
+          console.log("APPOINTMENT", appointment)
         })
         .catch((err) => console.log(err));
     }
