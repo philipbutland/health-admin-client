@@ -12,6 +12,7 @@ function AppointmentList() {
     const role = localStorage.getItem("role");
     if (role === "patient") {
       const user = localStorage.getItem("user");
+      console.log(user)
       axios
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
