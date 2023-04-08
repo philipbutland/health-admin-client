@@ -35,7 +35,7 @@ function HomePage() {
 
         <h2>Welcome to the Health Administration Website</h2>
 
-        <h2>Currently linking {doctorArray.length} Doctors with {patientArray.length} Patients</h2>
+        <h2>Currently linking <span className="doctors">{doctorArray.length}</span> Doctors with <span className="patients">{patientArray.length}</span> Patients</h2>
       </div>
     );
   }

@@ -61,8 +61,8 @@ function AppointmentList() {
   return (
     <div>
       <h1>Appointments</h1>
-      {!appointment && <h2>Loading...</h2>}
-      <table className="Container">
+    {!appointment && <h2>Loading...</h2>}
+      <table>
         <thead>
           <tr>
             <th className="tableHeader">Patient</th>

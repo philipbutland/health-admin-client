@@ -80,34 +80,29 @@ function SignupPage(props) {
 };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className="loginPage">
+      <p className="pageHeader">Sign Up</p>
+
       <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <label className="loginLabel">Email:</label>
+        <input className="loginField" type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+        <label className="loginLabel">Password:</label>
+        <input className="loginField" type="password" name="password" value={password} onChange={handlePassword} />
 
-        <label>Name:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsername}
+        <label className="loginLabel">Name:</label>
+        <input className="loginField" type="text" name="username" value={username} onChange={handleUsername}
         />
-        <button type="submit">Sign up</button>
+        <button className="loginButton" type="submit">Sign up</button>
       </form>
 
       {errorMessage && <p className="errorMessage">{errorMessage}</p>}
 
-      <p className="warningMessage">Already have account?</p>
-      <p className="linkMessage"><Link to={"/login"}> <p className="link">Login</p></Link></p>
+      <div className="longMessage">
+        <p className="warningMessage">Already have an account?</p>
+        <p className="linkMessage"><Link to={"/login"}> <p className="link">Login</p></Link></p>
+      </div>
+
     </div>
   );
 }

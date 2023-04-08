@@ -78,22 +78,11 @@ function EditPatient() {
       <form onSubmit={handleFormSubmit}>
         <label className="editFieldLabel">
           Username:
-          <input
-            className="editField"
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-          />
+          <input className="editField" type="text" name="username" value={username} onChange={(e) => setUserName(e.target.value)} />
         </label>
         <label className="editFieldLabel">
           Email:
-          <input
-            className="editField"
-            type="text"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+          <input className="editField" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         <label className="editFieldLabel">
@@ -103,23 +92,13 @@ function EditPatient() {
         </label>
         <label className="editFieldLabel">
           Date of Birth:
-          <input
-            className="editField"
-            type="date"
-            name="dob"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
+          <input className="editField" type="date" name="dob" value={dob} onChange={(e) => setDob(e.target.value)}
           />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Gender
           <div>
-            <select
-              className="editField"
-              name="gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
+            <select className="editField" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
               <option value="">--- Choose a gender ---</option>
               <option value="M">Male</option>
               <option value="F">Female</option>
@@ -130,12 +109,7 @@ function EditPatient() {
         <label htmlFor="" className="editFieldLabel">
           Blood Type
           <div>
-            <select
-              className="editField"
-              name="bloodType"
-              value={bloodType}
-              onChange={(e) => setBloodType(e.target.value)}
-            >
+            <select className="editField" name="bloodType" value={bloodType} onChange={(e) => setBloodType(e.target.value)} >
               <option value="">--- Choose a Blood Type ---</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
