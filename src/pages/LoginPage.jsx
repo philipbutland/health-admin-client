@@ -48,15 +48,15 @@ function LoginPage(props) {
           if (response.data.login) {
             navigate(`/patients/${response.data.login._id}`);
 
-          } else if (response.data.role === "admin") {
+          } 
+        }else if (response.data.role === "admin") {
             console.log("save role as:", response.data.role);
             localStorage.setItem("role", response.data.role);
             if (response.data.login) {
               navigate(`/`);
             }
           }
-        }
-    })
+        })
     .catch((error) => {
       const errorDescription = error.response.data.message;
       setErrorMessage(errorDescription);
