@@ -50,7 +50,7 @@ function AppointmentList() {
     <div>
       <h1>Appointments</h1>
     {!appointment && <h2>Loading...</h2>}
-      <table className="Container">
+      <table>
         <thead>
           <tr>
             <th className="tableHeader">Patient</th>
@@ -65,12 +65,12 @@ function AppointmentList() {
             appointment.map(individualAppointment => {
               return (
                 <tr key={individualAppointment._id} className="tableBody">
-                  {/* <td className="userColumn">
+                  <td className="userColumn">
                     {individualAppointment.patientId.username}
                   </td>
                   <td className="userColumn">
                     {individualAppointment.doctorId.username}
-                  </td> */}
+                  </td>
                   <td className="mediumColumn">
                     {individualAppointment.dateTime}
                   </td>

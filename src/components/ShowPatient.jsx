@@ -1,10 +1,15 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
+import patientPic from '../images/patient.png';
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 
 function ShowPatient(props) {
+
+    const [email, setEmail] = useState("");
+    const navigate = useNavigate();  
 
     const [appointment,setAppointment]=useState([])      
     useEffect(() => {
@@ -22,23 +27,46 @@ function ShowPatient(props) {
             setAppointment(response.data.appointment)
         })
     }, [])
+
+    const displayPatient = (patientId) => {
+        console.log("patientId", patientId)
+        // navigate(`/patients/${patientId}`);
+    };
+
+    console.log("props", props)
     
-    console.log("APPOINTMENT", appointment)
    
      return (
+
        <div>
            <p className="pageHeader">{props.username}</p>
            <div>           
                <div className="Photo">
-                   <img src={props.image} className="mediumImage" alt="patient" />
+                    {props.image ? <img src={props.image} className="mediumImage" alt="patient" /> :
+                                   <img src={patientPic} className="mediumImage" alt="patient" />}
+
+                   {/* <img src={props.image} className="mediumImage" alt="patient" /> */}
                </div>
                <div className="Info">
+
+                    {/* <label className="editFieldLabel">
+                        Email:
+                        <input className="editField" type="text" name="email" value={props.email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </label> */}
+
                     <div><p><b>e-mail: </b>{props.email}</p></div>
                     <div><p><b>Date of Birth: </b> {props.dob}</p></div>
                     <div><p><b>Gender: </b>{props.gender}</p></div>
                     <div><p><b>Blood Type: </b>{props.bloodType}</p></div>
+
+                    <button className="addButton"><Link to={`/patients/edit/${props.id}`}>Edit Information</Link></button>
+
+                    {/* <button className="editButton" onClick={displayPatient(props.id)}>Edit Information</button> */}
                 </div>
                 <br></br>
+                
                 <div  className="appoinmentsList">
                     
                     <p className="appointmentsHeader">Appointments for this Patient:</p> 

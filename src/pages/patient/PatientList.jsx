@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-//import patientPic from '../../images/patient.png';
 import service from '../../api/service'
+import patientPic from '../../images/patient.png';
+
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
@@ -56,7 +57,7 @@ function PatientList() {
     <div>
         <p className="pageHeader">Patient List</p>
         {!patient && <h2>Loading...</h2>}
-        <table className="Container">
+        <table>
 
             <thead>
                 <tr>
@@ -72,7 +73,8 @@ function PatientList() {
                     return(
                         <tr key={individualPatient._id} className="tableBody">
                             <td className="userColumn">{individualPatient.username}</td>
-                            <td className="mediumColumn"><img className="smallImage" src={individualPatient.photo} alt="patient" /></td>
+                            {individualPatient.photo ? <td className="mediumColumn"><img className="smallImage" src={individualPatient.photo} alt="patient" /></td> :
+                                                       <td className="mediumColumn"><img className="smallImage" src={patientPic} alt="patient" /></td>}
                             <td className="mediumColumn">{individualPatient.bloodType}</td>
                             <td className="mediumColumn">{individualPatient.gender}</td>
                             <td className="buttonColumn"><button className="editButton"><Link to={`/patients/${individualPatient._id}`}>Details</Link></button></td>
