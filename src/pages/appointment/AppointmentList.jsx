@@ -15,6 +15,7 @@ function AppointmentList() {
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
          console.log("Appointments", response.data);
+         console.log("PatientId", response.data.patientId)
           setAppointment(response.data);
         })
         .catch((err) => console.log(err));
@@ -24,6 +25,7 @@ function AppointmentList() {
         .get(`${API_URL}/appointments`)
         .then((response) => {
           console.log("Appointments", response.data);
+          console.log("PatientId", response.data.patientId)
           setAppointment(response.data);
         })
         .catch((err) => console.log(err));
@@ -59,7 +61,7 @@ function AppointmentList() {
         <tbody>
           {appointment &&
             appointment.map(individualAppointment => {
-              return (
+              {/* return (
                 <tr key={individualAppointment._id} className="tableBody">
                   <td className="userColumn">
                     {individualAppointment.patientId.username}
@@ -100,7 +102,7 @@ function AppointmentList() {
                     </button>
                   </td>
                 </tr>
-              );
+              ); */}
             })}
         </tbody>
       </table>
