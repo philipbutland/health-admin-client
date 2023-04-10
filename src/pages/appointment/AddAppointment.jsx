@@ -159,6 +159,7 @@ function AddAppointment() {
                 patientArray.map((individualPatient) => {
                   return (
                     <option
+                      className="dropdown"
                       key={individualPatient._id}
                       value={individualPatient._id}
                     >

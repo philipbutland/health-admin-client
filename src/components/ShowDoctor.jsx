@@ -7,8 +7,8 @@ function ShowDoctor(props) {
         <p className="pageHeader">{props.username}</p>
         <div>
             <div className="Photo">
-              {props.image ? <img src={props.image} className="mediumImage" alt="doctor" /> :
-                             <img src={doctorPic} className="mediumImage" alt="doctor" />}  
+              {props.image  ? <img src={props.image} className="mediumImage" alt="doctor" /> 
+                            : <img src={doctorPic} className="mediumImage" alt="doctor" />}  
             </div>
             <div className="Info">
                 <div><p><b>e-mail: </b>{props.email}</p></div>

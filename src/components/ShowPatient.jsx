@@ -42,8 +42,8 @@ function ShowPatient(props) {
            <p className="pageHeader">{props.username}</p>
            <div>           
                <div className="Photo">
-                    {props.image ? <img src={props.image} className="mediumImage" alt="patient" /> :
-                                   <img src={patientPic} className="mediumImage" alt="patient" />}
+                    {props.image    ? <img src={props.image} className="mediumImage" alt="patient" /> 
+                                    : <img src={patientPic} className="mediumImage" alt="patient" />}
 
                    {/* <img src={props.image} className="mediumImage" alt="patient" /> */}
                </div>

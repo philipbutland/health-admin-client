@@ -60,8 +60,8 @@ function DoctorList() {
                     return(
                         <tr key={individualDoctor._id} className="tableBody">
                             <td className="userColumn">{individualDoctor.username}</td>           
-                            {individualDoctor.photo ? <td className="mediumColumn"><img className="smallImage" src={individualDoctor.photo} alt="doctor" /></td> :
-                                                      <td className="mediumColumn"><img className="smallImage" src={doctorPic} alt="doctor" /></td>}                
+                            {individualDoctor.photo ? <td className="mediumColumn"><img className="smallImage" src={individualDoctor.photo} alt="doctor" /></td>
+                                                    : <td className="mediumColumn"><img className="smallImage" src={doctorPic} alt="doctor" /></td>}                
                             <td className="mediumColumn">{individualDoctor.department}</td>
                             <td className="buttonColumn"><button className="editButton"><Link to={`/doctors/${individualDoctor._id}`}>Details</Link></button></td>
                             <td className="buttonColumn"><button className="editButton"><Link to={`/doctors/edit/${individualDoctor._id}`}>Edit Doctor</Link></button></td>

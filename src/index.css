@@ -35,6 +35,10 @@ select {
   font-size: 32px;
 }
 
+.dropdown{
+  color: black;
+}
+
 /* NAVIGATION BAR */
 
 .navbar{
@@ -59,7 +63,7 @@ select {
   font-weight: bold;
   float: right;
   text-align: center;
-  font-size: 18px;
+  font-size: 140%;
   margin: 10px 20px 0 0;
   padding: 5px 10px;
   border-radius: 10px;
@@ -195,6 +199,8 @@ a {
   border-radius: 10px;
   width: 400px;
   font-size: 20px;
+  color: black;
+  font-weight:normal;
 }
 
 .smallImage{

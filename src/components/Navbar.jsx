@@ -61,8 +61,11 @@ function Navbar() {
           </Link>
           </>
       )}         
-             <button className="loginButton" onClick={logOutUser}>Logout</button>
-             <span className="userName">{user && user.username}</span>
+            <button className="loginButton" onClick={logOutUser}>Logout</button>
+
+            {role === "admin" ? <span className="userName">Admin</span>
+                              : <span className="userName">{user && user.username}</span>
+            }
         </>
       )}
 
