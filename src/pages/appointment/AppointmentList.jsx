@@ -18,6 +18,7 @@ function AppointmentList() {
         .then((response) => {
           console.log("*** Appointments", response.data);
           console.log("PatientId", response.data.patientId);
+          console.log("PatientId", response.data.doctorId);
           setAppointment(response.data);
         })
         .catch((err) => console.log(err));
