@@ -35,7 +35,11 @@ function HomePage() {
 
         <h2>Welcome to the Health Administration Website</h2>
 
-        <h2>Currently linking <span className="doctors">{doctorArray.length}</span> Doctors with <span className="patients">{patientArray.length}</span> Patients</h2>
+        <h2>Currently linking <span className="doctors">{doctorArray.length} </span> 
+        {doctorArray.length === 1 ? (<span>Doctor </span>) : (<span>Doctors </span>)}
+        with <span className="patients">{patientArray.length} </span> 
+        {patientArray.length === 1 ? (<span>Patient</span>) : (<span>Patients</span>)}</h2>     
+        
       </div>
     );
   }

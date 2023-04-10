@@ -10,6 +10,7 @@ const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 function EditPatient() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
@@ -42,6 +43,7 @@ function EditPatient() {
         const onePatient = response.data;
         setUserName(onePatient.username);
         setEmail(onePatient.email);
+        setPassword(onePatient.password);
         setPhoto(onePatient.photo);
         setDob(onePatient.dob);
         setGender(onePatient.gender);
@@ -52,7 +54,7 @@ function EditPatient() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { username, email, photo, dob, gender, bloodType };
+    const requestBody = { username, email, password, photo, dob, gender, bloodType };
 
     axios
       .put(`${API_URL}/patients/${patientId}`, requestBody)
@@ -83,6 +85,11 @@ function EditPatient() {
         <label className="editFieldLabel">
           Email:
           <input className="editField" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label htmlFor="" className="editFieldLabel">
+          Password
+          <input className="editField" type="text" name="password" value={password} onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <label className="editFieldLabel">

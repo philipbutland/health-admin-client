@@ -6,7 +6,7 @@ import service from "../../api/service";
 function AddDoctor() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("********");
   const [photo, setPhoto] = useState("");
   const [price, setPrice] = useState(0);
   const [department, setDepartment] = useState("");
@@ -40,12 +40,18 @@ const handleFileUpload = (e) => {
     if (!username) {
       setError("Please add a doctor's name")
     }
-    else if (!email)
+    else if (!email){
       setError("Please add an e-mail address for your doctor")
-    else if (!gender)
+    }
+    else if (!password){
+      setError("Please enter a password")
+    }
+    else if (!gender){
       setError("Please select a gender from the dropdown menu")
-    else if (!department)
+    }
+    else if (!department){
       setError("Please select a department from the dropdown menu")
+    }
     else{
       service
         .createDoctors(bodyToPost)
@@ -73,33 +79,15 @@ const handleFileUpload = (e) => {
         {error && <p className="errorMessage"> {error} </p>}
         <label htmlFor="" className="editFieldLabel">
           Doctor's Name
-          <input
-            className="editField" 
-            type="text"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="Name (required)"
-          />
+          <input className="editField" type="text" value={username} onChange={(e) => setUserName(e.target.value)} placeholder="Name (required)" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Email
-          <input
-            className="editField" 
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="e-mail address (required)"
-          />
+          <input className="editField" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="e-mail address (required)" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Password
-          <input
-            className="editField" 
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="password (required)"
-          />
+          <input className="editField" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password (required)" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Photo
@@ -107,11 +95,7 @@ const handleFileUpload = (e) => {
         </label>
         <label htmlFor="" className="editFieldLabel">
           Price
-          <input
-            className="editField" 
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+          <input className="editField" type="number" value={price} onChange={(e) => setPrice(e.target.value)}
           />
         </label>
 

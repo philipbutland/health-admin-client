@@ -7,7 +7,8 @@ const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 function AddPatient() {
   const [username,setUserName] = useState('')
-  const [email, setEmail] = useState('')
+  const [newEmail, setNewEmail] = useState("")
+  const [password, setPassword] = useState("********")
   const [photo, setPhoto] = useState('')
   const [dob, setDob] = useState('')
   const [gender, setGender] = useState('')
@@ -15,6 +16,8 @@ function AddPatient() {
   const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
+  console.log("1111 USERNAME", username)
+  console.log("EMAIL", newEmail)
 
 // ******** this method handles the file upload ********
 const handleFileUpload = (e) => {
@@ -27,7 +30,7 @@ const handleFileUpload = (e) => {
     .uploadImage(uploadData)
     .then(response => {
       setPhoto(response.fileUrl);
-      console.log(response.fileUrl)
+      console.log("RESPONSE", response.fileUrl)
     })
     .catch(err => console.log("Error while uploading the file: ", err));
 };
@@ -35,13 +38,17 @@ const handleFileUpload = (e) => {
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    const bodyToPost = {username, email, photo, dob, gender, bloodType}
+    const bodyToPost = {username, newEmail, password, photo, dob, gender, bloodType}
     console.log("bodytopost patient", bodyToPost)
     if (!username) {
       setError("Please select a patient's name")
     }
-    else if (!email)
+    else if (!newEmail) {
       setError("Please select an a-mail address for your patient")
+    }
+    else if (!password) {
+      setError("Please enter a password")
+    }
     else if (!gender)
       setError("Please select a gender from the dropdown menu")
     else if (!bloodType)
@@ -52,10 +59,11 @@ const handleFileUpload = (e) => {
         .post(`${API_URL}/patients/add-patient`, bodyToPost)
         .then(() => {
           setUserName("");
-          setEmail("");
+          setNewEmail("");
           setPhoto("");
           setDob("");
           setGender("");
+          setPassword("")
           setBloodType("");
           alert("Patient's Profile Created");
           navigate("/patients");
@@ -66,6 +74,10 @@ const handleFileUpload = (e) => {
         });
      }
   }
+
+
+  console.log("2222 USERNAME", username)
+  console.log("EMAIL", setNewEmail)
   
   return (
     <div>
@@ -74,23 +86,15 @@ const handleFileUpload = (e) => {
         {error && <p className="errorMessage"> {error} </p>}
         <label htmlFor="" className="editFieldLabel">
           Patient's Name
-          <input
-            className="editField" 
-            type="text"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="Name (required)"
-          />
+          <input className="editField" type="text" value={username} onChange={(e) => setUserName(e.target.value)} placeholder="Name (required)" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Email
-          <input
-            className="editField" 
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="e-mail address (required)"
-          />
+          <input className="editField" type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder="e-mail address (required)" />
+        </label>
+        <label htmlFor="" className="editFieldLabel">
+          Password
+          <input className="editField" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password (required)" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Photo
@@ -98,12 +102,7 @@ const handleFileUpload = (e) => {
         </label>
         <label htmlFor="" className="editFieldLabel">
           Date of Birth
-          <input
-            className="editField" 
-            type="date"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-          />
+          <input className="editField" type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
         </label>
 
         <label htmlFor=""  className="editFieldLabel">

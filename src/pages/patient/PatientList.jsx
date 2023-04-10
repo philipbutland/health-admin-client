@@ -28,7 +28,7 @@ function PatientList() {
       axios
         .get(`${API_URL}/patients`)
         .then((response) => {
-          console.log(response.data);
+          console.log("Admin patients", response.data);
           setPatient(response.data);
         })
         .catch((err) => console.log(err));
@@ -39,8 +39,8 @@ function PatientList() {
     axios
       .get(`${API_URL}/patients`)
       .then((response) => {
-        console.log(response.data, "result");
         setPatient(response.data);
+        console.log("PATIENTS", response.data)
       })
       .catch((err) => console.log(err));
   }, []);

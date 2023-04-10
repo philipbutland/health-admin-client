@@ -26,6 +26,7 @@ function DoctorList() {
     axios.get(`${API_URL}/doctors`)
     .then(response=>{
       setDoctor(response.data)
+      console.log("DOCTORS", response.data)
     })
     .catch(err => console.log(err))
   },[])
