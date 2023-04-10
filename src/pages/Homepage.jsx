@@ -26,8 +26,8 @@ function HomePage() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("arrays", doctorArray, patientArray)
-  console.log("lengths", doctorArray.length, patientArray.length)
+  // console.log("arrays", doctorArray, patientArray)
+  // console.log("lengths", doctorArray.length, patientArray.length)
 
     return (
       <div>

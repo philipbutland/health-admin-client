@@ -21,7 +21,7 @@ function LoginPage(props) {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { email, password };
-    console.log("REQUEST INFO", email, password)
+    // console.log("REQUEST INFO", email, password)
     setErrorMessage("")
 
 
@@ -34,29 +34,36 @@ function LoginPage(props) {
     }
 
     else {
-      console.log("!!!")
+      // console.log("!!!")
       axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log("§§", response.data)
+        // console.log("§§", response.data)
         storeToken(response.data.authToken);
         authenticateUser();
-        console.log("roleFromServer:" + response.data.role);
+        // console.log("roleFromServer:" + response.data.role);
         localStorage.setItem("role", response.data.role);
   
         if (response.data.role === "doctor") {
           console.log("save role as:", response.data.role);
+          console.log("id ", response.data.login._id)
           localStorage.setItem("role", response.data.role);
           if (response.data.login) {
-            // navigate(`/doctors/${response.data.login._id}`);
-            navigate("/")
+            navigate(`/doctors/${response.data.login._id}`);
+            // navigate("/")
           } 
         } else if (response.data.role === "patient") {
           console.log("save role as:", response.data.role);
+          console.log("id ", response.data.login._id)
           localStorage.setItem("role", response.data.role);
+          console.log("!! login", response.data.login)
+          console.log("!! id", response.data.login._id)
+          console.log("!! email", response.data.login.email)
+
           if (response.data.login) {
-            // navigate(`/patients/${response.data.login._id}`);
-            navigate("/")
+            console.log("$$$",response.data.login._id)
+            navigate(`../patients/${response.data.login._id}`);
+            // navigate("/")
           }
         } else if (response.data.role === "admin") {
           console.log("save role as:", response.data.role);
@@ -67,7 +74,7 @@ function LoginPage(props) {
         }
       })
       .catch((error) => {
-        console.log("error", error)
+        // console.log("error", error)
         const errorDescription = error.response.data.message;
         if (errorMessage){
           console.log(errorDescription)
