@@ -16,8 +16,8 @@ function AddPatient() {
   const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
-  console.log("1111 USERNAME", username)
-  console.log("EMAIL", newEmail)
+/*   console.log("1111 USERNAME", username)
+  console.log("EMAIL", newEmail) */
 
 // ******** this method handles the file upload ********
 const handleFileUpload = (e) => {
@@ -76,8 +76,8 @@ const handleFileUpload = (e) => {
   }
 
 
-  console.log("2222 USERNAME", username)
-  console.log("EMAIL", setNewEmail)
+ /*  console.log("2222 USERNAME", username)
+  console.log("EMAIL", setNewEmail) */
   
   return (
     <div>

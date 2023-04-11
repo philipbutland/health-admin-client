@@ -89,7 +89,7 @@ function EditPatient() {
         </label>
         <label htmlFor="" className="editFieldLabel">
           Password
-          <input className="editField" type="text" name="password" value={password} onChange={(e) => setPassword(e.target.value)}
+          <input className="editField" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <label className="editFieldLabel">

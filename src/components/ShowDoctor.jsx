@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
 import doctorPic from '../images/doctor.png';
 
+
 function ShowDoctor(props) {
+  console.log(props.id)
 
   return (
     <div className="singlePerson">
@@ -15,6 +18,7 @@ function ShowDoctor(props) {
                 <div><p><b>Price: </b> €{props.price}</p></div>
                 <div><p><b>Department: </b>{props.department}</p></div>
                 <div><p><b>Gender: </b>{props.gender}</p></div>
+                <button className="addButton"><Link to={`/doctors/edit/${props.id}`}>Edit Information</Link></button>
             </div>
         </div>
     </div>
