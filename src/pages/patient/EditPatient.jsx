@@ -31,7 +31,6 @@ function EditPatient() {
       .then((response) => {
         setButtondisable(false);
         setPhoto(response.fileUrl);
-        console.log(response.fileUrl);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
@@ -51,11 +50,11 @@ function EditPatient() {
       })
       .catch((error) => console.log(error));
   }, [patientId]);
-
+console.log(photo)
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = { username, email, password, photo, dob, gender, bloodType };
-
+console.log(requestBody)
     axios
       .put(`${API_URL}/patients/${patientId}`, requestBody)
       .then((response) => {
