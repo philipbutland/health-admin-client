@@ -87,11 +87,11 @@ function EditPatient() {
           <input className="editField" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label htmlFor="" className="editFieldLabel">
+        {/* <label htmlFor="" className="editFieldLabel">
           Password
-          <input className="editField" type="text" name="password" value={password} onChange={(e) => setPassword(e.target.value)}
+          <input className="editField" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
+        </label> */}
         <label className="editFieldLabel">
           Photo
           <input type="file" onChange={(e) => handleFileUpload(e)} />

@@ -7,7 +7,7 @@ const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 function AddPatient() {
   const [username,setUserName] = useState('')
-  const [newEmail, setNewEmail] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("********")
   const [photo, setPhoto] = useState('')
   const [dob, setDob] = useState('')
@@ -16,8 +16,8 @@ function AddPatient() {
   const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
-  console.log("1111 USERNAME", username)
-  console.log("EMAIL", newEmail)
+  // console.log("1111 USERNAME", username)
+  // console.log("EMAIL", email)
 
 // ******** this method handles the file upload ********
 const handleFileUpload = (e) => {
@@ -30,7 +30,7 @@ const handleFileUpload = (e) => {
     .uploadImage(uploadData)
     .then(response => {
       setPhoto(response.fileUrl);
-      console.log("RESPONSE", response.fileUrl)
+      // console.log("RESPONSE", response.fileUrl)
     })
     .catch(err => console.log("Error while uploading the file: ", err));
 };
@@ -38,12 +38,12 @@ const handleFileUpload = (e) => {
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    const bodyToPost = {username, newEmail, password, photo, dob, gender, bloodType}
+    const bodyToPost = {username, email, password, photo, dob, gender, bloodType}
     console.log("bodytopost patient", bodyToPost)
     if (!username) {
       setError("Please select a patient's name")
     }
-    else if (!newEmail) {
+    else if (!email) {
       setError("Please select an a-mail address for your patient")
     }
     else if (!password) {
@@ -54,12 +54,12 @@ const handleFileUpload = (e) => {
     else if (!bloodType)
       setError("Please select a blood type from the dropdown menu")
     else{
-      console.log("OK HERE")
+      // console.log("OK HERE")
       axios
         .post(`${API_URL}/patients/add-patient`, bodyToPost)
         .then(() => {
           setUserName("");
-          setNewEmail("");
+          setEmail("");
           setPhoto("");
           setDob("");
           setGender("");
@@ -76,8 +76,8 @@ const handleFileUpload = (e) => {
   }
 
 
-  console.log("2222 USERNAME", username)
-  console.log("EMAIL", setNewEmail)
+  // console.log("2222 USERNAME", username)
+  // console.log("EMAIL", setEmail)
   
   return (
     <div>
@@ -90,7 +90,7 @@ const handleFileUpload = (e) => {
         </label>
         <label htmlFor="" className="editFieldLabel">
           Email
-          <input className="editField" type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} placeholder="e-mail address (required)" />
+          <input className="editField" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="e-mail address (required)" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Password
