@@ -33,7 +33,7 @@ function DoctorInfo() {
 
   return (
     <div className="singlePerson">
-        <ShowDoctor username={username} image={photo} email={email} price={price} department={department} gender={gender} />
+        <ShowDoctor id={doctorId} username={username} image={photo} email={email} price={price} department={department} gender={gender} />
     </div>
   );
 }

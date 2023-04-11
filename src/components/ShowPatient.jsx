@@ -25,15 +25,7 @@ function ShowPatient(props) {
         .then(response=>{
             setAppointment(response.data.appointment)
         })
-    }, [])
-
-    const displayPatient = (patientId) => {
-        console.log("patientId", patientId)
-        // navigate(`/patients/${patientId}`);
-    };
-
-    console.log("props", props)
-    
+    }, [])    
    
      return (
 
@@ -43,8 +35,6 @@ function ShowPatient(props) {
                <div className="Photo">
                     {props.image    ? <img src={props.image} className="mediumImage" alt="patient" /> 
                                     : <img src={patientPic} className="mediumImage" alt="patient" />}
-
-                   {/* <img src={props.image} className="mediumImage" alt="patient" /> */}
                </div>
                <div className="Info">
 
