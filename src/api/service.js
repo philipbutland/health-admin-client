@@ -47,7 +47,12 @@ const createPatients = (newPatient) => {
 const uploadImage = (file) => {
   return service
     .post("/upload", file)
-    .then((res) => res.data)
+    .then((res) =>{
+      console.log(res.data)
+      return res.data
+          }
+    )
+    
     .catch(errorHandler);
 };
 
