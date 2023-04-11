@@ -129,6 +129,7 @@ a {
   width: 15%;
 }
 
+
 /* INFORMATION PAGES */
 
 .Photo{
@@ -150,6 +151,11 @@ a {
 
 .mediumImage{
   width: 75%;
+}
+
+.doctorName{
+  color: blue;
+  text-decoration: underline;
 }
 
 /* APPOINTMENTS TABLE */

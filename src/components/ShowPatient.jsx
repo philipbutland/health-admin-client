@@ -48,13 +48,6 @@ function ShowPatient(props) {
                </div>
                <div className="Info">
 
-                    {/* <label className="editFieldLabel">
-                        Email:
-                        <input className="editField" type="text" name="email" value={props.email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </label> */}
-
                     <div><p><b>e-mail: </b>{props.email}</p></div>
                     <div><p><b>Date of Birth: </b> {props.dob}</p></div>
                     <div><p><b>Gender: </b>{props.gender}</p></div>
@@ -62,7 +55,6 @@ function ShowPatient(props) {
 
                     <button className="addButton"><Link to={`/patients/edit/${props.id}`}>Edit Information</Link></button>
 
-                    {/* <button className="editButton" onClick={displayPatient(props.id)}>Edit Information</button> */}
                 </div>
                 <br></br>
                 
@@ -84,7 +76,7 @@ function ShowPatient(props) {
                             return(
                                 <tbody>
                                     <tr>
-                                        <td className="appointmentColumn">{oneApp.doctorName}</td>
+                                        <td className="appointmentColumn"><Link to={`/doctors/${oneApp.doctorId}`}><span className="doctorName">{oneApp.doctorName}</span></Link></td>
                                         <td className="appointmentColumn">{oneApp.dateTime}</td>
                                         <td className="appointmentColumn">{oneApp.department}</td>
                                    </tr>
