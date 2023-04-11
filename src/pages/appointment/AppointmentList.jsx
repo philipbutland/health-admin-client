@@ -78,12 +78,17 @@ function AppointmentList() {
             appointment.map((individualAppointment) => {
               return (
                 <tr key={individualAppointment._id} className="tableBody">
-                  <td className="userColumn">
+                  {individualAppointment.patientId &&
+                    <td className="userColumn">
                     {individualAppointment.patientId.username}
-                  </td>
-                  <td className="userColumn">
+                  </td>                
+                  }
+                  {individualAppointment.doctorId &&
+                    <td className="userColumn">
                     {individualAppointment.doctorId.username}
                   </td>
+                  }
+
                   <td className="mediumColumn">
                     {individualAppointment.dateTime}
                   </td>
