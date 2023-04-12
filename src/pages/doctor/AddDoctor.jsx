@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import service from "../../api/service";
 
@@ -35,7 +35,7 @@ const handleFileUpload = (e) => {
     e.preventDefault();
     setError("");
     const bodyToPost = { username, email, password, photo, price, department, gender };
-    console.log("bodytopost doctor", bodyToPost)
+    console.log("body to Post doctor", bodyToPost)
 
     if (!username) {
       setError("Please add a doctor's name")
