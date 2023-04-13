@@ -110,14 +110,18 @@ a {
 .addButton{
   background-color: #009688;
   width: 250px;
-  align-content: center;
+  margin: auto;
+  justify-content: center;
 }
 .addButton:hover {
   background-color: #365452;
   color: white;
 }
+
 .editButton{
+  margin: 5px 80px;
   background-color: #82b440;
+  text-align: center;
 }
 
 .editButton:hover {
@@ -155,6 +159,7 @@ a {
 
 .buttonColumn{
   width: 15%;
+  justify-content: center;
   }
 
 
