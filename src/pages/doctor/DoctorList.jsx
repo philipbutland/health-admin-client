@@ -56,7 +56,7 @@ function DoctorList() {
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody className="">
                 {doctor && doctor.map(individualDoctor=>{
                     return(
                         <tr key={individualDoctor._id} className="tableBody">

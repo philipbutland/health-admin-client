@@ -50,13 +50,18 @@ function AddAppointment() {
 
     if (role === "patient" ){
       bodyToPost.patientId = user._id;
+      console.log(bodyToPost.patientId, "PatientID")
       bodyToPost.doctorId = doctorId;
     }
     
     else if (role === "doctor" ){
       bodyToPost.doctorId = user._id;
-      console.log(user._id)
+      console.log(bodyToPost.doctorId, "doctorID")
       bodyToPost.patientId = patientId;
+      bodyToPost.doctorName = user.username;
+      console.log(bodyToPost.doctorName, "doctorName")
+      bodyToPost.department = user.department;
+      console.log(bodyToPost.department, "department")
     }
 
     if (!doctorId && role ==="admin") {
@@ -75,7 +80,7 @@ function AddAppointment() {
         .post(`${API_URL}/appointments/add-appointment`, bodyToPost, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
-        .then(() => {
+          .then(() => {
           setDoctorId("");
           setPatientId("");
           setDateTime("");
