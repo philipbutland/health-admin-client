@@ -12,25 +12,21 @@ function AppointmentList() {
     const role = localStorage.getItem("role");
     const user = localStorage.getItem("user");
     if (role === "patient") {
-      console.log(user);
       axios
         .get(`${API_URL}/appointments/patients/${user}`)
         .then((response) => {
-          console.log("*** Appointments", response.data);
-          console.log("PatientId", response.data.patientId);
-          console.log("PatientId", response.data.doctorId);
           setAppointment(response.data);
         })
         .catch((err) => console.log(err));
     }
     if (role === "doctor") {
-      console.log(user)
       axios
         .get(`${API_URL}/appointments/doctors/${user}`)
         .then((response) => {
-          console.log("DoctorId", response.data);
           setAppointment(response.data);
-          console.log("APPOINTMENT", appointment);
+          console.log("Appointment", response.data)
+          console.log("Doctor Id", appointment.doctorId)
+          console.log("Patient Id", appointment.patientId)
         })
         .catch((err) => console.log(err));
     }
@@ -38,10 +34,7 @@ function AppointmentList() {
       axios
         .get(`${API_URL}/appointments`)
         .then((response) => {
-          console.log("### Appointments", response.data);
-          console.log("PatientId", response.data.patientId);
           setAppointment(response.data);
-          console.log("APPOINTMENT", appointment);
         })
         .catch((err) => console.log(err));
     }
