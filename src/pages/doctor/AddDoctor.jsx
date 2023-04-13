@@ -25,7 +25,6 @@ const handleFileUpload = (e) => {
     .uploadImage(uploadData)
     .then(response => {
       setPhoto(response.fileUrl);
-      console.log(response.fileUrl)
     })
     .catch(err => console.log("Error while uploading the file: ", err));
 };
@@ -35,7 +34,6 @@ const handleFileUpload = (e) => {
     e.preventDefault();
     setError("");
     const bodyToPost = { username, email, password, photo, price, department, gender };
-    console.log("body to Post doctor", bodyToPost)
 
     if (!username) {
       setError("Please add a doctor's name")

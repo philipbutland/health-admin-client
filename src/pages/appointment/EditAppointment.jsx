@@ -57,7 +57,6 @@ function EditAppointment() {
     
     else if (role === "doctor" ){
       requestBody.doctorId = user._id;
-      console.log(user._id)
       requestBody.patientId = patientId;
     }
 

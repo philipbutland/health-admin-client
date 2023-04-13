@@ -24,9 +24,6 @@ function AppointmentList() {
         .get(`${API_URL}/appointments/doctors/${user}`)
         .then((response) => {
           setAppointment(response.data);
-          console.log("Appointment", response.data)
-          console.log("Doctor Id", appointment.doctorId)
-          console.log("Patient Id", appointment.patientId)
         })
         .catch((err) => console.log(err));
     }

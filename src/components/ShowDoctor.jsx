@@ -3,7 +3,6 @@ import doctorPic from '../images/doctor.png';
 
 
 function ShowDoctor(props) {
-  console.log(props.id)
 
   return (
     <div className="singlePerson">
