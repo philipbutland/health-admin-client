@@ -25,7 +25,6 @@ function AddAppointment() {
 
   let department=""
   let doctorName=""
-
   let IdCheck = ""
 
   function handleSubmit(e) {

@@ -39,10 +39,10 @@ function EditAppointment() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    
+
     if (doctorArray.length>0) {
       doctorArray.map(individualDoctor=>{
-          if (individualDoctor._id === doctorId) {
+          if (individualDoctor._id === doctorId._id) {
             department = individualDoctor.department
             doctorName = individualDoctor.username
           }

@@ -21,6 +21,7 @@ function AppointmentInfo() {
     axios
       .get(`${API_URL}/appointments/${appointmentId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
       .then((response) => {
+        // console.log("response", response.data)
         setDoctorName(response.data.doctorId.username);
         setPatientName(response.data.patientId.username)
         setDateTime(response.data.dateTime)
