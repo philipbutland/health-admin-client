@@ -102,7 +102,7 @@ a {
 
 .tableHeader{
   text-align: left;
-  font-size: 24px;
+  font-size: 21px;
   padding-left: 20px;
   color: red;
   margin-left: 20px;
@@ -128,7 +128,7 @@ a {
 
 .buttonColumn{
   width: 15%;
-}
+  }
 
 
 /* INFORMATION PAGES */

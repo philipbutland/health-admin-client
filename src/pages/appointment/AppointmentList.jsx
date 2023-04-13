@@ -7,7 +7,7 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 function AppointmentList() {
   const [appointment, setAppointment] = useState(false);
-
+  
   const getAppointments = () => {
     const role = localStorage.getItem("role");
     const user = localStorage.getItem("user");
@@ -18,7 +18,6 @@ function AppointmentList() {
         .then((response) => {
           console.log("*** Appointments", response.data);
           console.log("PatientId", response.data.patientId);
-          console.log("PatientId", response.data.doctorId);
           setAppointment(response.data);
         })
         .catch((err) => console.log(err));
@@ -31,6 +30,7 @@ function AppointmentList() {
           console.log("DoctorId", response.data);
           setAppointment(response.data);
           console.log("APPOINTMENT", appointment);
+          console.log("DEPARTMENT", response.data.department);
         })
         .catch((err) => console.log(err));
     }
