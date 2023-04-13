@@ -22,7 +22,6 @@ const getDoctors = () => {
 };
 
 const createDoctors = (newDoctor) => {
-  console.log("new doctor in service: ", newDoctor)
   return service
     .post("/doctors/add-doctor", newDoctor)
     .then((res) => res.data)
@@ -37,7 +36,6 @@ const getPatients = () => {
 };
 
 const createPatients = (newPatient) => {
-  console.log("new patient in the database: ", newPatient)
   return service
     .post("/patients/add-patient", newPatient)
     .then((res) => res.data)
@@ -48,7 +46,6 @@ const uploadImage = (file) => {
   return service
     .post("/upload", file)
     .then((res) =>{
-      console.log(res.data)
       return res.data
           }
     )

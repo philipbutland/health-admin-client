@@ -16,8 +16,6 @@ function AddPatient() {
   const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
-  // console.log("1111 USERNAME", username)
-  // console.log("EMAIL", email)
 
 // ******** this method handles the file upload ********
 const handleFileUpload = (e) => {
@@ -30,7 +28,6 @@ const handleFileUpload = (e) => {
     .uploadImage(uploadData)
     .then(response => {
       setPhoto(response.fileUrl);
-      // console.log("RESPONSE", response.fileUrl)
     })
     .catch(err => console.log("Error while uploading the file: ", err));
 };
@@ -39,7 +36,6 @@ const handleFileUpload = (e) => {
     e.preventDefault();
     setError("");
     const bodyToPost = {username, email, password, photo, dob, gender, bloodType}
-    console.log("bodytopost patient", bodyToPost)
     if (!username) {
       setError("Please select a patient's name")
     }
@@ -54,7 +50,6 @@ const handleFileUpload = (e) => {
     else if (!bloodType)
       setError("Please select a blood type from the dropdown menu")
     else{
-      // console.log("OK HERE")
       axios
         .post(`${API_URL}/patients/add-patient`, bodyToPost)
         .then(() => {
@@ -69,15 +64,10 @@ const handleFileUpload = (e) => {
           navigate("/patients");
         })
         .catch((error) => {
-          console.log("error", error);
           setError(<p>{error.response.data.message}</p>)
         });
      }
   }
-
-
-  // console.log("2222 USERNAME", username)
-  // console.log("EMAIL", setEmail)
   
   return (
     <div>

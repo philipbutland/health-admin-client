@@ -44,32 +44,50 @@ select {
 
 .navbar{
   background-color: #009688;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   margin: 0 auto;
 }
+
 
 .homeButton{
   background-color: red;
+}
+.homeButton:hover {
+  background-color: #365452;
+  color: white;
 }
 
 .navButton{
   background-color: #6cc2ba;
 }
+.navButton:hover {
+  background-color: #365452;
+  color: white;
+}
 
 .loginButton{
   background-color:blue;
 }
+.loginButton:hover {
+  background-color: #365452;
+  color: white;
+}
 
 .userName{
   color:white;
-  background-color: black;
+ /*  background-color:rgb(98, 103, 95); */
   font-weight: bold;
   float: right;
   text-align: center;
-  font-size: 140%;
-  margin: 10px 20px 0 0;
-  padding: 5px 10px;
+  font-size: 100%;
+  margin: 3px 3px 3px 3px;
   border-radius: 10px;
+  text-shadow: 1px 1px 0px black ;
+
   width: 10%;
-  height: 30px;
+  height: 20%;
 }
 
 /* HOME PAGE */
@@ -92,10 +110,19 @@ a {
 .addButton{
   background-color: #009688;
   width: 250px;
+  align-content: center;
 }
-
+.addButton:hover {
+  background-color: #365452;
+  color: white;
+}
 .editButton{
   background-color: #82b440;
+}
+
+.editButton:hover {
+  background-color: #365452;
+  color: white;
 }
 
 /* LIST PAGES */
@@ -138,7 +165,6 @@ a {
   padding: 5px;
   margin-left: 10%;
   width: 20%;
-  max-height: 1px;
 }
 
 .Info{
@@ -146,9 +172,11 @@ a {
   text-align: left;
   width: 50%;
   font-size: 24px;
-  background-color: azure;
+  background-color: #8fa98f;
   margin-right: 50px;
   padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 10px 10px ;
 }
 
 .mediumImage{
@@ -165,12 +193,12 @@ a {
 .appoinmentsList{
   margin: 350px 50px 0 50px;
   padding-bottom: 20px;
-  background-color: white;
-}
+  }
 
 .appointmentsHeader{
   font-weight: bold;
-  font-size: 36px;
+  font-size: 27px;
+  border-bottom: 1px solid black;
 }
 
 .appointmentColumn{
@@ -213,6 +241,8 @@ a {
 
 .smallImage{
   width: 25%;
+  display: block;
+  margin: 0 auto;
 }
 
 /* LOGIN AND SIGNUP */

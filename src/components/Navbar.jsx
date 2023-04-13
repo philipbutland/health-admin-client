@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import logo from '../images/logo.png';
+
 
 function Navbar() {
-  const { 
-    user,
-    isLoggedIn,
-    role = localStorage.getItem('role'),              
-    logOutUser            
-  } = useContext(AuthContext);
+  const { user, isLoggedIn, role = localStorage.getItem('role'), logOutUser} = useContext(AuthContext);
 
-  console.log("user", user)
   return (
     <nav className="navbar">
+     <Link to="/">
+     <img src={logo} alt="Logo" />
+     </Link>
       <Link to="/">
         <button className="homeButton">Home</button>
       </Link>
@@ -64,7 +63,8 @@ function Navbar() {
             <button className="loginButton" onClick={logOutUser}>Logout</button>
 
             {role === "admin" ? <span className="userName">Admin</span>
-                              : <span className="userName">{user && user.username}</span>
+                              :<span className="userName">{user && user.username}</span>
+                              
             }
         </>
       )}
@@ -81,7 +81,8 @@ function Navbar() {
           </Link>
         </>
       )}
-    </nav>
+    
+     </nav>
   );
 }
 

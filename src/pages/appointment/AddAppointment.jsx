@@ -26,14 +26,23 @@ function AddAppointment() {
   let department=""
   let doctorName=""
 
+  let IdCheck = ""
+
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
 
+    if (doctorId){
+     IdCheck = doctorId
+    }
+    else {
+      IdCheck = user._id
+    }
+    
     if (doctorArray.length>0) {
       doctorArray.map(individualDoctor=>{
 
-        if (individualDoctor._id === doctorId) {
+        if (individualDoctor._id === IdCheck) {
           department = individualDoctor.department;
           doctorName = individualDoctor.username;
         }
@@ -50,18 +59,14 @@ function AddAppointment() {
 
     if (role === "patient" ){
       bodyToPost.patientId = user._id;
-      console.log(bodyToPost.patientId, "PatientID")
       bodyToPost.doctorId = doctorId;
     }
     
     else if (role === "doctor" ){
       bodyToPost.doctorId = user._id;
-      console.log(bodyToPost.doctorId, "doctorID")
       bodyToPost.patientId = patientId;
       bodyToPost.doctorName = user.username;
-      console.log(bodyToPost.doctorName, "doctorName")
-      bodyToPost.department = user.department;
-      console.log(bodyToPost.department, "department")
+      bodyToPost.department = department;
     }
 
     if (!doctorId && role ==="admin") {
@@ -75,7 +80,6 @@ function AddAppointment() {
       return;
     } else {
       const storedToken = localStorage.getItem("authToken");
-      console.log("BODY2POST", bodyToPost);
       axios
         .post(`${API_URL}/appointments/add-appointment`, bodyToPost, {
           headers: { Authorization: `Bearer ${storedToken}` },

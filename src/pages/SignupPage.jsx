@@ -23,12 +23,10 @@ function SignupPage(props) {
     e.preventDefault();
     let role = "patient";
     setErrorMessage("")
-    console.log("** error **", errorMessage)
     const requestBody = { email, password, username, role };
     const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
 
     if (!email || !password || !username) {
-      console.log("§§§§§§§§§§§§§§", email, password, username)
       if (!email && !password && !username) {
         setErrorMessage("please provide an e-mail address, user name and password")
       }
@@ -68,7 +66,6 @@ function SignupPage(props) {
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
-        console.log("Message", errorMessage)
         if (errorMessage){
           console.log(errorDescription)
         }

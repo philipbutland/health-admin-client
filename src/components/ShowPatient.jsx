@@ -13,10 +13,6 @@ function ShowPatient(props) {
     const [appointment,setAppointment]=useState([])      
     useEffect(() => {
         axios.get(`${API_URL}5/patients`)
-        .then(response=>{
-            console.log("all patients data",response.data)
-        })
-
     }, [])
     
    
@@ -50,7 +46,7 @@ function ShowPatient(props) {
                 
                 <div  className="appoinmentsList">
                     
-                    <p className="appointmentsHeader">Appointments for this Patient:</p> 
+                    <p className="appointmentsHeader">My Appointments</p> 
 
                     <table>
                         <thead>
@@ -62,7 +58,6 @@ function ShowPatient(props) {
                         </thead>
 
                         {appointment.length>0 && appointment.map(oneApp=>{
-                            console.log("oneApp", oneApp)
                             return(
                                 <tbody>
                                     <tr>

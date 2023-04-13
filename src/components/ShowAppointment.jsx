@@ -10,9 +10,6 @@ function ShowAppointment(props) {
 
     useEffect(()=>{
         axios.get(`${API_URL}/appointments`)
-        .then(response=>{
-          console.log(response.data)
-        })
         .catch(err => console.log(err))
       },[])
 
