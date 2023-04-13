@@ -137,7 +137,8 @@ a {
   float: left;
   padding: 5px;
   margin-left: 10%;
-  width: auto;
+  width: 20%;
+  max-height: 1px;
 }
 
 .Info{
