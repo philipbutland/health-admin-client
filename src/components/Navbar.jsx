@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import logo from '../images/logo.png';
+
 
 
 function Navbar() {
@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <nav className="navbar">
      <Link to="/">
-     <img src={logo} alt="Logo" />
+    <h3 className="logo">HEALTH <span className="logoColor"> ADMIN </span></h3>
      </Link>
       <Link to="/">
         <button className="homeButton">Home</button>

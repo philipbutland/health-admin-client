@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import imageHome from "../images/homeImage.png"
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -36,7 +37,7 @@ function HomePage() {
         {doctorArray.length === 1 ? (<span>Doctor </span>) : (<span>Doctors </span>)}
         with <span className="patients">{patientArray.length} </span> 
         {patientArray.length === 1 ? (<span>Patient</span>) : (<span>Patients</span>)}</h2>     
-        
+        <img className="smallImage2" src={imageHome} alt="imageHome" />
       </div>
     );
   }

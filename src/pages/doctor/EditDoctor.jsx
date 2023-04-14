@@ -104,7 +104,7 @@ function EditDoctor() {
         <label className="editFieldLabel">
           Photo
           <input type="file" onChange={(e) => handleFileUpload(e)} />
-          <img className="smallImage" src={photo} alt="doctor" />
+          <img className="smallImage2" src={photo} alt="doctor" />
         </label>
         <label className="editFieldLabel">
           Price:

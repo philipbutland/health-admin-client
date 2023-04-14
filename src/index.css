@@ -66,6 +66,13 @@ select {
   background-color: #365452;
   color: white;
 }
+.logo {
+background-color: #365452;
+}
+.logoColor {
+  color: #6cc2ba;
+  padding: -20px, -20px
+  }
 
 .loginButton{
   background-color:blue;
@@ -248,6 +255,10 @@ a {
   width: 25%;
   display: block;
   margin: 0 auto;
+}
+.smallImage2{
+  width: 10%;
+  padding: 12px;
 }
 
 /* LOGIN AND SIGNUP */

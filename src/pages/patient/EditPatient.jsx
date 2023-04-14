@@ -92,7 +92,7 @@ function EditPatient() {
         <label className="editFieldLabel">
           Photo
           <input type="file" onChange={(e) => handleFileUpload(e)} />
-          <img className="smallImage" src={photo} alt="patient" />
+          <img className="smallImage2" src={photo} alt="patient" />
         </label>
         <label className="editFieldLabel">
           Date of Birth:

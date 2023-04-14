@@ -90,6 +90,7 @@ const handleFileUpload = (e) => {
         <label htmlFor="" className="editFieldLabel">
           Photo
           <input type="file" onChange={(e) => handleFileUpload(e)} />
+          <img className="smallImage2" src={photo} alt="doctor" />
         </label>
         <label htmlFor="" className="editFieldLabel">
           Price
