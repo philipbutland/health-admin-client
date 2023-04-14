@@ -183,7 +183,7 @@ function AddAppointment() {
           Date and Time
           <input
             className="editField"
-            type="datetime-local"
+            type = "datetime-local"
             value={dateTime}
             onChange={(e) => setDateTime(e.target.value)}
           />

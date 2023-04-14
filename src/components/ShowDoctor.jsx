@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import doctorPic from '../images/doctor.png';
 
 const role = localStorage.getItem("role");
-console.log("role", role)
-
 
 function ShowDoctor(props) {
 
