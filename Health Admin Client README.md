@@ -41,7 +41,6 @@
 
 * appointment.jsx - used on the page for an individual appointment
 * doctor.png - default picture used when no photo has been specified for a doctor
-* logo.png - used in the navigation bar
 * patient.png - default picture used when no photo has been specified for a patient
 
 ## APPOINTMENT PAGES (in src/pages/appointment)
