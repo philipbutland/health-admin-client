@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import doctorPic from '../images/doctor.png';
 
+const role = localStorage.getItem("role");
+console.log("role", role)
+
 
 function ShowDoctor(props) {
 
@@ -18,7 +21,9 @@ function ShowDoctor(props) {
                 <div><p><b>Department: </b>{props.department}</p></div>
                 <div><p><b>Gender: </b>{props.gender}</p></div>
 
-                <button className="addButton"><Link to={`/doctors/edit/${props.id}`}>Edit Information</Link></button>
+                {(role === "admin" || role === "doctor") &&
+                  <button className="addButton"><Link to={`/doctors/edit/${props.id}`}>Edit Information</Link></button>
+                }
 
             </div>
         </div>
