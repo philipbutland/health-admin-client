@@ -3,7 +3,7 @@
 
 ## Description
 
-​Platform displaying music festivals and information about them​
+​Platform linking patients with doctors, and helping them make and change appointments
 
 ## Features
 
